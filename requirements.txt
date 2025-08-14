@@ -1,0 +1,31 @@
+# Web & Schema
+fastapi==0.116.1
+uvicorn[standard]==0.30.6
+starlette==0.47.2
+pydantic==2.8.2
+pydantic-settings==2.4.0
+aiofiles==24.1.0
+orjson==3.10.7
+httpx==0.27.2
+loguru==0.7.2
+python-dotenv==1.0.1
+
+# OpenAI
+openai==1.99.9
+
+# LlamaIndex + Qdrant 持久化 (为后续模块预留)
+llama-index==0.13.0
+qdrant-client==1.15.1
+
+# GraphRAG (为后续模块预留)
+graphrag==2.4.0
+
+# 数据处理
+pandas>=2.2.3
+pyarrow==17.0.0
+
+# 测试依赖
+pytest==8.3.2
+pytest-asyncio==0.24.0
+pytest-mock==3.14.0
+httpx==0.27.2
