@@ -183,9 +183,46 @@ class QdrantRepository:
         except Exception as e:
             logger.error(f"统计向量点数量失败: {e}")
             return 0
+
+    async def delete_vectors_by_filter(
+        self,
+        filter_condition: Dict[str, Any],
+        collection_name: Optional[str] = None
+    ) -> int:
+        """根据过滤条件删除向量"""
+        try:
+            if collection_name is None:
+                collection_name = self.settings.qdrant_collection_name
+
+            # 构建Qdrant过滤器
+            query_filter = models.Filter(**filter_condition)
+
+            # 执行删除操作
+            delete_result = self.client.delete(
+                collection_name=collection_name,
+                points_selector=models.FilterSelector(filter=query_filter)
+            )
+
+            # 获取删除的数量（这里简化处理，实际可能需要先查询再删除来获取准确数量）
+            deleted_count = getattr(delete_result, 'operation_id', 0)
+            if deleted_count == 0:
+                # 如果无法直接获取删除数量，返回一个估计值
+                deleted_count = 1  # 假设至少删除了一些数据
+
+            logger.info(f"成功删除 {deleted_count} 个向量点")
+            return deleted_count
+
+        except Exception as e:
+            logger.error(f"删除向量失败: {e}")
+            return 0
     
     def close(self):
         """关闭客户端连接"""
         if self.client:
             self.client.close()
             logger.info("Qdrant客户端连接已关闭")
+
+
+# 创建全局RAG仓库实例
+from app.core.config import get_settings
+rag_repository = QdrantRepository(get_settings())

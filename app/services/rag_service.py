@@ -364,3 +364,8 @@ class RAGService:
         except Exception as e:
             logger.error(f"摘要聊天记忆失败: {e}")
             return chat_memory  # 失败时返回原记忆
+
+
+# 创建全局RAG服务实例
+from app.core.config import get_settings
+rag_service = RAGService(get_settings())
