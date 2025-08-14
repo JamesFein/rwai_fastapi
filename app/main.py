@@ -13,7 +13,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from .core.config import get_settings
 from .core.logging import setup_logging, get_logger
 from .constants.paths import ensure_directories
-from .api.v1.outline import router as outline_router
+from .api.v1 import api_router
 from .schemas.outline import ErrorResponse, HealthResponse
 from . import __version__, __description__
 
@@ -207,9 +207,8 @@ async def health_check():
 
 # 注册路由
 app.include_router(
-    outline_router,
-    prefix=settings.api_v1_prefix,
-    tags=["大纲生成"]
+    api_router,
+    prefix=settings.api_v1_prefix
 )
 
 

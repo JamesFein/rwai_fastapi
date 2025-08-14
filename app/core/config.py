@@ -18,10 +18,16 @@ class Settings(BaseSettings):
     outline_model: str = Field(default="gpt-4o-mini", description="大纲生成模型")
     refine_model: str = Field(default="gpt-4o-mini", description="大纲精简模型")
     
-    # RAG 配置 (为后续模块预留)
+    # RAG 配置
     rag_embed_model: str = Field(default="text-embedding-3-small", description="RAG嵌入模型")
     rag_llm_model: str = Field(default="gpt-4o-mini", description="RAG语言模型")
     qdrant_url: str = Field(default="http://localhost:6333", description="Qdrant向量数据库URL")
+    qdrant_grpc_port: int = Field(default=6334, description="Qdrant gRPC端口")
+    qdrant_prefer_grpc: bool = Field(default=True, description="优先使用gRPC连接")
+    qdrant_collection_name: str = Field(default="course_materials", description="Qdrant集合名称")
+    rag_chunk_size: int = Field(default=512, description="RAG文本分块大小")
+    rag_chunk_overlap: int = Field(default=50, description="RAG文本分块重叠")
+    rag_top_k: int = Field(default=5, description="RAG检索Top-K数量")
     
     # GraphRAG 配置 (为后续模块预留)
     graph_rag_workdir: str = Field(default="./data/outputs/graphrag", description="GraphRAG工作目录")
