@@ -11,10 +11,9 @@ from datetime import datetime
 import glob
 
 from ...core.deps import (
-    validate_upload_file, 
-    save_upload_file, 
+    validate_upload_file,
+    save_upload_file,
     read_text_file,
-    generate_task_id,
     get_current_settings
 )
 from ...core.config import Settings
@@ -28,7 +27,7 @@ from ...schemas.outline import (
 )
 from ...services.outline_service import outline_service
 from ...utils.fileio import file_utils
-from ...utils.idgen import filename_generator, path_generator
+from ...utils.idgen import IDGenerator, filename_generator, path_generator
 from ...utils.timers import async_timer, performance_monitor
 from ...utils.validation import CourseValidation, FileValidation
 from ...constants.paths import UPLOADS_DIR, OUTLINES_DIR
@@ -59,7 +58,7 @@ async def generate_outline(
 ):
     """生成文档大纲"""
     
-    task_id = generate_task_id()
+    task_id = IDGenerator.generate_task_id()
     
     try:
         async with async_timer(f"outline_generation_{task_id}") as timer:
@@ -122,7 +121,7 @@ async def generate_outline(
             
             logger.info(f"文件处理完成，开始生成大纲 - 任务ID: {task_id}")
             
-            # 调用大纲生成服务
+            # 调用大纲生成服务，传入API层的task_id
             result = await outline_service.process_outline_generation(
                 file_content=file_content,
                 original_filename=validated_file.filename,
@@ -131,16 +130,17 @@ async def generate_outline(
                 model_name=model_name,
                 course_id=course_id,
                 course_material_id=course_material_id,
-                material_name=material_name
+                material_name=material_name,
+                task_id=task_id  # 传入API层的task_id
             )
-            
+
             # 更新任务存储
             task_storage[task_id].update({
                 "status": result.status,
                 "result": result,
                 "completed_at": timer.get_elapsed()
             })
-            
+
             # 记录性能指标
             performance_monitor.record_timing(
                 "outline_generation",
@@ -151,12 +151,15 @@ async def generate_outline(
                 include_refine=include_refine,
                 model_name=model_name or settings.outline_model
             )
-            
+
             logger.info(f"大纲生成完成 - 任务ID: {task_id}, 状态: {result.status}")
-            
+
             # 设置原始文件路径
             result.original_file_path = str(upload_path)
-            
+
+            # 确保返回的结果使用正确的task_id
+            result.task_id = task_id
+
             return result
             
     except HTTPException:

@@ -236,7 +236,8 @@ class CourseProcessService:
                 model_name=request.llm_model,
                 course_id=request.course_id,
                 course_material_id=request.course_material_id,
-                material_name=request.material_name
+                material_name=request.material_name,
+                task_id=task_id  # 传入统一的task_id
             )
             
             if outline_response.status.value != "completed":

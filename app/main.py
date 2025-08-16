@@ -8,6 +8,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .core.config import get_settings
@@ -210,6 +211,15 @@ app.include_router(
     api_router,
     prefix=settings.api_v1_prefix
 )
+
+# 挂载静态文件
+import os
+static_dir = os.path.join(os.path.dirname(__file__), "static")
+if os.path.exists(static_dir):
+    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+    logger.info(f"✅ 静态文件服务已启用: {static_dir}")
+else:
+    logger.warning(f"⚠️ 静态文件目录不存在: {static_dir}")
 
 
 # 如果直接运行此文件

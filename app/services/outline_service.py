@@ -10,10 +10,10 @@ from openai import AsyncOpenAI
 
 from ..core.config import get_settings
 from ..core.logging import get_logger
-from ..core.deps import generate_task_id, generate_filename, read_text_file, write_text_file
+from ..core.deps import generate_filename, read_text_file, write_text_file
 from ..schemas.outline import TaskStatus, OutlineGenerateResponse
 from ..constants.paths import OUTLINES_DIR, PROMPTS_DIR
-from ..utils.idgen import path_generator
+from ..utils.idgen import IDGenerator, path_generator
 
 logger = get_logger("outline_service")
 
@@ -215,7 +215,8 @@ class OutlineService:
         model_name: Optional[str] = None,
         course_id: Optional[str] = None,
         course_material_id: Optional[str] = None,
-        material_name: Optional[str] = None
+        material_name: Optional[str] = None,
+        task_id: Optional[str] = None
     ) -> OutlineGenerateResponse:
         """
         处理完整的大纲生成流程
@@ -229,11 +230,13 @@ class OutlineService:
             course_id: 课程ID (新增)
             course_material_id: 课程材料ID (新增)
             material_name: 材料名称 (新增)
+            task_id: 任务ID (可选，如果不提供则自动生成)
 
         Returns:
             大纲生成响应
         """
-        task_id = generate_task_id()
+        if task_id is None:
+            task_id = IDGenerator.generate_task_id()
         start_time = time.time()
         
         try:

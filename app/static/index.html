@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Backend API 控制台</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <i class="bi bi-cpu"></i>
+          AI Backend API 控制台
+        </a>
+
+        <!-- 系统状态指示器 -->
+        <div class="navbar-nav ms-auto">
+          <div class="nav-item">
+            <span class="nav-link">
+              <span id="system-status" class="badge bg-success">
+                <i class="bi bi-circle-fill"></i> 在线
+              </span>
+            </span>
+          </div>
+          <div class="nav-item">
+            <button
+              class="btn btn-outline-light btn-sm"
+              onclick="refreshStatus()"
+            >
+              <i class="bi bi-arrow-clockwise"></i> 刷新
+            </button>
+          </div>
+          <div class="nav-item">
+            <button
+              class="btn btn-outline-light btn-sm ms-2"
+              onclick="toggleTheme()"
+            >
+              <i class="bi bi-moon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- 侧边导航菜单 -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+          <div class="position-sticky pt-3">
+            <ul class="nav flex-column">
+              <!-- 文档处理 -->
+              <li class="nav-item">
+                <h6
+                  class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+                >
+                  <span>文档处理</span>
+                </h6>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  href="#"
+                  onclick="showPage('outline-generate')"
+                >
+                  <i class="bi bi-file-text"></i> 大纲生成
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  onclick="showPage('task-management')"
+                >
+                  <i class="bi bi-list-task"></i> 任务管理
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  onclick="showPage('performance-monitor')"
+                >
+                  <i class="bi bi-graph-up"></i> 性能监控
+                </a>
+              </li>
+
+              <!-- RAG 检索 -->
+              <li class="nav-item">
+                <h6
+                  class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+                >
+                  <span>RAG 检索</span>
+                </h6>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showPage('rag-chat')">
+                  <i class="bi bi-chat-dots"></i> 智能问答
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showPage('rag-index')">
+                  <i class="bi bi-database"></i> 索引管理
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  onclick="showPage('collection-management')"
+                >
+                  <i class="bi bi-collection"></i> 集合管理
+                </a>
+              </li>
+
+              <!-- 课程材料 -->
+              <li class="nav-item">
+                <h6
+                  class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+                >
+                  <span>课程材料</span>
+                </h6>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  onclick="showPage('unified-process')"
+                >
+                  <i class="bi bi-gear"></i> 统一处理
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  onclick="showPage('material-management')"
+                >
+                  <i class="bi bi-folder"></i> 材料管理
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  onclick="showPage('cleanup-tools')"
+                >
+                  <i class="bi bi-trash"></i> 清理工具
+                </a>
+              </li>
+
+              <!-- 系统监控 -->
+              <li class="nav-item">
+                <h6
+                  class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+                >
+                  <span>系统监控</span>
+                </h6>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  onclick="showPage('health-status')"
+                >
+                  <i class="bi bi-heart-pulse"></i> 健康状态
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/docs" target="_blank">
+                  <i class="bi bi-book"></i> API 文档
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="h2" id="page-title">大纲生成</h1>
+          </div>
+
+          <!-- 页面内容容器 -->
+          <div id="page-content">
+            <!-- 默认显示大纲生成页面 -->
+            <div id="outline-generate-page" class="page-content active">
+              <!-- 大纲生成页面内容将在这里加载 -->
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- 加载状态模态框 -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">加载中...</span>
+            </div>
+            <p class="mt-3 mb-0">处理中，请稍候...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 错误提示模态框 -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="bi bi-exclamation-triangle text-danger"></i>
+              错误提示
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p id="error-message">发生了未知错误</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              关闭
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@5.1.1/marked.min.js"></script>
+    <!-- Chart.js for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/pages.js"></script>
+    <script src="js/pages-extended.js"></script>
+  </body>
+</html>
