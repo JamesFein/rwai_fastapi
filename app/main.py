@@ -8,7 +8,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from fastapi.staticfiles import StaticFiles
+# StaticFiles 导入已移除 - 不再需要静态文件服务
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .core.config import get_settings
@@ -212,14 +212,9 @@ app.include_router(
     prefix=settings.api_v1_prefix
 )
 
-# 挂载静态文件
-import os
-static_dir = os.path.join(os.path.dirname(__file__), "static")
-if os.path.exists(static_dir):
-    app.mount("/static", StaticFiles(directory=static_dir), name="static")
-    logger.info(f"✅ 静态文件服务已启用: {static_dir}")
-else:
-    logger.warning(f"⚠️ 静态文件目录不存在: {static_dir}")
+# 静态文件挂载已移除 - 前端已独立部署
+# 前端现在通过独立的服务器（如Live Server）提供服务
+logger.info("ℹ️ 静态文件服务已禁用 - 前端独立部署")
 
 
 # 如果直接运行此文件

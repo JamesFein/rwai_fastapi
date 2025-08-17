@@ -1707,14 +1707,6 @@
         "documentation": {}
     },
     {
-        "label": "StaticFiles",
-        "importPath": "fastapi.staticfiles",
-        "description": "fastapi.staticfiles",
-        "isExtraImport": true,
-        "detail": "fastapi.staticfiles",
-        "documentation": {}
-    },
-    {
         "label": "HTTPException",
         "importPath": "starlette.exceptions",
         "description": "starlette.exceptions",
@@ -3024,15 +3016,6 @@
         "importPath": "app.main",
         "description": "app.main",
         "peekOfCode": "settings = get_settings()\n# 添加 CORS 中间件\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # 生产环境应该限制具体域名\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n# 请求日志中间件",
-        "detail": "app.main",
-        "documentation": {}
-    },
-    {
-        "label": "static_dir",
-        "kind": 5,
-        "importPath": "app.main",
-        "description": "app.main",
-        "peekOfCode": "static_dir = os.path.join(os.path.dirname(__file__), \"static\")\nif os.path.exists(static_dir):\n    app.mount(\"/static\", StaticFiles(directory=static_dir), name=\"static\")\n    logger.info(f\"✅ 静态文件服务已启用: {static_dir}\")\nelse:\n    logger.warning(f\"⚠️ 静态文件目录不存在: {static_dir}\")\n# 如果直接运行此文件\nif __name__ == \"__main__\":\n    import uvicorn\n    logger.info(f\"🚀 启动开发服务器 - {settings.host}:{settings.port}\")",
         "detail": "app.main",
         "documentation": {}
     },
