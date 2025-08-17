@@ -906,14 +906,6 @@
         "documentation": {}
     },
     {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -1103,22 +1095,6 @@
         "description": "app.core.config",
         "isExtraImport": true,
         "detail": "app.core.config",
-        "documentation": {}
-    },
-    {
-        "label": "get_settings",
-        "importPath": "app.core.config",
-        "description": "app.core.config",
-        "isExtraImport": true,
-        "detail": "app.core.config",
-        "documentation": {}
-    },
-    {
-        "label": "RAGService",
-        "importPath": "app.services.rag_service",
-        "description": "app.services.rag_service",
-        "isExtraImport": true,
-        "detail": "app.services.rag_service",
         "documentation": {}
     },
     {
@@ -1331,38 +1307,6 @@
     },
     {
         "label": "ChatMessage",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "IndexRequest",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "QueryRequest",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "DocumentMetadata",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "ChatMode",
         "importPath": "app.schemas.rag",
         "description": "app.schemas.rag",
         "isExtraImport": true,
@@ -3270,24 +3214,6 @@
         "description": "tests.test_rag",
         "peekOfCode": "def sample_query_request():\n    \"\"\"示例查询请求\"\"\"\n    return QueryRequest(\n        question=\"什么是Python？\",\n        mode=ChatMode.QUERY,\n        course_id=\"course_001\",\n        chat_memory=None,\n        collection_name=\"test_collection\",\n        top_k=5\n    )",
         "detail": "tests.test_rag",
-        "documentation": {}
-    },
-    {
-        "label": "greet_user",
-        "kind": 2,
-        "importPath": "test_rag_demo",
-        "description": "test_rag_demo",
-        "peekOfCode": "def greet_user():\n    print(\"Hello!\")\ngreet_user()\n```\n## 向函数传递信息\n可以在函数定义的括号内添加参数：\n```python\ndef greet_user(username):\n    print(f\"Hello, {username.title()}!\")\ngreet_user('alice')",
-        "detail": "test_rag_demo",
-        "documentation": {}
-    },
-    {
-        "label": "greet_user",
-        "kind": 2,
-        "importPath": "test_rag_demo",
-        "description": "test_rag_demo",
-        "peekOfCode": "def greet_user(username):\n    print(f\"Hello, {username.title()}!\")\ngreet_user('alice')\n```\n## 实参和形参\n- **形参**：函数定义中的变量\n- **实参**：调用函数时传递给函数的信息\n\"\"\"\n    # 1. 测试索引建立\n    print(\"\\n📚 测试索引建立...\")",
-        "detail": "test_rag_demo",
         "documentation": {}
     }
 ]
