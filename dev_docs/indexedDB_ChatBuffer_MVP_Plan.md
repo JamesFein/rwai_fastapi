@@ -38,7 +38,7 @@
 - **course_material_id**：课程材料 ID（当 data_scope 为 "course_material" 时必需）
 - **created_at**：创建时间戳
 - **updated_at**：最后更新时间戳
-- **title**：会话标题（course_chat 类型基于课件名称，free_chat 类型基于首条用户消息生成）
+- **title**：会话标题（course_chat 类型基于课件名称或是课程名称生成，如果 data_scope 是 course 就用 course_name,如果 data_scope 是 course_material 就用 course_material_name, free_chat 类型基于首条用户消息生成开头的 20 字符。）
 
 ### 1.3 数据范围（data_scope）定义
 
