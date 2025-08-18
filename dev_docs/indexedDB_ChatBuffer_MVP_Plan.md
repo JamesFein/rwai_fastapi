@@ -29,24 +29,39 @@
 每个会话必须包含以下字段：
 
 - **session_id**：会话唯一标识（nanoid 生成）
-- **session_type**：会话类型（"course_material_chat" 或 "free_chat"）
+- **session_type**：会话类型（"course_chat" 或 "free_chat" ）
+- **data_scope**：数据范围标识（"course" 或 "course_material"），决定 RAG 检索的过滤范围
 - **frontend_session_chat_history**：前端聊天历史记录数组
 - **chatSummaryBuffer**：LlamaIndex 后端生成的聊天摘要缓冲区（可为空）
 - **mode**：聊天模式（"query" 或 "condense_question"）
-- **course_id**：课程 ID（可选）
-- **course_material_id**：课程材料 ID（course_material_chat 类型必需，free_chat 类型可选）
+- **course_id**：课程 ID（当 data_scope 为 "course" 时必需）
+- **course_material_id**：课程材料 ID（当 data_scope 为 "course_material" 时必需）
 - **created_at**：创建时间戳
 - **updated_at**：最后更新时间戳
-- **title**：会话标题（course_material_chat 类型基于课件名称，free_chat 类型基于首条用户消息生成）
+- **title**：会话标题（course_chat 类型基于课件名称，free_chat 类型基于首条用户消息生成）
 
-### 1.3 会话类型定义
+### 1.3 数据范围（data_scope）定义
 
-- **course_material_chat**：针对特定课件的聊天会话
+- **course**：基于课程的数据范围
 
+  - 必需字段：course_id
+  - RAG 检索：根据 course_id 过滤文本块，检索该课程下所有课件的内容
+  - 使用场景：用户想要在整个课程范围内进行问答
+
+- **course_material**：基于课程材料的数据范围
   - 必需字段：course_material_id
-  - 使用场景：学生针对特定课件进行断续的学习讨论
-  - 上下文范围：限定在特定课件的知识范围内
-  - RAG 检索：只检索相关课件的内容
+  - RAG 检索：根据 course_material_id 过滤文本块，只检索特定课件的内容
+  - 使用场景：用户想要针对特定课件进行精确问答
+
+### 1.4 会话类型定义
+
+- **course_chat**：针对特定课件或是特定课程的聊天会话
+
+  - 必需字段：根据 data_scope 确定（course_id 或 course_material_id）
+  - 使用场景：学生针对特定课件或课程进行断续的学习讨论
+  - 上下文范围：根据 data_scope 限定在课程或课件的知识范围内
+  - RAG 检索：根据 data_scope 和对应 ID 过滤检索内容
+  - **默认类型**：在当前的开发计划中，所有的 session 的 session_type 都是 "course_chat"，这是默认值
 
 - **free_chat**：自由聊天会话（未来扩展功能，当前不实现）
   - 可选字段：course_id、course_material_id 都可为空
@@ -67,6 +82,7 @@
 - **索引**：
   - `updated_at`：用于按时间排序和清理
   - `session_type`：用于按会话类型过滤
+  - `data_scope`：用于按数据范围过滤
   - `course_id`：用于按课程过滤（可选）
   - `course_material_id`：用于按课件过滤（可选）
 
@@ -75,7 +91,7 @@
 - 不使用单独的会话索引，直接从 sessions 对象存储查询
 - 每个会话作为独立记录存储，便于原子操作
 - 利用 IndexedDB 的索引功能实现高效查询和排序
-- 确保 course_material_id 在所有会话中的唯一性（每个课件只对应一个会话）
+- 对于 data_scope 是“course_material”的 session 来说，确保 course_material_id 在所有会话中的唯一性（每个课件只对应一个会话）
 
 ---
 
@@ -88,12 +104,19 @@
    - 用户问题（question）
    - 会话 ID（session_id）
    - 聊天模式（mode：query 或 condense_question）
+   - 数据范围（data_scope：course 或 course_material）
    - ChatSummaryBuffer（如果存在）
-   - 可选：course_id、course_material_id
+   - 根据 data_scope 必需的参数：
+     - 当 data_scope 为 "course" 时：course_id（必需）
+     - 当 data_scope 为 "course_material" 时：course_material_id（必需）
 
 2. **后端处理**：
 
+   - 根据 data_scope 和对应的 ID 参数构建 RAG 检索过滤条件：
+     - 当 data_scope 为 "course" 时：使用 course_id 过滤文本块
+     - 当 data_scope 为 "course_material" 时：使用 course_material_id 过滤文本块
    - 根据 mode 和 chatSummaryBuffer 创建相应的聊天引擎
+   - 执行 RAG 检索（使用过滤条件）
    - 生成回答
    - 更新 chatSummaryBuffer
    - 返回答案（在 condense_question 模式下 response 中有引用的数据）和更新后的 chatSummaryBuffer
@@ -118,7 +141,7 @@
 - 创建 IndexedDB 数据库和对象存储
 - 实现会话的 CRUD 操作
 - 实现按时间排序的会话列表查询（按 updated_at 倒序显示）
-- 实现按 course_material_id 查找现有会话的功能
+- 实现按 data_scope 和对应 ID（course_id 或 course_material_id）查找现有会话的功能
 - 实现 30 天过期数据清理
 - 实现特定会话的聊天历史和 ChatSummaryBuffer 清空功能
 
@@ -126,8 +149,8 @@
 
 - 使用 nanoid 生成 session_id
 - 管理当前活跃会话状态
-- 处理会话创建和打开（当前只支持从课件页面创建 course_material_chat 类型）
-- 实现 course_material_id 唯一性检查，如存在则跳转到现有会话
+- 处理会话创建和打开（支持基于 data_scope 的不同创建方式）
+- 实现基于 data_scope 和对应 ID 的唯一性检查，如存在则跳转到现有会话
 - 维护 frontend_session_chat_history
 
 ### 4.3 Visit Session 管理
@@ -142,7 +165,8 @@
 - 添加会话列表侧边栏（按 updated_at 倒序显示所有会话）
 - 支持会话切换和历史记录加载
 - 提供清空当前会话聊天记录的功能按钮
-- 支持从课件页面直接创建或打开 course_material_chat 类型会话
+- 支持从课件页面直接创建或打开 course_chat 类型会话
+- 支持基于 data_scope 的会话管理和切换
 
 ---
 
@@ -150,19 +174,31 @@
 
 ### 5.1 API 接口调整
 
-- 修改现有 `/api/v1/rag/query` 接口，支持接收 chatSummaryBuffer
+- 修改现有 `/api/v1/rag/query` 接口，支持接收以下新参数：
+  - `data_scope`：数据范围标识（"course" 或 "course_material"）
+  - `chatSummaryBuffer`：聊天摘要缓冲区
 - 确保响应中包含更新后的 chatSummaryBuffer
 - 保持接口向后兼容性
 
-### 5.2 ChatSummaryBuffer 处理
+### 5.2 RAG 检索过滤逻辑
+
+- 根据 data_scope 参数确定过滤策略：
+  - 当 data_scope 为 "course" 时：使用 course_id 过滤，检索该课程下所有课件的文本块
+  - 当 data_scope 为 "course_material" 时：使用 course_material_id 过滤，只检索特定课件的文本块
+- 在向量搜索时应用相应的过滤条件
+- 确保过滤逻辑的正确性和性能
+
+### 5.3 ChatSummaryBuffer 处理
 
 - 在 RAG 查询时，如果请求包含 chatSummaryBuffer，使用它来初始化聊天引擎
 - 确保 chatSummaryBuffer 的正确传递和更新
 - 处理 chatSummaryBuffer 为空的情况
 
-### 5.3 Schema 更新
+### 5.4 Schema 更新
 
-- 更新 QueryRequest 模型，添加 chatSummaryBuffer 字段
+- 更新 QueryRequest 模型，添加以下字段：
+  - `data_scope`：数据范围标识
+  - `chatSummaryBuffer`：聊天摘要缓冲区
 - 更新 QueryResponse 模型，确保返回更新后的 chatSummaryBuffer
 - 保持与现有 ChatMemory 结构的兼容性
 
@@ -239,9 +275,12 @@
 
 ### 10.1 第一阶段（核心功能）
 
-1. 实现 IndexedDB 基础操作和 course_material_id 唯一性约束
-2. 修改后端 API 支持 chatSummaryBuffer
-3. 实现从课件页面创建或打开会话的功能
+1. 实现 IndexedDB 基础操作和基于 data_scope 的会话唯一性约束
+2. 修改后端 API 支持 data_scope 参数和 chatSummaryBuffer
+3. 实现后端 RAG 检索的过滤逻辑（基于 course_id 和 course_material_id）
+4. 创建测试页面 test-data-scope.html（独立文件，不修改现有 pages.js）
+5. 实现基于 data_scope 的会话创建和查找功能
+6. 前端代码重构规划：评估 pages.js 和 pages-extended.js 的重构方案
 
 ### 10.2 第二阶段（完善功能）
 
@@ -249,6 +288,7 @@
 2. 添加会话清空功能
 3. 添加 visit_session 管理和垃圾清理
 4. 完善错误处理和用户体验
+5. 执行前端代码重构：将 pages.js 和 pages-extended.js 模块化拆分
 
 ### 10.3 第三阶段（优化）
 
@@ -258,9 +298,118 @@
 
 ---
 
-## 11. 未来扩展计划
+## 10.4 测试页面开发计划
 
-### 11.1 free_chat 功能扩展（当前不实现）
+### 10.4.1 测试页面概述
+
+为了方便测试新的 data_scope 功能，需要在 `frontend` 目录下创建一个专门的测试页面 `test-data-scope.html`。该页面将使用 Live Server 打开，提供独立的测试环境。
+
+### 10.4.2 测试页面功能需求
+
+#### 用户输入界面
+
+- **course_id 输入框**：用户可以输入课程 ID
+- **course_material_id 输入框**：用户可以输入课程材料 ID
+- **data_scope 选择器**：下拉菜单，选项为 "course" 或 "course_material"
+- **开始聊天按钮**：点击后根据输入参数开始聊天会话
+
+#### 会话加载逻辑
+
+- 点击"开始聊天"后，根据 data_scope 和对应 ID 查找 IndexedDB 中的现有会话：
+  - 如果 data_scope 是 "course"：使用 course_id 和 data_scope="course" 查找会话
+  - 如果 data_scope 是 "course_material"：使用 course_material_id 和 data_scope="course_material" 查找会话
+- 如果找到现有会话，加载该会话的聊天历史并渲染到界面
+- 如果没有找到现有会话，创建新的会话并开始对话
+
+#### 聊天界面
+
+- 显示完整的聊天历史记录
+- 支持发送新消息和接收回复
+- 正确传递 data_scope 参数到后端 API
+- 实时更新 IndexedDB 中的会话数据
+
+### 10.4.3 测试页面技术实现要点
+
+#### 页面结构
+
+- 独立的 HTML 文件，包含必要的 CSS 和 JavaScript 引用
+- 简洁的用户界面，专注于测试功能
+- 清晰的参数输入区域和聊天显示区域
+
+#### JavaScript 模块集成
+
+- 复用现有的 IndexedDB 管理模块
+- 复用现有的 RAG API 调用模块
+- 实现专门的会话查找和创建逻辑
+
+#### 数据验证
+
+- 验证用户输入的完整性（根据 data_scope 检查必需字段）
+- 提供清晰的错误提示和用户指导
+- 确保参数正确传递到后端
+
+### 10.4.4 测试场景覆盖
+
+#### 基本功能测试
+
+- 创建基于 course 的新会话
+- 创建基于 course_material 的新会话
+- 加载现有会话并继续对话
+- 验证 RAG 检索的过滤效果
+
+#### 边界情况测试
+
+- 处理无效的 course_id 或 course_material_id
+- 处理网络错误和 API 异常
+- 验证 IndexedDB 数据的一致性
+
+---
+
+## 11. 前端代码重构策略
+
+### 11.1 当前代码状况分析
+
+- **pages.js**：代码行数已超过 1000 行，包含多个页面的逻辑
+- **pages-extended.js**：代码行数已超过 1000 行，包含扩展功能
+- **问题**：单个文件过于庞大，不便于 AI 编程和代码维护
+
+### 11.2 重构原则
+
+- **模块化拆分**：按功能领域将代码拆分为独立的模块文件
+- **单一职责**：每个模块文件专注于特定的功能领域
+- **可维护性**：提高代码的可读性和可维护性
+- **AI 友好**：确保单个文件的代码量适合 AI 编程（建议每个文件不超过 500 行）
+
+### 11.3 建议的模块拆分方案
+
+#### 核心页面模块
+
+- `pages-outline.js`：大纲生成相关页面逻辑
+- `pages-rag.js`：RAG 智能问答页面逻辑
+- `pages-unified.js`：统一处理页面逻辑
+- `pages-collection.js`：集合管理页面逻辑
+- `pages-health.js`：健康状态页面逻辑
+
+#### 功能模块
+
+- `sessionManager.js`：会话管理核心逻辑
+- `indexedDBHelper.js`：IndexedDB 操作封装
+- `visitSessionManager.js`：访问会话和垃圾清理管理
+- `chatInterface.js`：聊天界面通用组件
+- `fileUpload.js`：文件上传通用组件
+
+### 11.4 重构实施策略
+
+- **渐进式重构**：不一次性重写所有代码，而是逐步拆分和重构
+- **向后兼容**：确保重构过程中不影响现有功能
+- **新功能独立**：新增功能（如 data_scope 相关功能）使用新的模块化架构
+- **测试验证**：每次重构后进行充分测试，确保功能正常
+
+---
+
+## 12. 未来扩展计划
+
+### 12.1 free_chat 功能扩展（当前不实现）
 
 **功能描述：**
 
@@ -278,7 +427,7 @@
 
 - 利用现有的 session_type 字段，添加对"free_chat"值的支持
 - free_chat 类型会话的 course_id 和 course_material_id 字段为空
-- 保持与 course_material_chat 相同的 chatSummaryBuffer 管理机制
+- 保持与 course_chat 相同的 chatSummaryBuffer 管理机制
 
 **注意事项：**
 
@@ -288,34 +437,44 @@
 
 ---
 
-## 12. 测试策略
+## 13. 测试策略
 
-### 12.1 前端测试
+### 13.1 前端测试
 
 - IndexedDB 操作的单元测试
 - 会话管理功能的集成测试
-- course_material_id 唯一性约束测试
+- data_scope 相关功能测试：
+  - 基于 course 和 course_material 的会话创建测试
+  - data_scope 参数验证测试
+  - 会话查找逻辑测试
 - 会话清空功能测试
 - 跨浏览器兼容性测试
+- 测试页面功能验证
 
-### 12.2 后端测试
+### 13.2 后端测试
 
 - ChatSummaryBuffer 处理的单元测试
+- data_scope 过滤逻辑测试：
+  - course_id 过滤的准确性测试
+  - course_material_id 过滤的准确性测试
+  - 过滤性能测试
 - API 接口的集成测试
 - 向后兼容性测试
 
-### 12.3 端到端测试
+### 13.3 端到端测试
 
-- 完整聊天流程测试
+- 完整聊天流程测试（包含 data_scope 参数）
 - 会话持久化测试
 - 垃圾清理功能测试
 - 从课件页面创建会话的业务流程测试
+- 测试页面的完整功能流程测试
+- data_scope 切换和会话管理的端到端测试
 
 ---
 
-## 13. 详细技术实现说明
+## 14. 详细技术实现说明
 
-### 13.1 前端 IndexedDB 操作接口设计
+### 14.1 前端 IndexedDB 操作接口设计
 
 #### 数据库初始化
 
@@ -328,21 +487,22 @@
 
 - `createSession(sessionData)`: 创建新会话
 - `getSession(sessionId)`: 获取指定会话
-- `findSessionByCourseMaterilaId(courseMaterilaId)`: 根据课件 ID 查找现有会话
+- `findSessionByDataScope(dataScope, scopeId)`: 根据数据范围和对应 ID 查找现有会话
 - `updateSession(sessionId, updates)`: 更新会话数据
 - `deleteSession(sessionId)`: 删除会话
 - `clearSessionHistory(sessionId)`: 清空指定会话的聊天历史和 ChatSummaryBuffer
 - `listSessions(options)`: 获取会话列表（按 updated_at 倒序排序）
 - `cleanupExpiredSessions(days)`: 清理过期会话
 
-### 13.2 前端会话数据模型
+### 14.2 前端会话数据模型
 
 #### Session 对象结构
 
 ```
 {
   session_id: string,           // nanoid 生成
-  session_type: string,         // 'course_material_chat' | 'free_chat'
+  session_type: string,         // 'course_chat' | 'free_chat'
+  data_scope: string,           // 'course' | 'course_material'
   title: string,                // 会话标题
   frontend_session_chat_history: [
     {
@@ -353,18 +513,19 @@
   ],
   chatSummaryBuffer: object | null,  // LlamaIndex ChatSummaryBuffer
   mode: 'query' | 'condense_question',
-  course_id?: string,
-  course_material_id?: string,
+  course_id?: string,           // 当 data_scope 为 'course' 时必需
+  course_material_id?: string,  // 当 data_scope 为 'course_material' 时必需
   created_at: number,
   updated_at: number
 }
 ```
 
-### 13.3 后端 Schema 调整
+### 14.3 后端 Schema 调整
 
 #### QueryRequest 扩展
 
 - 添加 `session_id: string` 字段
+- 添加 `data_scope: string` 字段（"course" 或 "course_material"）
 - 添加 `chatSummaryBuffer: object | null` 字段
 - 保持现有 `chat_memory` 字段的向后兼容性
 
@@ -373,7 +534,7 @@
 - 确保 `chat_memory` 字段包含更新后的 ChatSummaryBuffer
 - 添加 `session_id: string` 字段用于前端会话关联
 
-### 13.4 Visit Session 实现细节
+### 14.4 Visit Session 实现细节
 
 #### 检测机制
 
@@ -389,9 +550,9 @@
 
 ---
 
-## 14. 与现有代码的集成方案
+## 15. 与现有代码的集成方案
 
-### 14.1 前端集成点
+### 15.1 前端集成点
 
 #### 现有聊天界面改造
 
@@ -402,11 +563,20 @@
 
 #### 新增模块
 
-- `sessionManager.js`: 会话管理核心逻辑，包含 course_material_id 唯一性检查
+- `sessionManager.js`: 会话管理核心逻辑，包含基于 data_scope 的唯一性检查
 - `indexedDBHelper.js`: IndexedDB 操作封装
 - `visitSessionManager.js`: 访问会话和垃圾清理管理
 
-### 14.2 后端集成点
+#### 前端代码重构说明
+
+由于现有的 `pages.js` 和 `pages-extended.js` 文件都已超过 1000 行，代码过长不便于 AI 编程和维护。在接下来的前端开发中：
+
+- **不应继续增加** `pages.js` 和 `pages-extended.js` 的代码量
+- **重构策略**：可能需要对现有的 `pages.js` 和 `pages-extended.js` 进行重构，将功能模块化
+- **新功能实现**：建立新的独立 JavaScript 文件来实现新功能，避免单个文件过于庞大
+- **模块化原则**：按功能领域拆分代码，提高代码的可维护性和可读性
+
+### 15.2 后端集成点
 
 #### RAG Service 调整
 
