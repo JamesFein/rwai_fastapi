@@ -39,9 +39,9 @@ class QdrantRepository:
             logger.error(f"Qdrant客户端初始化失败: {e}")
             raise
     
-    async def create_collection(
-        self, 
-        collection_name: str, 
+    def create_collection(
+        self,
+        collection_name: str,
         vector_size: int = 1536,  # text-embedding-3-small的向量维度
         distance: Distance = Distance.COSINE
     ) -> bool:
@@ -66,7 +66,7 @@ class QdrantRepository:
             logger.error(f"创建集合失败: {e}")
             return False
     
-    async def delete_collection(self, collection_name: str) -> bool:
+    def delete_collection(self, collection_name: str) -> bool:
         """删除集合"""
         try:
             self.client.delete_collection(collection_name=collection_name)
@@ -76,7 +76,7 @@ class QdrantRepository:
             logger.error(f"删除集合失败: {e}")
             return False
     
-    async def get_collections(self) -> List[CollectionInfo]:
+    def get_collections(self) -> List[CollectionInfo]:
         """获取所有集合信息"""
         try:
             collections_response = self.client.get_collections()
@@ -98,9 +98,9 @@ class QdrantRepository:
             logger.error(f"获取集合列表失败: {e}")
             return []
     
-    async def upsert_points(
-        self, 
-        collection_name: str, 
+    def upsert_points(
+        self,
+        collection_name: str,
         points: List[PointStruct]
     ) -> bool:
         """插入或更新向量点"""
@@ -115,7 +115,7 @@ class QdrantRepository:
             logger.error(f"插入向量点失败: {e}")
             return False
     
-    async def search_points(
+    def search_points(
         self,
         collection_name: str,
         query_vector: List[float],
@@ -161,7 +161,7 @@ class QdrantRepository:
             logger.error(f"搜索向量点失败: {e}")
             return []
     
-    async def get_collection_info(self, collection_name: str) -> Optional[CollectionInfo]:
+    def get_collection_info(self, collection_name: str) -> Optional[CollectionInfo]:
         """获取指定集合的信息"""
         try:
             collection_info = self.client.get_collection(collection_name)
@@ -175,7 +175,7 @@ class QdrantRepository:
             logger.error(f"获取集合信息失败: {e}")
             return None
     
-    async def count_points(self, collection_name: str) -> int:
+    def count_points(self, collection_name: str) -> int:
         """统计集合中的向量点数量"""
         try:
             count_result = self.client.count(collection_name=collection_name)
@@ -184,7 +184,7 @@ class QdrantRepository:
             logger.error(f"统计向量点数量失败: {e}")
             return 0
 
-    async def delete_vectors_by_filter(
+    def delete_vectors_by_filter(
         self,
         filter_condition: Dict[str, Any],
         collection_name: Optional[str] = None

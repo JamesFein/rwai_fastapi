@@ -1,5 +1,10 @@
 """
 RAG服务核心 - 负责文档处理、索引建立和问答查询
+
+⚠️ DEPRECATED: 此服务已被标记为过时，正在迁移到新的架构中。
+新的实现请参考：
+- app/services/rag/document_indexing_service.py (文档索引功能)
+- app/services/rag/conversation_service.py (对话功能)
 """
 import time
 import uuid
@@ -26,7 +31,7 @@ from app.schemas.rag import (
 
 
 class RAGService:
-    """RAG服务类"""
+    """RAG服务类 - DEPRECATED"""
     
     def __init__(self, settings: AppSettings):
         """初始化RAG服务"""

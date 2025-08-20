@@ -1,6 +1,9 @@
 """
 智能聊天API路由
 基于 Redis 共享内存的聊天系统
+
+⚠️ DEPRECATED: 此API版本已被标记为过时，请使用 /api/v1/conversation/v2 新版本API。
+新版本提供更好的架构、性能和功能。
 """
 from fastapi import APIRouter, Depends, HTTPException, status
 from loguru import logger
@@ -10,7 +13,12 @@ from app.services.chat_service import ChatService
 from app.schemas.rag import ChatRequest, ChatResponse, ChatEngineType
 
 
-router = APIRouter(prefix="/chat", tags=["智能聊天"])
+router = APIRouter(prefix="/chat", tags=["智能聊天 (Deprecated)"])
+
+
+def _log_deprecated_warning(endpoint_name: str):
+    """记录deprecated警告"""
+    logger.warning(f"⚠️ DEPRECATED API调用: {endpoint_name} - 请使用 /api/v1/conversation/v2 新版本API")
 
 
 def get_chat_service(settings: Settings = Depends(get_settings)) -> ChatService:
@@ -18,14 +26,16 @@ def get_chat_service(settings: Settings = Depends(get_settings)) -> ChatService:
     return ChatService(settings)
 
 
-@router.post("/", response_model=ChatResponse)
+@router.post("/", response_model=ChatResponse, deprecated=True)
 async def intelligent_chat(
     request: ChatRequest,
     chat_service: ChatService = Depends(get_chat_service)
 ):
     """
     智能聊天接口
-    
+
+    ⚠️ DEPRECATED: 请使用 /api/v1/conversation/v2/chat 新版本API
+
     基于 Redis 共享内存的智能聊天系统，支持：
     - 多会话管理（基于 conversation_id）
     - 动态过滤（course_id 或 course_material_id）
@@ -70,6 +80,9 @@ async def intelligent_chat(
             if not request.course_id and not request.course_material_id:
                 logger.warning(f"condense_plus_context模式建议提供course_id或course_material_id进行过滤")
         
+        # 记录deprecated警告
+        _log_deprecated_warning("POST /chat/")
+
         # 执行聊天
         response = await chat_service.chat(request)
         

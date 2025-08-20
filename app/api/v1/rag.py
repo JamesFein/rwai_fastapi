@@ -1,5 +1,8 @@
 """
 RAG模块API路由
+
+⚠️ DEPRECATED: 此API版本已被标记为过时，请使用 /api/v1/rag/v2 新版本API。
+新版本提供更好的性能、错误处理和功能。
 """
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form
@@ -13,7 +16,12 @@ from app.schemas.rag import (
     CollectionListResponse, DeleteCollectionResponse, DocumentMetadata
 )
 
-router = APIRouter(prefix="/rag", tags=["RAG"])
+router = APIRouter(prefix="/rag", tags=["RAG (Deprecated)"])
+
+
+def _log_deprecated_warning(endpoint_name: str):
+    """记录deprecated警告"""
+    logger.warning(f"⚠️ DEPRECATED API调用: {endpoint_name} - 请使用 /api/v1/rag/v2 新版本API")
 
 
 def get_rag_service(settings: Settings = Depends(get_settings)) -> RAGService:
@@ -21,7 +29,7 @@ def get_rag_service(settings: Settings = Depends(get_settings)) -> RAGService:
     return RAGService(settings)
 
 
-@router.post("/index", response_model=IndexResponse)
+@router.post("/index", response_model=IndexResponse, deprecated=True)
 async def build_index(
     file: UploadFile = File(...),
     course_id: str = Form(...),
@@ -32,7 +40,9 @@ async def build_index(
 ):
     """
     建立文档索引
-    
+
+    ⚠️ DEPRECATED: 请使用 /api/v1/rag/v2/index 新版本API
+
     - **file**: 上传的MD文件
     - **course_id**: 课程ID
     - **course_material_id**: 课程材料ID
@@ -40,6 +50,7 @@ async def build_index(
     - **collection_name**: 集合名称（可选，默认使用配置中的名称）
     """
     try:
+        _log_deprecated_warning("POST /rag/index")
         # 验证文件类型
         if not file.filename.endswith(('.md', '.txt')):
             raise HTTPException(
@@ -89,14 +100,16 @@ async def build_index(
         )
 
 
-@router.post("/query", response_model=QueryResponse)
+@router.post("/query", response_model=QueryResponse, deprecated=True)
 async def query_rag(
     request: QueryRequest,
     rag_service: RAGService = Depends(get_rag_service)
 ):
     """
     RAG问答查询
-    
+
+    ⚠️ DEPRECATED: 请使用 /api/v1/conversation/v2/chat 新版本API
+
     - **question**: 用户问题
     - **mode**: 聊天模式（query: 检索模式, chat: 直接聊天模式）
     - **course_id**: 课程ID（可选，用于过滤检索范围）
@@ -105,6 +118,7 @@ async def query_rag(
     - **top_k**: 检索Top-K数量（可选）
     """
     try:
+        _log_deprecated_warning("POST /rag/query")
         # 执行查询
         response = await rag_service.query(request)
         

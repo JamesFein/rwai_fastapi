@@ -146,6 +146,38 @@
         "documentation": {}
     },
     {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "UploadFile",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -290,6 +322,62 @@
         "documentation": {}
     },
     {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "UploadFile",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "File",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Form",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "Depends",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -307,6 +395,22 @@
     },
     {
         "label": "UploadFile",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "UploadFile",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -418,6 +522,94 @@
         "documentation": {}
     },
     {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
         "label": "get_settings",
         "importPath": "app.core.config",
         "description": "app.core.config",
@@ -459,6 +651,54 @@
     },
     {
         "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
         "importPath": "app.core.config",
         "description": "app.core.config",
         "isExtraImport": true,
@@ -495,6 +735,30 @@
         "description": "app.services.chat_service",
         "isExtraImport": true,
         "detail": "app.services.chat_service",
+        "documentation": {}
+    },
+    {
+        "label": "ChatRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatEngineType",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
         "documentation": {}
     },
     {
@@ -571,6 +835,46 @@
     },
     {
         "label": "DocumentMetadata",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "CollectionInfo",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "DocumentMetadata",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "DeleteCollectionResponse",
         "importPath": "app.schemas.rag",
         "description": "app.schemas.rag",
         "isExtraImport": true,
@@ -682,35 +986,155 @@
         "documentation": {}
     },
     {
-        "label": "JSONResponse",
-        "importPath": "fastapi.responses",
-        "description": "fastapi.responses",
+        "label": "ChatRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
         "isExtraImport": true,
-        "detail": "fastapi.responses",
+        "detail": "app.schemas.rag",
         "documentation": {}
     },
     {
-        "label": "JSONResponse",
-        "importPath": "fastapi.responses",
-        "description": "fastapi.responses",
+        "label": "ChatResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
         "isExtraImport": true,
-        "detail": "fastapi.responses",
+        "detail": "app.schemas.rag",
         "documentation": {}
     },
     {
-        "label": "JSONResponse",
-        "importPath": "fastapi.responses",
-        "description": "fastapi.responses",
+        "label": "ChatEngineType",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
         "isExtraImport": true,
-        "detail": "fastapi.responses",
+        "detail": "app.schemas.rag",
         "documentation": {}
     },
     {
-        "label": "JSONResponse",
-        "importPath": "fastapi.responses",
-        "description": "fastapi.responses",
+        "label": "SourceInfo",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
         "isExtraImport": true,
-        "detail": "fastapi.responses",
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "CollectionInfo",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatEngineType",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "SourceInfo",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "QueryRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "QueryResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatMessage",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatMemory",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "SourceInfo",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatMode",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
         "documentation": {}
     },
     {
@@ -739,7 +1163,31 @@
         "documentation": {}
     },
     {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -908,6 +1356,182 @@
     },
     {
         "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -14323,6 +14947,134 @@
         "documentation": {}
     },
     {
+        "label": "ConversationService",
+        "importPath": "app.services.rag.conversation_service",
+        "description": "app.services.rag.conversation_service",
+        "isExtraImport": true,
+        "detail": "app.services.rag.conversation_service",
+        "documentation": {}
+    },
+    {
+        "label": "get_rag_config_manager",
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "isExtraImport": true,
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "RAGConfigManager",
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "isExtraImport": true,
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "get_rag_config_manager",
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "isExtraImport": true,
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "RAGConfigManager",
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "isExtraImport": true,
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "RAGConfigManager",
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "isExtraImport": true,
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "RAGConfigManager",
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "isExtraImport": true,
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "Path",
         "importPath": "pathlib",
         "description": "pathlib",
@@ -14660,6 +15412,30 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "timezone",
         "importPath": "datetime",
         "description": "datetime",
@@ -14713,6 +15489,14 @@
         "description": "app.services.rag_service",
         "isExtraImport": true,
         "detail": "app.services.rag_service",
+        "documentation": {}
+    },
+    {
+        "label": "DocumentIndexingService",
+        "importPath": "app.services.rag.document_indexing_service",
+        "description": "app.services.rag.document_indexing_service",
+        "isExtraImport": true,
+        "detail": "app.services.rag.document_indexing_service",
         "documentation": {}
     },
     {
@@ -14790,6 +15574,14 @@
     },
     {
         "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
         "importPath": "pydantic",
         "description": "pydantic",
         "isExtraImport": true,
@@ -15126,6 +15918,14 @@
         "documentation": {}
     },
     {
+        "label": "BaseSettings",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
+        "isExtraImport": true,
+        "detail": "pydantic_settings",
+        "documentation": {}
+    },
+    {
         "label": "SettingsConfigDict",
         "importPath": "pydantic_settings",
         "description": "pydantic_settings",
@@ -15194,6 +15994,22 @@
         "documentation": {}
     },
     {
+        "label": "QdrantClient",
+        "importPath": "qdrant_client",
+        "description": "qdrant_client",
+        "isExtraImport": true,
+        "detail": "qdrant_client",
+        "documentation": {}
+    },
+    {
+        "label": "QdrantClient",
+        "importPath": "qdrant_client",
+        "description": "qdrant_client",
+        "isExtraImport": true,
+        "detail": "qdrant_client",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "qdrant_client.http",
         "description": "qdrant_client.http",
@@ -15211,6 +16027,22 @@
     },
     {
         "label": "VectorParams",
+        "importPath": "qdrant_client.http.models",
+        "description": "qdrant_client.http.models",
+        "isExtraImport": true,
+        "detail": "qdrant_client.http.models",
+        "documentation": {}
+    },
+    {
+        "label": "PointStruct",
+        "importPath": "qdrant_client.http.models",
+        "description": "qdrant_client.http.models",
+        "isExtraImport": true,
+        "detail": "qdrant_client.http.models",
+        "documentation": {}
+    },
+    {
+        "label": "PointStruct",
         "importPath": "qdrant_client.http.models",
         "description": "qdrant_client.http.models",
         "isExtraImport": true,
@@ -15595,6 +16427,110 @@
         "documentation": {}
     },
     {
+        "label": "VectorStoreIndex",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "PromptTemplate",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "Document",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "VectorStoreIndex",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "PromptTemplate",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "VectorStoreIndex",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "Document",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "PromptTemplate",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
         "label": "Document",
         "importPath": "llama_index.core",
         "description": "llama_index.core",
@@ -15688,6 +16624,30 @@
         "description": "llama_index.core",
         "isExtraImport": true,
         "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "ChatSummaryMemoryBuffer",
+        "importPath": "llama_index.core.memory",
+        "description": "llama_index.core.memory",
+        "isExtraImport": true,
+        "detail": "llama_index.core.memory",
+        "documentation": {}
+    },
+    {
+        "label": "ChatSummaryMemoryBuffer",
+        "importPath": "llama_index.core.memory",
+        "description": "llama_index.core.memory",
+        "isExtraImport": true,
+        "detail": "llama_index.core.memory",
+        "documentation": {}
+    },
+    {
+        "label": "ChatSummaryMemoryBuffer",
+        "importPath": "llama_index.core.memory",
+        "description": "llama_index.core.memory",
+        "isExtraImport": true,
+        "detail": "llama_index.core.memory",
         "documentation": {}
     },
     {
@@ -15947,6 +16907,86 @@
         "documentation": {}
     },
     {
+        "label": "SimpleChatEngine",
+        "importPath": "llama_index.core.chat_engine",
+        "description": "llama_index.core.chat_engine",
+        "isExtraImport": true,
+        "detail": "llama_index.core.chat_engine",
+        "documentation": {}
+    },
+    {
+        "label": "SimpleChatEngine",
+        "importPath": "llama_index.core.chat_engine",
+        "description": "llama_index.core.chat_engine",
+        "isExtraImport": true,
+        "detail": "llama_index.core.chat_engine",
+        "documentation": {}
+    },
+    {
+        "label": "SimpleChatEngine",
+        "importPath": "llama_index.core.chat_engine",
+        "description": "llama_index.core.chat_engine",
+        "isExtraImport": true,
+        "detail": "llama_index.core.chat_engine",
+        "documentation": {}
+    },
+    {
+        "label": "CondensePlusContextChatEngine",
+        "importPath": "llama_index.core.chat_engine",
+        "description": "llama_index.core.chat_engine",
+        "isExtraImport": true,
+        "detail": "llama_index.core.chat_engine",
+        "documentation": {}
+    },
+    {
+        "label": "MetadataFilter",
+        "importPath": "llama_index.core.vector_stores",
+        "description": "llama_index.core.vector_stores",
+        "isExtraImport": true,
+        "detail": "llama_index.core.vector_stores",
+        "documentation": {}
+    },
+    {
+        "label": "MetadataFilters",
+        "importPath": "llama_index.core.vector_stores",
+        "description": "llama_index.core.vector_stores",
+        "isExtraImport": true,
+        "detail": "llama_index.core.vector_stores",
+        "documentation": {}
+    },
+    {
+        "label": "FilterOperator",
+        "importPath": "llama_index.core.vector_stores",
+        "description": "llama_index.core.vector_stores",
+        "isExtraImport": true,
+        "detail": "llama_index.core.vector_stores",
+        "documentation": {}
+    },
+    {
+        "label": "MetadataFilter",
+        "importPath": "llama_index.core.vector_stores",
+        "description": "llama_index.core.vector_stores",
+        "isExtraImport": true,
+        "detail": "llama_index.core.vector_stores",
+        "documentation": {}
+    },
+    {
+        "label": "MetadataFilters",
+        "importPath": "llama_index.core.vector_stores",
+        "description": "llama_index.core.vector_stores",
+        "isExtraImport": true,
+        "detail": "llama_index.core.vector_stores",
+        "documentation": {}
+    },
+    {
+        "label": "FilterOperator",
+        "importPath": "llama_index.core.vector_stores",
+        "description": "llama_index.core.vector_stores",
+        "isExtraImport": true,
+        "detail": "llama_index.core.vector_stores",
+        "documentation": {}
+    },
+    {
         "label": "MetadataFilter",
         "importPath": "llama_index.core.vector_stores",
         "description": "llama_index.core.vector_stores",
@@ -15979,6 +17019,22 @@
         "documentation": {}
     },
     {
+        "label": "RedisChatStore",
+        "importPath": "llama_index.storage.chat_store.redis",
+        "description": "llama_index.storage.chat_store.redis",
+        "isExtraImport": true,
+        "detail": "llama_index.storage.chat_store.redis",
+        "documentation": {}
+    },
+    {
+        "label": "RedisChatStore",
+        "importPath": "llama_index.storage.chat_store.redis",
+        "description": "llama_index.storage.chat_store.redis",
+        "isExtraImport": true,
+        "detail": "llama_index.storage.chat_store.redis",
+        "documentation": {}
+    },
+    {
         "label": "OpenAI",
         "importPath": "llama_index.llms.openai",
         "description": "llama_index.llms.openai",
@@ -15992,6 +17048,54 @@
         "description": "llama_index.llms.openai",
         "isExtraImport": true,
         "detail": "llama_index.llms.openai",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAI",
+        "importPath": "llama_index.llms.openai",
+        "description": "llama_index.llms.openai",
+        "isExtraImport": true,
+        "detail": "llama_index.llms.openai",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAI",
+        "importPath": "llama_index.llms.openai",
+        "description": "llama_index.llms.openai",
+        "isExtraImport": true,
+        "detail": "llama_index.llms.openai",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAI",
+        "importPath": "llama_index.llms.openai",
+        "description": "llama_index.llms.openai",
+        "isExtraImport": true,
+        "detail": "llama_index.llms.openai",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAIEmbedding",
+        "importPath": "llama_index.embeddings.openai",
+        "description": "llama_index.embeddings.openai",
+        "isExtraImport": true,
+        "detail": "llama_index.embeddings.openai",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAIEmbedding",
+        "importPath": "llama_index.embeddings.openai",
+        "description": "llama_index.embeddings.openai",
+        "isExtraImport": true,
+        "detail": "llama_index.embeddings.openai",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAIEmbedding",
+        "importPath": "llama_index.embeddings.openai",
+        "description": "llama_index.embeddings.openai",
+        "isExtraImport": true,
+        "detail": "llama_index.embeddings.openai",
         "documentation": {}
     },
     {
@@ -16035,11 +17139,43 @@
         "documentation": {}
     },
     {
-        "label": "AsyncOpenAI",
-        "importPath": "openai",
-        "description": "openai",
+        "label": "QdrantVectorStore",
+        "importPath": "llama_index.vector_stores.qdrant",
+        "description": "llama_index.vector_stores.qdrant",
         "isExtraImport": true,
-        "detail": "openai",
+        "detail": "llama_index.vector_stores.qdrant",
+        "documentation": {}
+    },
+    {
+        "label": "QdrantVectorStore",
+        "importPath": "llama_index.vector_stores.qdrant",
+        "description": "llama_index.vector_stores.qdrant",
+        "isExtraImport": true,
+        "detail": "llama_index.vector_stores.qdrant",
+        "documentation": {}
+    },
+    {
+        "label": "QdrantVectorStore",
+        "importPath": "llama_index.vector_stores.qdrant",
+        "description": "llama_index.vector_stores.qdrant",
+        "isExtraImport": true,
+        "detail": "llama_index.vector_stores.qdrant",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
         "documentation": {}
     },
     {
@@ -16256,6 +17392,30 @@
         "description": "app.repositories.rag_repository",
         "isExtraImport": true,
         "detail": "app.repositories.rag_repository",
+        "documentation": {}
+    },
+    {
+        "label": "QdrantRepository",
+        "importPath": "app.repositories.rag_repository",
+        "description": "app.repositories.rag_repository",
+        "isExtraImport": true,
+        "detail": "app.repositories.rag_repository",
+        "documentation": {}
+    },
+    {
+        "label": "QdrantRepository",
+        "importPath": "app.repositories.rag_repository",
+        "description": "app.repositories.rag_repository",
+        "isExtraImport": true,
+        "detail": "app.repositories.rag_repository",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncOpenAI",
+        "importPath": "openai",
+        "description": "openai",
+        "isExtraImport": true,
+        "detail": "openai",
         "documentation": {}
     },
     {
@@ -50300,7 +51460,7 @@
         "kind": 2,
         "importPath": "app.api.v1.chat",
         "description": "app.api.v1.chat",
-        "peekOfCode": "def get_chat_service(settings: Settings = Depends(get_settings)) -> ChatService:\n    \"\"\"获取聊天服务实例\"\"\"\n    return ChatService(settings)\n@router.post(\"/\", response_model=ChatResponse)\nasync def intelligent_chat(\n    request: ChatRequest,\n    chat_service: ChatService = Depends(get_chat_service)\n):\n    \"\"\"\n    智能聊天接口",
+        "peekOfCode": "def get_chat_service(settings: Settings = Depends(get_settings)) -> ChatService:\n    \"\"\"获取聊天服务实例\"\"\"\n    return ChatService(settings)\n@router.post(\"/\", response_model=ChatResponse, deprecated=True)\nasync def intelligent_chat(\n    request: ChatRequest,\n    chat_service: ChatService = Depends(get_chat_service)\n):\n    \"\"\"\n    智能聊天接口",
         "detail": "app.api.v1.chat",
         "documentation": {}
     },
@@ -50309,8 +51469,26 @@
         "kind": 5,
         "importPath": "app.api.v1.chat",
         "description": "app.api.v1.chat",
-        "peekOfCode": "router = APIRouter(prefix=\"/chat\", tags=[\"智能聊天\"])\ndef get_chat_service(settings: Settings = Depends(get_settings)) -> ChatService:\n    \"\"\"获取聊天服务实例\"\"\"\n    return ChatService(settings)\n@router.post(\"/\", response_model=ChatResponse)\nasync def intelligent_chat(\n    request: ChatRequest,\n    chat_service: ChatService = Depends(get_chat_service)\n):\n    \"\"\"",
+        "peekOfCode": "router = APIRouter(prefix=\"/chat\", tags=[\"智能聊天 (Deprecated)\"])\ndef _log_deprecated_warning(endpoint_name: str):\n    \"\"\"记录deprecated警告\"\"\"\n    logger.warning(f\"⚠️ DEPRECATED API调用: {endpoint_name} - 请使用 /api/v1/conversation/v2 新版本API\")\ndef get_chat_service(settings: Settings = Depends(get_settings)) -> ChatService:\n    \"\"\"获取聊天服务实例\"\"\"\n    return ChatService(settings)\n@router.post(\"/\", response_model=ChatResponse, deprecated=True)\nasync def intelligent_chat(\n    request: ChatRequest,",
         "detail": "app.api.v1.chat",
+        "documentation": {}
+    },
+    {
+        "label": "get_conversation_service",
+        "kind": 2,
+        "importPath": "app.api.v1.conversation_v2",
+        "description": "app.api.v1.conversation_v2",
+        "peekOfCode": "def get_conversation_service(\n    settings: Settings = Depends(get_settings),\n    rag_config_manager: RAGConfigManager = Depends(get_rag_config_manager)\n) -> ConversationService:\n    \"\"\"获取对话服务实例\"\"\"\n    return ConversationService(settings, rag_config_manager)\n@router.post(\"/chat\", response_model=ChatResponse)\nasync def intelligent_chat(\n    request: ChatRequest,\n    conv_service: ConversationService = Depends(get_conversation_service)",
+        "detail": "app.api.v1.conversation_v2",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "app.api.v1.conversation_v2",
+        "description": "app.api.v1.conversation_v2",
+        "peekOfCode": "router = APIRouter(prefix=\"/conversation/v2\", tags=[\"智能对话 v2\"])\ndef get_conversation_service(\n    settings: Settings = Depends(get_settings),\n    rag_config_manager: RAGConfigManager = Depends(get_rag_config_manager)\n) -> ConversationService:\n    \"\"\"获取对话服务实例\"\"\"\n    return ConversationService(settings, rag_config_manager)\n@router.post(\"/chat\", response_model=ChatResponse)\nasync def intelligent_chat(\n    request: ChatRequest,",
+        "detail": "app.api.v1.conversation_v2",
         "documentation": {}
     },
     {
@@ -50363,7 +51541,7 @@
         "kind": 2,
         "importPath": "app.api.v1.rag",
         "description": "app.api.v1.rag",
-        "peekOfCode": "def get_rag_service(settings: Settings = Depends(get_settings)) -> RAGService:\n    \"\"\"获取RAG服务实例\"\"\"\n    return RAGService(settings)\n@router.post(\"/index\", response_model=IndexResponse)\nasync def build_index(\n    file: UploadFile = File(...),\n    course_id: str = Form(...),\n    course_material_id: str = Form(...),\n    course_material_name: str = Form(...),\n    collection_name: str = Form(None),",
+        "peekOfCode": "def get_rag_service(settings: Settings = Depends(get_settings)) -> RAGService:\n    \"\"\"获取RAG服务实例\"\"\"\n    return RAGService(settings)\n@router.post(\"/index\", response_model=IndexResponse, deprecated=True)\nasync def build_index(\n    file: UploadFile = File(...),\n    course_id: str = Form(...),\n    course_material_id: str = Form(...),\n    course_material_name: str = Form(...),\n    collection_name: str = Form(None),",
         "detail": "app.api.v1.rag",
         "documentation": {}
     },
@@ -50372,8 +51550,80 @@
         "kind": 5,
         "importPath": "app.api.v1.rag",
         "description": "app.api.v1.rag",
-        "peekOfCode": "router = APIRouter(prefix=\"/rag\", tags=[\"RAG\"])\ndef get_rag_service(settings: Settings = Depends(get_settings)) -> RAGService:\n    \"\"\"获取RAG服务实例\"\"\"\n    return RAGService(settings)\n@router.post(\"/index\", response_model=IndexResponse)\nasync def build_index(\n    file: UploadFile = File(...),\n    course_id: str = Form(...),\n    course_material_id: str = Form(...),\n    course_material_name: str = Form(...),",
+        "peekOfCode": "router = APIRouter(prefix=\"/rag\", tags=[\"RAG (Deprecated)\"])\ndef _log_deprecated_warning(endpoint_name: str):\n    \"\"\"记录deprecated警告\"\"\"\n    logger.warning(f\"⚠️ DEPRECATED API调用: {endpoint_name} - 请使用 /api/v1/rag/v2 新版本API\")\ndef get_rag_service(settings: Settings = Depends(get_settings)) -> RAGService:\n    \"\"\"获取RAG服务实例\"\"\"\n    return RAGService(settings)\n@router.post(\"/index\", response_model=IndexResponse, deprecated=True)\nasync def build_index(\n    file: UploadFile = File(...),",
         "detail": "app.api.v1.rag",
+        "documentation": {}
+    },
+    {
+        "label": "get_document_indexing_service",
+        "kind": 2,
+        "importPath": "app.api.v1.rag_v2",
+        "description": "app.api.v1.rag_v2",
+        "peekOfCode": "def get_document_indexing_service(\n    settings: Settings = Depends(get_settings),\n    rag_config_manager: RAGConfigManager = Depends(get_rag_config_manager)\n) -> DocumentIndexingService:\n    \"\"\"获取文档索引服务实例\"\"\"\n    return DocumentIndexingService(settings, rag_config_manager)\n@router.post(\"/index\", response_model=IndexResponse)\nasync def build_index(\n    file: UploadFile = File(...),\n    course_id: str = Form(...),",
+        "detail": "app.api.v1.rag_v2",
+        "documentation": {}
+    },
+    {
+        "label": "get_collections",
+        "kind": 2,
+        "importPath": "app.api.v1.rag_v2",
+        "description": "app.api.v1.rag_v2",
+        "peekOfCode": "def get_collections(\n    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)\n):\n    \"\"\"\n    获取所有集合列表 v2\n    返回详细的集合信息，包括向量数量等统计信息\n    \"\"\"\n    try:\n        collections = doc_service.get_collections()\n        logger.info(f\"获取集合列表成功 v2: {len(collections)} 个集合\")",
+        "detail": "app.api.v1.rag_v2",
+        "documentation": {}
+    },
+    {
+        "label": "get_collection_info",
+        "kind": 2,
+        "importPath": "app.api.v1.rag_v2",
+        "description": "app.api.v1.rag_v2",
+        "peekOfCode": "def get_collection_info(\n    collection_name: str,\n    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)\n):\n    \"\"\"\n    获取指定集合的详细信息 v2\n    - **collection_name**: 集合名称\n    \"\"\"\n    try:\n        collection_info = doc_service.get_collection_info(collection_name)",
+        "detail": "app.api.v1.rag_v2",
+        "documentation": {}
+    },
+    {
+        "label": "delete_collection",
+        "kind": 2,
+        "importPath": "app.api.v1.rag_v2",
+        "description": "app.api.v1.rag_v2",
+        "peekOfCode": "def delete_collection(\n    collection_name: str,\n    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)\n):\n    \"\"\"\n    删除指定集合 v2\n    - **collection_name**: 要删除的集合名称\n    \"\"\"\n    try:\n        success = doc_service.delete_collection(collection_name)",
+        "detail": "app.api.v1.rag_v2",
+        "documentation": {}
+    },
+    {
+        "label": "delete_documents_by_course",
+        "kind": 2,
+        "importPath": "app.api.v1.rag_v2",
+        "description": "app.api.v1.rag_v2",
+        "peekOfCode": "def delete_documents_by_course(\n    course_id: str,\n    collection_name: Optional[str] = None,\n    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)\n):\n    \"\"\"\n    删除指定课程的所有文档 v2\n    - **course_id**: 课程ID\n    - **collection_name**: 集合名称（可选）\n    \"\"\"",
+        "detail": "app.api.v1.rag_v2",
+        "documentation": {}
+    },
+    {
+        "label": "delete_documents_by_material",
+        "kind": 2,
+        "importPath": "app.api.v1.rag_v2",
+        "description": "app.api.v1.rag_v2",
+        "peekOfCode": "def delete_documents_by_material(\n    course_id: str,\n    course_material_id: str,\n    collection_name: Optional[str] = None,\n    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)\n):\n    \"\"\"\n    删除指定课程材料的所有文档 v2\n    - **course_id**: 课程ID\n    - **course_material_id**: 课程材料ID",
+        "detail": "app.api.v1.rag_v2",
+        "documentation": {}
+    },
+    {
+        "label": "count_documents",
+        "kind": 2,
+        "importPath": "app.api.v1.rag_v2",
+        "description": "app.api.v1.rag_v2",
+        "peekOfCode": "def count_documents(\n    collection_name: str,\n    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)\n):\n    \"\"\"\n    统计集合中的文档数量 v2\n    - **collection_name**: 集合名称\n    \"\"\"\n    try:\n        count = doc_service.count_documents(collection_name)",
+        "detail": "app.api.v1.rag_v2",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "app.api.v1.rag_v2",
+        "description": "app.api.v1.rag_v2",
+        "peekOfCode": "router = APIRouter(prefix=\"/rag/v2\", tags=[\"RAG v2\"])\ndef get_document_indexing_service(\n    settings: Settings = Depends(get_settings),\n    rag_config_manager: RAGConfigManager = Depends(get_rag_config_manager)\n) -> DocumentIndexingService:\n    \"\"\"获取文档索引服务实例\"\"\"\n    return DocumentIndexingService(settings, rag_config_manager)\n@router.post(\"/index\", response_model=IndexResponse)\nasync def build_index(\n    file: UploadFile = File(...),",
+        "detail": "app.api.v1.rag_v2",
         "documentation": {}
     },
     {
@@ -50959,6 +52209,168 @@
         "description": "app.schemas.rag",
         "peekOfCode": "class ChatResponse(BaseModel):\n    \"\"\"智能聊天响应模型\"\"\"\n    answer: str = Field(..., description=\"AI回答内容\")\n    sources: List[SourceInfo] = Field(default_factory=list, description=\"检索到的来源信息（仅condense_plus_context模式）\")\n    conversation_id: str = Field(..., description=\"对话会话ID\")\n    chat_engine_type: ChatEngineType = Field(..., description=\"使用的聊天引擎类型\")\n    filter_info: Optional[str] = Field(None, description=\"使用的过滤条件信息\")\n    processing_time: float = Field(..., description=\"处理时间（秒）\")",
         "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "CleanupService",
+        "kind": 6,
+        "importPath": "app.services.course_material.cleanup_service",
+        "description": "app.services.course_material.cleanup_service",
+        "peekOfCode": "class CleanupService:\n    \"\"\"课程材料清理服务\"\"\"\n    def __init__(self):\n        self.settings = get_settings()\n    async def cleanup_course_material(\n        self,\n        request: CleanupRequest\n    ) -> CleanupResponse:\n        \"\"\"\n        清理指定课程材料的所有数据",
+        "detail": "app.services.course_material.cleanup_service",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "app.services.course_material.cleanup_service",
+        "description": "app.services.course_material.cleanup_service",
+        "peekOfCode": "logger = get_logger(\"cleanup_service\")\nclass CleanupService:\n    \"\"\"课程材料清理服务\"\"\"\n    def __init__(self):\n        self.settings = get_settings()\n    async def cleanup_course_material(\n        self,\n        request: CleanupRequest\n    ) -> CleanupResponse:\n        \"\"\"",
+        "detail": "app.services.course_material.cleanup_service",
+        "documentation": {}
+    },
+    {
+        "label": "cleanup_service",
+        "kind": 5,
+        "importPath": "app.services.course_material.cleanup_service",
+        "description": "app.services.course_material.cleanup_service",
+        "peekOfCode": "cleanup_service = CleanupService()",
+        "detail": "app.services.course_material.cleanup_service",
+        "documentation": {}
+    },
+    {
+        "label": "CourseMaterialProcessService",
+        "kind": 6,
+        "importPath": "app.services.course_material.course_material_process_service",
+        "description": "app.services.course_material.course_material_process_service",
+        "peekOfCode": "class CourseMaterialProcessService:\n    \"\"\"统一课程材料处理服务\"\"\"\n    def __init__(self):\n        self.settings = get_settings()\n        # 存储任务状态的简单内存存储（生产环境应使用数据库）\n        self.task_storage: Dict[str, CourseProcessResponse] = {}\n        # 初始化文档索引服务\n        rag_config_manager = get_rag_config_manager()\n        self.document_indexing_service = DocumentIndexingService(self.settings, rag_config_manager)\n    async def process_course_material(",
+        "detail": "app.services.course_material.course_material_process_service",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "app.services.course_material.course_material_process_service",
+        "description": "app.services.course_material.course_material_process_service",
+        "peekOfCode": "logger = get_logger(\"course_material_process_service\")\nclass CourseMaterialProcessService:\n    \"\"\"统一课程材料处理服务\"\"\"\n    def __init__(self):\n        self.settings = get_settings()\n        # 存储任务状态的简单内存存储（生产环境应使用数据库）\n        self.task_storage: Dict[str, CourseProcessResponse] = {}\n        # 初始化文档索引服务\n        rag_config_manager = get_rag_config_manager()\n        self.document_indexing_service = DocumentIndexingService(self.settings, rag_config_manager)",
+        "detail": "app.services.course_material.course_material_process_service",
+        "documentation": {}
+    },
+    {
+        "label": "course_material_process_service",
+        "kind": 5,
+        "importPath": "app.services.course_material.course_material_process_service",
+        "description": "app.services.course_material.course_material_process_service",
+        "peekOfCode": "course_material_process_service = CourseMaterialProcessService()",
+        "detail": "app.services.course_material.course_material_process_service",
+        "documentation": {}
+    },
+    {
+        "label": "ChatService",
+        "kind": 6,
+        "importPath": "app.services.legacy.chat_service",
+        "description": "app.services.legacy.chat_service",
+        "peekOfCode": "class ChatService:\n    \"\"\"智能聊天服务类 - DEPRECATED\"\"\"\n    def __init__(self, settings: AppSettings):\n        \"\"\"初始化聊天服务\"\"\"\n        self.settings = settings\n        self._setup_llama_index()\n        self._setup_vector_index()\n        self._load_prompts()\n    def _setup_llama_index(self):\n        \"\"\"设置LlamaIndex全局配置\"\"\"",
+        "detail": "app.services.legacy.chat_service",
+        "documentation": {}
+    },
+    {
+        "label": "RAGService",
+        "kind": 6,
+        "importPath": "app.services.legacy.rag_service",
+        "description": "app.services.legacy.rag_service",
+        "peekOfCode": "class RAGService:\n    \"\"\"RAG服务类 - DEPRECATED\"\"\"\n    def __init__(self, settings: AppSettings):\n        \"\"\"初始化RAG服务\"\"\"\n        self.settings = settings\n        self.qdrant_repo = QdrantRepository(settings)\n        self._setup_llama_index()\n        self._load_prompts()\n    def _setup_llama_index(self):\n        \"\"\"设置LlamaIndex全局配置\"\"\"",
+        "detail": "app.services.legacy.rag_service",
+        "documentation": {}
+    },
+    {
+        "label": "rag_service",
+        "kind": 5,
+        "importPath": "app.services.legacy.rag_service",
+        "description": "app.services.legacy.rag_service",
+        "peekOfCode": "rag_service = RAGService(get_settings())",
+        "detail": "app.services.legacy.rag_service",
+        "documentation": {}
+    },
+    {
+        "label": "ConversationMemoryManager",
+        "kind": 6,
+        "importPath": "app.services.rag.conversation_service",
+        "description": "app.services.rag.conversation_service",
+        "peekOfCode": "class ConversationMemoryManager:\n    \"\"\"对话内存管理器\"\"\"\n    def __init__(self, rag_config_manager: RAGConfigManager):\n        \"\"\"\n        初始化对话内存管理器\n        Args:\n            rag_config_manager: RAG配置管理器\n        \"\"\"\n        self.rag_config_manager = rag_config_manager\n        self._load_prompts()",
+        "detail": "app.services.rag.conversation_service",
+        "documentation": {}
+    },
+    {
+        "label": "ChatEngineFactory",
+        "kind": 6,
+        "importPath": "app.services.rag.conversation_service",
+        "description": "app.services.rag.conversation_service",
+        "peekOfCode": "class ChatEngineFactory:\n    \"\"\"聊天引擎工厂\"\"\"\n    def __init__(self, app_settings: AppSettings, rag_config_manager: RAGConfigManager):\n        \"\"\"\n        初始化聊天引擎工厂\n        Args:\n            app_settings: 应用配置\n            rag_config_manager: RAG配置管理器\n        \"\"\"\n        self.app_settings = app_settings",
+        "detail": "app.services.rag.conversation_service",
+        "documentation": {}
+    },
+    {
+        "label": "ConversationService",
+        "kind": 6,
+        "importPath": "app.services.rag.conversation_service",
+        "description": "app.services.rag.conversation_service",
+        "peekOfCode": "class ConversationService:\n    \"\"\"对话服务类\"\"\"\n    def __init__(self, app_settings: AppSettings, rag_config_manager: RAGConfigManager):\n        \"\"\"\n        初始化对话服务\n        Args:\n            app_settings: 应用配置\n            rag_config_manager: RAG配置管理器\n        \"\"\"\n        self.app_settings = app_settings",
+        "detail": "app.services.rag.conversation_service",
+        "documentation": {}
+    },
+    {
+        "label": "DocumentIndexingService",
+        "kind": 6,
+        "importPath": "app.services.rag.document_indexing_service",
+        "description": "app.services.rag.document_indexing_service",
+        "peekOfCode": "class DocumentIndexingService:\n    \"\"\"文档索引服务类\"\"\"\n    def __init__(self, app_settings: AppSettings, rag_config_manager: RAGConfigManager):\n        \"\"\"\n        初始化文档索引服务\n        Args:\n            app_settings: 应用配置\n            rag_config_manager: RAG配置管理器\n        \"\"\"\n        self.app_settings = app_settings",
+        "detail": "app.services.rag.document_indexing_service",
+        "documentation": {}
+    },
+    {
+        "label": "RAGSettings",
+        "kind": 6,
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "peekOfCode": "class RAGSettings(BaseSettings):\n    \"\"\"RAG专用配置类，支持环境变量覆盖\"\"\"\n    # Redis 配置\n    redis_url: str = Field(default=\"redis://localhost:6379\", description=\"Redis连接URL\")\n    redis_ttl: int = Field(default=3600, description=\"Redis数据TTL（秒）\")\n    # 对话配置\n    conversation_token_limit: int = Field(default=4000, description=\"对话内存Token限制\")\n    conversation_similarity_top_k: int = Field(default=6, description=\"对话检索Top-K\")\n    # LLM 配置\n    llm_model: str = Field(default=\"gpt-4o-mini\", description=\"LLM模型名称\")",
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "RAGConfigManager",
+        "kind": 6,
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "peekOfCode": "class RAGConfigManager:\n    \"\"\"RAG配置管理器 - 单例模式\"\"\"\n    _instance: Optional['RAGConfigManager'] = None\n    _initialized: bool = False\n    def __new__(cls) -> 'RAGConfigManager':\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n        return cls._instance\n    def __init__(self):\n        if not self._initialized:",
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "get_rag_config_manager",
+        "kind": 2,
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "peekOfCode": "def get_rag_config_manager() -> RAGConfigManager:\n    \"\"\"获取RAG配置管理器实例\"\"\"\n    return rag_config_manager\ndef initialize_rag_config(app_settings: AppSettings) -> None:\n    \"\"\"初始化RAG配置（应用启动时调用）\"\"\"\n    rag_config_manager.initialize(app_settings)",
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "initialize_rag_config",
+        "kind": 2,
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "peekOfCode": "def initialize_rag_config(app_settings: AppSettings) -> None:\n    \"\"\"初始化RAG配置（应用启动时调用）\"\"\"\n    rag_config_manager.initialize(app_settings)",
+        "detail": "app.services.rag.rag_settings",
+        "documentation": {}
+    },
+    {
+        "label": "rag_config_manager",
+        "kind": 5,
+        "importPath": "app.services.rag.rag_settings",
+        "description": "app.services.rag.rag_settings",
+        "peekOfCode": "rag_config_manager = RAGConfigManager()\ndef get_rag_config_manager() -> RAGConfigManager:\n    \"\"\"获取RAG配置管理器实例\"\"\"\n    return rag_config_manager\ndef initialize_rag_config(app_settings: AppSettings) -> None:\n    \"\"\"初始化RAG配置（应用启动时调用）\"\"\"\n    rag_config_manager.initialize(app_settings)",
+        "detail": "app.services.rag.rag_settings",
         "documentation": {}
     },
     {

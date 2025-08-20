@@ -16,6 +16,7 @@ from .core.logging import setup_logging, get_logger
 from .constants.paths import ensure_directories
 from .api.v1 import api_router
 from .schemas.outline import ErrorResponse, HealthResponse
+from .services.rag.rag_settings import initialize_rag_config
 from . import __version__, __description__
 
 # 设置日志
@@ -53,6 +54,15 @@ async def lifespan(app: FastAPI):
         logger.info("✅ 配置验证完成")
     except Exception as e:
         logger.error(f"❌ 配置验证失败: {str(e)}")
+        raise
+
+    # 初始化RAG配置管理器
+    try:
+        logger.info("🔧 初始化RAG配置管理器...")
+        initialize_rag_config(settings)
+        logger.info("✅ RAG配置管理器初始化完成")
+    except Exception as e:
+        logger.error(f"❌ RAG配置管理器初始化失败: {str(e)}")
         raise
     
     logger.info("🎉 AI Backend 应用启动完成")
