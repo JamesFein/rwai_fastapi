@@ -341,7 +341,10 @@ function displayOutlineResult(taskData) {
                     </div>
                 </div>
                 <div class="border rounded p-3" style="max-height: 400px; overflow-y: auto;">
-                    ${marked.parse(taskData.outline_content)}
+                    ${marked.parse(taskData.outline_content, {
+                      mangle: false,
+                      headerIds: false,
+                    })}
                 </div>
                 <div class="mt-3 text-muted small">
                     <div>处理时间: ${formatTime(taskData.processing_time)}</div>
@@ -802,22 +805,22 @@ function loadRagChatPage(container) {
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
-                            <label for="course-id" class="form-label">课程ID</label>
-                            <input type="text" class="form-control" id="course-id"
+                            <label for="rag-course-id" class="form-label">课程ID</label>
+                            <input type="text" class="form-control" id="rag-course-id"
                                    placeholder="例如: python_course">
                             <div class="form-text">按课程过滤检索结果</div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="course-material-id" class="form-label">课程材料ID</label>
-                            <input type="text" class="form-control" id="course-material-id"
+                            <label for="rag-course-material-id" class="form-label">课程材料ID</label>
+                            <input type="text" class="form-control" id="rag-course-material-id"
                                    placeholder="例如: chapter_01">
                             <div class="form-text">按具体材料过滤检索结果</div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="collection-name" class="form-label">集合名称</label>
-                            <input type="text" class="form-control" id="collection-name"
+                            <label for="rag-collection-name" class="form-label">集合名称</label>
+                            <input type="text" class="form-control" id="rag-collection-name"
                                    placeholder="默认使用配置中的集合">
                             <div class="form-text">指定向量数据库集合</div>
                         </div>
@@ -961,11 +964,13 @@ async function handleNewChatSubmit(e) {
       conversation_id: document.getElementById("conversation-id").value.trim(),
       question: question,
       chat_engine_type: document.getElementById("chat-engine-type").value,
-      course_id: document.getElementById("course-id").value.trim(),
+      course_id: document.getElementById("rag-course-id").value.trim(),
       course_material_id: document
-        .getElementById("course-material-id")
+        .getElementById("rag-course-material-id")
         .value.trim(),
-      collection_name: document.getElementById("collection-name").value.trim(),
+      collection_name: document
+        .getElementById("rag-collection-name")
+        .value.trim(),
     };
 
     // 验证必填字段
@@ -1066,8 +1071,11 @@ function addNewChatMessage(role, content, isLoading = false) {
   messageContent.className = "message-content";
 
   if (role === "assistant") {
-    // 使用marked解析Markdown
-    messageContent.innerHTML = marked.parse(content);
+    // 使用marked解析Markdown，禁用deprecated选项
+    messageContent.innerHTML = marked.parse(content, {
+      mangle: false,
+      headerIds: false,
+    });
   } else {
     messageContent.textContent = content;
   }
@@ -1394,7 +1402,7 @@ function exportChatHistory() {
     document.getElementById("conversation-id").value
   }\n\n`;
 
-  messages.forEach((message, index) => {
+  messages.forEach((message) => {
     const role = message.classList.contains("user") ? "用户" : "AI助手";
     const content = message.querySelector(".message-content").textContent;
     const timestamp = message.querySelector(".message-timestamp").textContent;
@@ -1503,10 +1511,10 @@ function applyPreset(index) {
 
   document.getElementById("conversation-id").value = preset.conversation_id;
   document.getElementById("chat-engine-type").value = preset.chat_engine_type;
-  document.getElementById("course-id").value = preset.course_id;
-  document.getElementById("course-material-id").value =
+  document.getElementById("rag-course-id").value = preset.course_id;
+  document.getElementById("rag-course-material-id").value =
     preset.course_material_id;
-  document.getElementById("collection-name").value = preset.collection_name;
+  document.getElementById("rag-collection-name").value = preset.collection_name;
 
   updateEngineDescription();
 
@@ -1524,9 +1532,9 @@ function saveCurrentConfig() {
   const config = {
     conversation_id: document.getElementById("conversation-id").value,
     chat_engine_type: document.getElementById("chat-engine-type").value,
-    course_id: document.getElementById("course-id").value,
-    course_material_id: document.getElementById("course-material-id").value,
-    collection_name: document.getElementById("collection-name").value,
+    course_id: document.getElementById("rag-course-id").value,
+    course_material_id: document.getElementById("rag-course-material-id").value,
+    collection_name: document.getElementById("rag-collection-name").value,
     timestamp: new Date().toISOString(),
   };
 
@@ -1542,9 +1550,9 @@ function clearAllInputs() {
 
   document.getElementById("conversation-id").value = "";
   document.getElementById("chat-engine-type").value = "condense_plus_context";
-  document.getElementById("course-id").value = "";
-  document.getElementById("course-material-id").value = "";
-  document.getElementById("collection-name").value = "";
+  document.getElementById("rag-course-id").value = "";
+  document.getElementById("rag-course-material-id").value = "";
+  document.getElementById("rag-collection-name").value = "";
 
   updateEngineDescription();
   generateConversationId();
@@ -1560,11 +1568,13 @@ function showPayloadPreview() {
     conversation_id: document.getElementById("conversation-id").value.trim(),
     question: "这是一个测试问题",
     chat_engine_type: document.getElementById("chat-engine-type").value,
-    course_id: document.getElementById("course-id").value.trim(),
+    course_id: document.getElementById("rag-course-id").value.trim(),
     course_material_id: document
-      .getElementById("course-material-id")
+      .getElementById("rag-course-material-id")
       .value.trim(),
-    collection_name: document.getElementById("collection-name").value.trim(),
+    collection_name: document
+      .getElementById("rag-collection-name")
+      .value.trim(),
   };
 
   const chatData = ChatAPI.buildChatRequest(formData);
@@ -1630,11 +1640,13 @@ async function sendRawRequest() {
     conversation_id: document.getElementById("conversation-id").value.trim(),
     question: prompt("请输入测试问题:", "什么是Python？"),
     chat_engine_type: document.getElementById("chat-engine-type").value,
-    course_id: document.getElementById("course-id").value.trim(),
+    course_id: document.getElementById("rag-course-id").value.trim(),
     course_material_id: document
-      .getElementById("course-material-id")
+      .getElementById("rag-course-material-id")
       .value.trim(),
-    collection_name: document.getElementById("collection-name").value.trim(),
+    collection_name: document
+      .getElementById("rag-collection-name")
+      .value.trim(),
   };
 
   if (!formData.question) {
@@ -1718,7 +1730,8 @@ async function sendRawRequest() {
                 <div class="mt-3">
                   <h6>AI 回答:</h6>
                   <div class="border p-3 rounded">${marked.parse(
-                    response.answer
+                    response.answer,
+                    { mangle: false, headerIds: false }
                   )}</div>
                 </div>
               `

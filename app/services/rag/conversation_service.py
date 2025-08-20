@@ -224,7 +224,7 @@ class ChatEngineFactory:
             raise
     
     def _create_condense_plus_context_engine(
-        self, 
+        self,
         memory: ChatSummaryMemoryBuffer,
         filters: Optional[MetadataFilters] = None
     ):
@@ -232,32 +232,30 @@ class ChatEngineFactory:
         try:
             # 获取对话配置
             conversation_config = self.rag_config_manager.get_conversation_config()
-            
-            # 创建带过滤器的查询引擎
+
+            # 创建condense_plus_context聊天引擎，直接传递过滤器参数
             if filters:
-                query_engine = self.index.as_query_engine(
-                    similarity_top_k=conversation_config["similarity_top_k"], 
-                    filters=filters
+                chat_engine = self.index.as_chat_engine(
+                    chat_mode="condense_plus_context",
+                    condense_prompt=self.condense_prompt,
+                    context_prompt=self.context_prompt,
+                    memory=memory,
+                    verbose=True,
+                    similarity_top_k=conversation_config["similarity_top_k"],
+                    filters=filters  # 直接传递过滤器
                 )
+                logger.info(f"condense_plus_context聊天引擎创建成功，使用过滤器: {filters}")
             else:
-                query_engine = self.index.as_query_engine(
+                chat_engine = self.index.as_chat_engine(
+                    chat_mode="condense_plus_context",
+                    condense_prompt=self.condense_prompt,
+                    context_prompt=self.context_prompt,
+                    memory=memory,
+                    verbose=True,
                     similarity_top_k=conversation_config["similarity_top_k"]
                 )
+                logger.info("condense_plus_context聊天引擎创建成功，无过滤器")
 
-            # 创建condense_plus_context聊天引擎
-            chat_engine = self.index.as_chat_engine(
-                chat_mode="condense_plus_context",
-                condense_prompt=self.condense_prompt,
-                context_prompt=self.context_prompt,
-                memory=memory,
-                verbose=True,
-            )
-
-            # 手动设置过滤器到聊天引擎的查询引擎
-            if filters:
-                chat_engine._query_engine = query_engine
-
-            logger.info("condense_plus_context聊天引擎创建成功")
             return chat_engine
         except Exception as e:
             logger.error(f"创建condense_plus_context聊天引擎失败: {e}")
@@ -306,25 +304,32 @@ class ConversationService:
     def _create_filters(self, course_id: Optional[str], course_material_id: Optional[str]) -> Optional[MetadataFilters]:
         """创建动态过滤器"""
         filters_list = []
-        
+
         # course_id 和 course_material_id 只能存在一个
         if course_id and course_material_id:
             logger.warning("course_id 和 course_material_id 只能选择一个，优先使用 course_id")
             filters_list.append(
                 MetadataFilter(key="course_id", value=course_id, operator=FilterOperator.EQ)
             )
+            logger.info(f"创建过滤器: course_id = {course_id} (优先使用)")
         elif course_id:
             filters_list.append(
                 MetadataFilter(key="course_id", value=course_id, operator=FilterOperator.EQ)
             )
+            logger.info(f"创建过滤器: course_id = {course_id}")
         elif course_material_id:
             filters_list.append(
                 MetadataFilter(key="course_material_id", value=course_material_id, operator=FilterOperator.EQ)
             )
-        
+            logger.info(f"创建过滤器: course_material_id = {course_material_id}")
+
         if filters_list:
-            return MetadataFilters(filters=filters_list)
-        return None
+            metadata_filters = MetadataFilters(filters=filters_list)
+            logger.info(f"过滤器创建成功: {metadata_filters}")
+            return metadata_filters
+        else:
+            logger.info("未创建过滤器，将搜索全部文档")
+            return None
 
     async def chat(self, request: ChatRequest) -> ChatResponse:
         """
