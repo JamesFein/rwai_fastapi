@@ -12,8 +12,8 @@ from ...schemas.course_materials import (
     CleanupRequest, CleanupResponse, ProcessingStatus
 )
 from ...schemas.outline import ErrorResponse
-from ...services.course_process_service import course_process_service
-from ...services.cleanup_service import cleanup_service
+from ...services.course_material.course_material_process_service import course_material_process_service
+from ...services.course_material.cleanup_service import cleanup_service
 
 logger = get_logger("course_materials_api")
 
@@ -61,7 +61,7 @@ async def process_course_material(
         )
         
         # 执行处理
-        response = await course_process_service.process_course_material(file, request)
+        response = await course_material_process_service.process_course_material(file, request)
         
         return response
         
@@ -87,7 +87,7 @@ async def get_task_status(task_id: str):
     """
     try:
         # 获取任务状态
-        task_response = course_process_service.get_task_status(task_id)
+        task_response = course_material_process_service.get_task_status(task_id)
         
         if not task_response:
             raise HTTPException(

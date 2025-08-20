@@ -8,12 +8,12 @@ from typing import Dict, Any, Optional, Tuple
 import aiofiles
 from openai import AsyncOpenAI
 
-from ..core.config import get_settings
-from ..core.logging import get_logger
-from ..core.deps import generate_filename, read_text_file, write_text_file
-from ..schemas.outline import TaskStatus, OutlineGenerateResponse
-from ..constants.paths import OUTLINES_DIR, PROMPTS_DIR
-from ..utils.idgen import IDGenerator, path_generator
+from ...core.config import get_settings
+from ...core.logging import get_logger
+from ...core.deps import generate_filename, read_text_file, write_text_file
+from ...schemas.outline import TaskStatus, OutlineGenerateResponse
+from ...constants.paths import OUTLINES_DIR, PROMPTS_DIR
+from ...utils.idgen import IDGenerator, path_generator
 
 logger = get_logger("outline_service")
 

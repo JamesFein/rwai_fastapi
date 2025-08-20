@@ -1,181 +1,243 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>API连接测试</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .test-section {
-            margin: 20px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .success {
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-            color: #155724;
-        }
-        .error {
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-            color: #721c24;
-        }
-        .loading {
-            background-color: #fff3cd;
-            border-color: #ffeaa7;
-            color: #856404;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        pre {
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-radius: 3px;
-            overflow-x: auto;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .test-section {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+      }
+      .error {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+      }
+      .loading {
+        background-color: #fff3cd;
+        border-color: #ffeaa7;
+        color: #856404;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      pre {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 3px;
+        overflow-x: auto;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>前后端分离测试</h1>
-        <p>这个页面用于测试前端是否能正确访问独立的FastAPI后端服务。</p>
-        
-        <div class="test-section">
-            <h3>API基础配置</h3>
-            <p><strong>后端地址:</strong> <span id="api-url">http://localhost:8000</span></p>
-            <p><strong>前端地址:</strong> <span id="frontend-url"></span></p>
-        </div>
+      <h1>前后端分离测试</h1>
+      <p>这个页面用于测试前端是否能正确访问独立的FastAPI后端服务。</p>
 
-        <div class="test-section">
-            <h3>连接测试</h3>
-            <button onclick="testRootEndpoint()">测试根路径 (/)</button>
-            <button onclick="testHealthEndpoint()">测试健康检查 (/health)</button>
-            <button onclick="testCORS()">测试CORS</button>
-            <div id="test-results"></div>
-        </div>
+      <div class="test-section">
+        <h3>API基础配置</h3>
+        <p>
+          <strong>后端地址:</strong>
+          <span id="api-url">http://localhost:8000</span>
+        </p>
+        <p><strong>前端地址:</strong> <span id="frontend-url"></span></p>
+      </div>
 
-        <div class="test-section">
-            <h3>API功能测试</h3>
-            <button onclick="testOutlineAPI()">测试大纲API</button>
-            <button onclick="testRAGAPI()">测试RAG API</button>
-            <div id="api-results"></div>
-        </div>
+      <div class="test-section">
+        <h3>连接测试</h3>
+        <button onclick="testRootEndpoint()">测试根路径 (/)</button>
+        <button onclick="testHealthEndpoint()">测试健康检查 (/health)</button>
+        <button onclick="testCORS()">测试CORS</button>
+        <div id="test-results"></div>
+      </div>
+
+      <div class="test-section">
+        <h3>API功能测试</h3>
+        <button onclick="testOutlineAPI()">测试大纲API</button>
+        <button onclick="testRAGAPI()">测试RAG API</button>
+        <div id="api-results"></div>
+      </div>
     </div>
 
     <script>
-        // 设置前端URL
-        document.getElementById('frontend-url').textContent = window.location.origin;
-        
-        const API_BASE_URL = 'http://localhost:8000';
-        
-        function showResult(containerId, message, type = 'success') {
-            const container = document.getElementById(containerId);
-            const div = document.createElement('div');
-            div.className = `test-section ${type}`;
-            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong><br>${message}`;
-            container.appendChild(div);
-        }
+      // 设置前端URL
+      document.getElementById("frontend-url").textContent =
+        window.location.origin;
 
-        async function testRootEndpoint() {
-            showResult('test-results', '正在测试根路径...', 'loading');
-            try {
-                const response = await fetch(`${API_BASE_URL}/`);
-                const data = await response.json();
-                showResult('test-results', `✅ 根路径测试成功<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 'success');
-            } catch (error) {
-                showResult('test-results', `❌ 根路径测试失败: ${error.message}`, 'error');
-            }
-        }
+      const API_BASE_URL = "http://localhost:8000";
 
-        async function testHealthEndpoint() {
-            showResult('test-results', '正在测试健康检查...', 'loading');
-            try {
-                const response = await fetch(`${API_BASE_URL}/health`);
-                const data = await response.json();
-                showResult('test-results', `✅ 健康检查测试成功<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 'success');
-            } catch (error) {
-                showResult('test-results', `❌ 健康检查测试失败: ${error.message}`, 'error');
-            }
-        }
+      function showResult(containerId, message, type = "success") {
+        const container = document.getElementById(containerId);
+        const div = document.createElement("div");
+        div.className = `test-section ${type}`;
+        div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong><br>${message}`;
+        container.appendChild(div);
+      }
 
-        async function testCORS() {
-            showResult('test-results', '正在测试CORS...', 'loading');
-            try {
-                const response = await fetch(`${API_BASE_URL}/health`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Test-Header': 'cors-test'
-                    }
-                });
-                
-                if (response.ok) {
-                    showResult('test-results', '✅ CORS测试成功 - 跨域请求正常', 'success');
-                } else {
-                    showResult('test-results', `❌ CORS测试失败 - HTTP ${response.status}`, 'error');
-                }
-            } catch (error) {
-                if (error.message.includes('CORS')) {
-                    showResult('test-results', `❌ CORS测试失败: ${error.message}`, 'error');
-                } else {
-                    showResult('test-results', `❌ CORS测试失败: ${error.message}`, 'error');
-                }
-            }
+      async function testRootEndpoint() {
+        showResult("test-results", "正在测试根路径...", "loading");
+        try {
+          const response = await fetch(`${API_BASE_URL}/`);
+          const data = await response.json();
+          showResult(
+            "test-results",
+            `✅ 根路径测试成功<br><pre>${JSON.stringify(data, null, 2)}</pre>`,
+            "success"
+          );
+        } catch (error) {
+          showResult(
+            "test-results",
+            `❌ 根路径测试失败: ${error.message}`,
+            "error"
+          );
         }
+      }
 
-        async function testOutlineAPI() {
-            showResult('api-results', '正在测试大纲API...', 'loading');
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/v1/outline/tasks`);
-                const data = await response.json();
-                showResult('api-results', `✅ 大纲API测试成功<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 'success');
-            } catch (error) {
-                showResult('api-results', `❌ 大纲API测试失败: ${error.message}`, 'error');
-            }
+      async function testHealthEndpoint() {
+        showResult("test-results", "正在测试健康检查...", "loading");
+        try {
+          const response = await fetch(`${API_BASE_URL}/health`);
+          const data = await response.json();
+          showResult(
+            "test-results",
+            `✅ 健康检查测试成功<br><pre>${JSON.stringify(
+              data,
+              null,
+              2
+            )}</pre>`,
+            "success"
+          );
+        } catch (error) {
+          showResult(
+            "test-results",
+            `❌ 健康检查测试失败: ${error.message}`,
+            "error"
+          );
         }
+      }
 
-        async function testRAGAPI() {
-            showResult('api-results', '正在测试RAG API...', 'loading');
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/v1/rag/collections`);
-                const data = await response.json();
-                showResult('api-results', `✅ RAG API测试成功<br><pre>${JSON.stringify(data, null, 2)}</pre>`, 'success');
-            } catch (error) {
-                showResult('api-results', `❌ RAG API测试失败: ${error.message}`, 'error');
-            }
+      async function testCORS() {
+        showResult("test-results", "正在测试CORS...", "loading");
+        try {
+          const response = await fetch(`${API_BASE_URL}/health`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Test-Header": "cors-test",
+            },
+          });
+
+          if (response.ok) {
+            showResult(
+              "test-results",
+              "✅ CORS测试成功 - 跨域请求正常",
+              "success"
+            );
+          } else {
+            showResult(
+              "test-results",
+              `❌ CORS测试失败 - HTTP ${response.status}`,
+              "error"
+            );
+          }
+        } catch (error) {
+          if (error.message.includes("CORS")) {
+            showResult(
+              "test-results",
+              `❌ CORS测试失败: ${error.message}`,
+              "error"
+            );
+          } else {
+            showResult(
+              "test-results",
+              `❌ CORS测试失败: ${error.message}`,
+              "error"
+            );
+          }
         }
+      }
 
-        // 页面加载时自动测试基本连接
-        window.onload = function() {
-            setTimeout(() => {
-                testRootEndpoint();
-                testHealthEndpoint();
-            }, 1000);
-        };
+      async function testOutlineAPI() {
+        showResult("api-results", "正在测试大纲API...", "loading");
+        try {
+          const response = await fetch(`${API_BASE_URL}/api/v1/outline/tasks`);
+          const data = await response.json();
+          showResult(
+            "api-results",
+            `✅ 大纲API测试成功<br><pre>${JSON.stringify(data, null, 2)}</pre>`,
+            "success"
+          );
+        } catch (error) {
+          showResult(
+            "api-results",
+            `❌ 大纲API测试失败: ${error.message}`,
+            "error"
+          );
+        }
+      }
+
+      async function testRAGAPI() {
+        showResult("api-results", "正在测试RAG API v2...", "loading");
+        try {
+          const response = await fetch(
+            `${API_BASE_URL}/api/v1/rag/v2/collections`
+          );
+          const data = await response.json();
+          showResult(
+            "api-results",
+            `✅ RAG API v2测试成功<br><pre>${JSON.stringify(
+              data,
+              null,
+              2
+            )}</pre>`,
+            "success"
+          );
+        } catch (error) {
+          showResult(
+            "api-results",
+            `❌ RAG API v2测试失败: ${error.message}`,
+            "error"
+          );
+        }
+      }
+
+      // 页面加载时自动测试基本连接
+      window.onload = function () {
+        setTimeout(() => {
+          testRootEndpoint();
+          testHealthEndpoint();
+        }, 1000);
+      };
     </script>
-</body>
+  </body>
 </html>

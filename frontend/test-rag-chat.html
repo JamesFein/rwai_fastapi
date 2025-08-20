@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG 聊天测试页面</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <h4><i class="bi bi-info-circle"></i> RAG 聊天功能测试页面</h4>
+                    <p class="mb-0">这是一个独立的测试页面，用于验证重写后的RAG聊天功能。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RAG 聊天内容区域 -->
+        <div id="rag-chat-container">
+            <!-- 内容将通过JavaScript加载 -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@5.1.1/marked.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/pages.js"></script>
+    
+    <script>
+        // 初始化测试页面
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('RAG聊天测试页面加载完成');
+            
+            // 加载RAG聊天页面
+            const container = document.getElementById('rag-chat-container');
+            loadRagChatPage(container);
+            
+            // 显示测试提示
+            setTimeout(() => {
+                if (typeof addChatSystemInfo === 'function') {
+                    addChatSystemInfo('测试页面已加载完成，可以开始测试RAG聊天功能');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

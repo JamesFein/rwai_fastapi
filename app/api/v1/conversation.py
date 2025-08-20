@@ -1,5 +1,5 @@
 """
-智能对话API路由 v2
+智能对话API路由
 使用新的对话服务实现，提供更好的架构和功能
 """
 from typing import Optional
@@ -11,7 +11,7 @@ from app.services.rag.conversation_service import ConversationService
 from app.services.rag.rag_settings import get_rag_config_manager, RAGConfigManager
 from app.schemas.rag import ChatRequest, ChatResponse, ChatEngineType
 
-router = APIRouter(prefix="/conversation/v2", tags=["智能对话 v2"])
+router = APIRouter(prefix="/conversation", tags=["智能对话"])
 
 
 def get_conversation_service(
@@ -28,16 +28,16 @@ async def intelligent_chat(
     conv_service: ConversationService = Depends(get_conversation_service)
 ):
     """
-    智能对话接口 v2
-    
+    智能对话接口
+
     基于新架构的智能对话系统，提供更好的性能和功能：
-    
+
     **新特性：**
     - 模块化架构：分离内存管理和引擎工厂
     - 统一配置管理：通过RAG配置管理器统一管理所有配置
     - 更好的错误处理：详细的错误信息和日志记录
     - 灵活的提示词管理：支持文件化的提示词模板
-    
+
     **参数说明：**
     - **conversation_id**: 对话会话ID，用作Redis存储键，确保会话隔离
     - **course_id**: 课程ID（与course_material_id二选一），用于过滤检索范围
@@ -47,13 +47,13 @@ async def intelligent_chat(
         - `simple`: 直接对话模式，不检索文档
     - **question**: 用户问题
     - **collection_name**: 集合名称（可选，默认使用配置中的名称）
-    
+
     **过滤逻辑：**
     - 如果提供 course_id，检索时只匹配该课程的文本块
     - 如果提供 course_material_id，检索时只匹配该材料的文本块
     - 如果同时提供两者，优先使用 course_id
     - 如果都不提供，搜索全部文档
-    
+
     **引擎模式：**
     - `condense_plus_context`: 使用向量检索 + 上下文整合，适合知识问答
     - `simple`: 直接与LLM对话，适合一般聊天
@@ -65,28 +65,28 @@ async def intelligent_chat(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="conversation_id 不能为空"
             )
-        
+
         if not request.question.strip():
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="question 不能为空"
             )
-        
+
         # 验证过滤参数（至少提供一个或都不提供）
         if request.chat_engine_type == ChatEngineType.CONDENSE_PLUS_CONTEXT:
             if not request.course_id and not request.course_material_id:
                 logger.warning(f"condense_plus_context模式建议提供course_id或course_material_id进行过滤")
-        
+
         # 执行聊天
         response = await conv_service.chat(request)
-        
-        logger.info(f"聊天完成 v2 - 会话ID: {request.conversation_id}, 引擎: {request.chat_engine_type}, 问题: {request.question[:50]}...")
+
+        logger.info(f"聊天完成 - 会话ID: {request.conversation_id}, 引擎: {request.chat_engine_type}, 问题: {request.question[:50]}...")
         return response
-    
+
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"聊天API错误 v2: {e}")
+        logger.error(f"聊天API错误: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"聊天处理失败: {str(e)}"
@@ -99,10 +99,10 @@ async def clear_conversation(
     conv_service: ConversationService = Depends(get_conversation_service)
 ):
     """
-    清除指定会话的聊天记录 v2
-    
+    清除指定会话的聊天记录
+
     使用新的对话服务实现，提供更可靠的清除功能
-    
+
     - **conversation_id**: 要清除的会话ID
     """
     try:
@@ -111,28 +111,27 @@ async def clear_conversation(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="conversation_id 不能为空"
             )
-        
+
         # 使用新的对话服务清除会话
         success = await conv_service.clear_conversation(conversation_id)
-        
+
         if success:
-            logger.info(f"会话清除成功 v2: {conversation_id}")
+            logger.info(f"会话清除成功: {conversation_id}")
             return {
                 "success": True,
                 "message": f"会话 {conversation_id} 的聊天记录已清除",
-                "conversation_id": conversation_id,
-                "version": "v2"
+                "conversation_id": conversation_id
             }
         else:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"清除会话 {conversation_id} 失败"
             )
-    
+
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"清除会话记录失败 v2: {e}")
+        logger.error(f"清除会话记录失败: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"清除会话记录失败: {str(e)}"
@@ -142,12 +141,11 @@ async def clear_conversation(
 @router.get("/engines")
 async def get_available_engines():
     """
-    获取可用的聊天引擎类型 v2
-    
+    获取可用的聊天引擎类型
+
     返回详细的引擎信息和配置
     """
     return {
-        "version": "v2",
         "engines": [
             {
                 "type": ChatEngineType.CONDENSE_PLUS_CONTEXT,
@@ -155,7 +153,7 @@ async def get_available_engines():
                 "description": "基于文档内容的智能问答，适合知识查询",
                 "features": [
                     "向量检索",
-                    "上下文整合", 
+                    "上下文整合",
                     "来源追踪",
                     "动态过滤",
                     "问题压缩",
@@ -169,7 +167,7 @@ async def get_available_engines():
             },
             {
                 "type": ChatEngineType.SIMPLE,
-                "name": "直接对话模式", 
+                "name": "直接对话模式",
                 "description": "与AI直接对话，不检索文档，适合一般聊天",
                 "features": [
                     "快速响应",
@@ -198,27 +196,25 @@ async def conversation_health_check(
     conv_service: ConversationService = Depends(get_conversation_service)
 ):
     """
-    对话服务健康检查 v2
-    
+    对话服务健康检查
+
     提供详细的服务状态信息
     """
     try:
         service_status = conv_service.get_service_status()
-        
+
         return {
             "status": "healthy",
-            "version": "v2",
             "service_info": service_status,
-            "message": "对话服务 v2 运行正常"
+            "message": "对话服务运行正常"
         }
-    
+
     except Exception as e:
-        logger.error(f"对话服务健康检查失败 v2: {e}")
+        logger.error(f"对话服务健康检查失败: {e}")
         return {
             "status": "unhealthy",
-            "version": "v2",
             "error": str(e),
-            "message": "对话服务 v2 异常"
+            "message": "对话服务异常"
         }
 
 
@@ -228,8 +224,8 @@ async def get_conversation_status(
     conv_service: ConversationService = Depends(get_conversation_service)
 ):
     """
-    获取指定会话的状态信息 v2
-    
+    获取指定会话的状态信息
+
     - **conversation_id**: 会话ID
     """
     try:
@@ -238,20 +234,19 @@ async def get_conversation_status(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="conversation_id 不能为空"
             )
-        
+
         # 这里可以添加获取会话状态的逻辑
         # 目前返回基本信息
         return {
             "conversation_id": conversation_id,
             "status": "active",
-            "version": "v2",
             "message": "会话状态正常"
         }
-    
+
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"获取会话状态失败 v2: {e}")
+        logger.error(f"获取会话状态失败: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"获取会话状态失败: {str(e)}"
@@ -263,22 +258,21 @@ async def get_conversation_config(
     conv_service: ConversationService = Depends(get_conversation_service)
 ):
     """
-    获取对话服务配置信息 v2
-    
+    获取对话服务配置信息
+
     返回当前的配置设置
     """
     try:
         service_status = conv_service.get_service_status()
-        
+
         return {
-            "version": "v2",
             "configuration": service_status.get("rag_config", {}),
             "components": service_status.get("components", {}),
             "supported_engines": service_status.get("supported_engines", [])
         }
-    
+
     except Exception as e:
-        logger.error(f"获取对话配置失败 v2: {e}")
+        logger.error(f"获取对话配置失败: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"获取对话配置失败: {str(e)}"

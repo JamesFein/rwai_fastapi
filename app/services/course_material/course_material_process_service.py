@@ -17,7 +17,7 @@ from ...schemas.course_materials import (
     CourseProcessRequest, CourseProcessResponse, ProcessingStatus, ProcessingStep
 )
 from ...schemas.rag import DocumentMetadata, IndexRequest
-from ...services.outline_service import outline_service
+from ...services.outline.outline_service import outline_service
 from ...services.rag.document_indexing_service import DocumentIndexingService
 from ...services.rag.rag_settings import get_rag_config_manager
 from ...services.course_material.cleanup_service import cleanup_service

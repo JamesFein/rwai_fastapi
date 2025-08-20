@@ -1,46 +1,38 @@
 """
 智能聊天API路由
 基于 Redis 共享内存的聊天系统
-
-⚠️ DEPRECATED: 此API版本已被标记为过时，请使用 /api/v1/conversation/v2 新版本API。
-新版本提供更好的架构、性能和功能。
 """
 from fastapi import APIRouter, Depends, HTTPException, status
 from loguru import logger
 
 from app.core.config import get_settings, Settings
-from app.services.chat_service import ChatService
+from app.services.rag.conversation_service import ConversationService
 from app.schemas.rag import ChatRequest, ChatResponse, ChatEngineType
 
 
-router = APIRouter(prefix="/chat", tags=["智能聊天 (Deprecated)"])
+router = APIRouter(prefix="/chat", tags=["智能聊天"])
 
 
-def _log_deprecated_warning(endpoint_name: str):
-    """记录deprecated警告"""
-    logger.warning(f"⚠️ DEPRECATED API调用: {endpoint_name} - 请使用 /api/v1/conversation/v2 新版本API")
-
-
-def get_chat_service(settings: Settings = Depends(get_settings)) -> ChatService:
+def get_chat_service(settings: Settings = Depends(get_settings)) -> ConversationService:
     """获取聊天服务实例"""
-    return ChatService(settings)
+    from app.services.rag.rag_settings import get_rag_config_manager
+    rag_config_manager = get_rag_config_manager()
+    return ConversationService(settings, rag_config_manager)
 
 
-@router.post("/", response_model=ChatResponse, deprecated=True)
+@router.post("/", response_model=ChatResponse)
 async def intelligent_chat(
     request: ChatRequest,
-    chat_service: ChatService = Depends(get_chat_service)
+    chat_service: ConversationService = Depends(get_chat_service)
 ):
     """
     智能聊天接口
-
-    ⚠️ DEPRECATED: 请使用 /api/v1/conversation/v2/chat 新版本API
 
     基于 Redis 共享内存的智能聊天系统，支持：
     - 多会话管理（基于 conversation_id）
     - 动态过滤（course_id 或 course_material_id）
     - 双引擎模式（condense_plus_context 或 simple）
-    
+
     **参数说明：**
     - **conversation_id**: 对话会话ID，用作Redis存储键，确保会话隔离
     - **course_id**: 课程ID（与course_material_id二选一），用于过滤检索范围
@@ -50,13 +42,13 @@ async def intelligent_chat(
         - `simple`: 直接对话模式，不检索文档
     - **question**: 用户问题
     - **collection_name**: 集合名称（可选，默认使用配置中的名称）
-    
+
     **过滤逻辑：**
     - 如果提供 course_id，检索时只匹配该课程的文本块
     - 如果提供 course_material_id，检索时只匹配该材料的文本块
     - 如果同时提供两者，优先使用 course_id
     - 如果都不提供，搜索全部文档
-    
+
     **引擎模式：**
     - `condense_plus_context`: 使用向量检索 + 上下文整合，适合知识问答
     - `simple`: 直接与LLM对话，适合一般聊天
@@ -68,27 +60,24 @@ async def intelligent_chat(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="conversation_id 不能为空"
             )
-        
+
         if not request.question.strip():
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="question 不能为空"
             )
-        
+
         # 验证过滤参数（至少提供一个或都不提供）
         if request.chat_engine_type == ChatEngineType.CONDENSE_PLUS_CONTEXT:
             if not request.course_id and not request.course_material_id:
                 logger.warning(f"condense_plus_context模式建议提供course_id或course_material_id进行过滤")
-        
-        # 记录deprecated警告
-        _log_deprecated_warning("POST /chat/")
 
         # 执行聊天
         response = await chat_service.chat(request)
-        
+
         logger.info(f"聊天完成 - 会话ID: {request.conversation_id}, 引擎: {request.chat_engine_type}, 问题: {request.question[:50]}...")
         return response
-    
+
     except HTTPException:
         raise
     except Exception as e:
@@ -101,7 +90,7 @@ async def intelligent_chat(
 
 @router.get("/health")
 async def chat_health_check(
-    chat_service: ChatService = Depends(get_chat_service)
+    chat_service: ConversationService = Depends(get_chat_service)
 ):
     """
     聊天服务健康检查
@@ -158,7 +147,7 @@ async def get_available_engines():
 @router.delete("/conversations/{conversation_id}")
 async def clear_conversation(
     conversation_id: str,
-    chat_service: ChatService = Depends(get_chat_service)
+    chat_service: ConversationService = Depends(get_chat_service)
 ):
     """
     清除指定会话的聊天记录

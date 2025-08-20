@@ -25,7 +25,7 @@ from ...schemas.outline import (
     ErrorResponse,
     TaskStatus
 )
-from ...services.outline_service import outline_service
+from ...services.outline.outline_service import outline_service
 from ...utils.fileio import file_utils
 from ...utils.idgen import IDGenerator, filename_generator, path_generator
 from ...utils.timers import async_timer, performance_monitor

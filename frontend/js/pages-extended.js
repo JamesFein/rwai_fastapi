@@ -1054,6 +1054,17 @@ function loadCleanupToolsPage(container) {
                                 清理材料
                             </button>
                         </form>
+
+                        <!-- RAG v2 清理选项 -->
+                        <div class="mt-3">
+                            <h6 class="text-muted">RAG v2 清理选项</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-warning btn-sm" onclick="cleanupRAGDocumentsByMaterial()">
+                                    <i class="bi bi-database-dash"></i>
+                                    仅清理RAG文档 (v2)
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1111,6 +1122,17 @@ function loadCleanupToolsPage(container) {
                                 清理整个课程
                             </button>
                         </form>
+
+                        <!-- RAG v2 清理选项 -->
+                        <div class="mt-3">
+                            <h6 class="text-muted">RAG v2 清理选项</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-warning btn-sm" onclick="cleanupRAGDocumentsByCourse()">
+                                    <i class="bi bi-database-dash"></i>
+                                    仅清理RAG文档 (v2)
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1296,4 +1318,74 @@ function displayCleanupResults(result) {
     `;
 
   resultsDiv.style.display = "block";
+}
+
+// RAG v2 清理函数
+async function cleanupRAGDocumentsByMaterial() {
+  const courseId = document.getElementById("cleanup-course-id").value;
+  const materialId = document.getElementById("cleanup-material-id").value;
+
+  if (!courseId || !materialId) {
+    showError("请填写课程ID和材料ID");
+    return;
+  }
+
+  if (
+    !confirm(
+      `确定要清理课程 "${courseId}" 中材料 "${materialId}" 的RAG文档吗？`
+    )
+  ) {
+    return;
+  }
+
+  try {
+    showLoading();
+    const response = await RAGAPI.deleteDocumentsByMaterial(
+      courseId,
+      materialId
+    );
+    hideLoading();
+
+    showSuccess(`RAG文档清理完成，删除了 ${response.deleted_count} 个文档`);
+    displayCleanupResults({
+      message: `RAG文档清理完成`,
+      deleted_count: response.deleted_count,
+      course_id: courseId,
+      material_id: materialId,
+    });
+  } catch (error) {
+    hideLoading();
+    showError("RAG文档清理失败: " + error.message);
+  }
+}
+
+async function cleanupRAGDocumentsByCourse() {
+  const courseId = document.getElementById("cleanup-course-id-full").value;
+
+  if (!courseId) {
+    showError("请填写课程ID");
+    return;
+  }
+
+  if (
+    !confirm(`确定要清理课程 "${courseId}" 的所有RAG文档吗？此操作不可撤销！`)
+  ) {
+    return;
+  }
+
+  try {
+    showLoading();
+    const response = await RAGAPI.deleteDocumentsByCourse(courseId);
+    hideLoading();
+
+    showSuccess(`RAG文档清理完成，删除了 ${response.deleted_count} 个文档`);
+    displayCleanupResults({
+      message: `RAG文档清理完成`,
+      deleted_count: response.deleted_count,
+      course_id: courseId,
+    });
+  } catch (error) {
+    hideLoading();
+    showError("RAG文档清理失败: " + error.message);
+  }
 }

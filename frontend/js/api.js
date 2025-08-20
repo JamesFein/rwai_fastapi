@@ -130,11 +130,6 @@ const RAGAPI = {
     return api.postForm("/api/v1/rag/index", formData);
   },
 
-  // RAG查询
-  async query(queryData) {
-    return api.post("/api/v1/rag/query", queryData);
-  },
-
   // 获取集合列表
   async getCollections() {
     return api.get("/api/v1/rag/collections");
@@ -147,30 +142,112 @@ const RAGAPI = {
 
   // 获取集合信息
   async getCollectionInfo(collectionName) {
-    return api.get(`/api/v1/rag/collections/${collectionName}/info`);
+    return api.get(`/api/v1/rag/collections/${collectionName}`);
+  },
+
+  // 按课程删除文档
+  async deleteDocumentsByCourse(courseId, collectionName = null) {
+    const params = collectionName ? `?collection_name=${collectionName}` : "";
+    return api.delete(`/api/v1/rag/documents/course/${courseId}${params}`);
+  },
+
+  // 按材料删除文档
+  async deleteDocumentsByMaterial(courseId, materialId, collectionName = null) {
+    const params = collectionName ? `?collection_name=${collectionName}` : "";
+    return api.delete(
+      `/api/v1/rag/documents/material/${courseId}/${materialId}${params}`
+    );
+  },
+
+  // 统计文档数量
+  async countDocuments(collectionName) {
+    return api.get(`/api/v1/rag/collections/${collectionName}/count`);
+  },
+
+  // RAG服务健康检查
+  async getHealth() {
+    return api.get("/api/v1/rag/health");
   },
 };
 
 // 智能聊天API
 const ChatAPI = {
-  // 智能聊天
+  // 智能聊天 - 使用最新的v1 API
   async chat(chatData) {
-    return api.post("/api/v1/chat/", chatData);
-  },
-
-  // 获取可用引擎
-  async getEngines() {
-    return api.get("/api/v1/chat/engines");
+    return api.post("/api/v1/conversation/chat", chatData);
   },
 
   // 清除会话记录
   async clearConversation(conversationId) {
-    return api.delete(`/api/v1/chat/conversations/${conversationId}`);
+    return api.delete(`/api/v1/conversation/conversations/${conversationId}`);
+  },
+
+  // 获取对话状态
+  async getConversationStatus(conversationId) {
+    return api.get(
+      `/api/v1/conversation/conversations/${conversationId}/status`
+    );
+  },
+
+  // 获取对话配置
+  async getConfig() {
+    return api.get("/api/v1/conversation/config");
   },
 
   // 聊天服务健康检查
   async getHealth() {
-    return api.get("/api/v1/chat/health");
+    return api.get("/api/v1/conversation/health");
+  },
+
+  // 验证聊天参数
+  validateChatRequest(chatData) {
+    const errors = [];
+
+    if (!chatData.conversation_id || !chatData.conversation_id.trim()) {
+      errors.push("对话会话ID不能为空");
+    }
+
+    if (!chatData.question || !chatData.question.trim()) {
+      errors.push("问题内容不能为空");
+    }
+
+    if (!chatData.chat_engine_type) {
+      errors.push("必须选择聊天引擎类型");
+    }
+
+    const validEngineTypes = ["condense_plus_context", "simple"];
+    if (
+      chatData.chat_engine_type &&
+      !validEngineTypes.includes(chatData.chat_engine_type)
+    ) {
+      errors.push("无效的聊天引擎类型");
+    }
+
+    return errors;
+  },
+
+  // 构建聊天请求数据
+  buildChatRequest(formData) {
+    const chatData = {
+      conversation_id: formData.conversation_id,
+      question: formData.question,
+      chat_engine_type: formData.chat_engine_type,
+    };
+
+    // 添加可选的过滤参数
+    if (formData.course_id && formData.course_id.trim()) {
+      chatData.course_id = formData.course_id.trim();
+    }
+
+    if (formData.course_material_id && formData.course_material_id.trim()) {
+      chatData.course_material_id = formData.course_material_id.trim();
+    }
+
+    if (formData.collection_name && formData.collection_name.trim()) {
+      chatData.collection_name = formData.collection_name.trim();
+    }
+
+    return chatData;
   },
 };
 

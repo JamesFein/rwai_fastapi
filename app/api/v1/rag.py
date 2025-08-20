@@ -1,47 +1,44 @@
 """
 RAG模块API路由
-
-⚠️ DEPRECATED: 此API版本已被标记为过时，请使用 /api/v1/rag/v2 新版本API。
-新版本提供更好的性能、错误处理和功能。
+使用新的文档索引服务实现
 """
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form
 from fastapi.responses import JSONResponse
 from loguru import logger
 
 from app.core.config import get_settings, Settings
-from app.services.rag_service import RAGService
+from app.services.rag.document_indexing_service import DocumentIndexingService
+from app.services.rag.rag_settings import get_rag_config_manager, RAGConfigManager
 from app.schemas.rag import (
-    IndexRequest, IndexResponse, QueryRequest, QueryResponse,
-    CollectionListResponse, DeleteCollectionResponse, DocumentMetadata
+    IndexRequest, IndexResponse, CollectionInfo,
+    DocumentMetadata, DeleteCollectionResponse
 )
 
-router = APIRouter(prefix="/rag", tags=["RAG (Deprecated)"])
+router = APIRouter(prefix="/rag", tags=["RAG"])
 
 
-def _log_deprecated_warning(endpoint_name: str):
-    """记录deprecated警告"""
-    logger.warning(f"⚠️ DEPRECATED API调用: {endpoint_name} - 请使用 /api/v1/rag/v2 新版本API")
+def get_document_indexing_service(
+    settings: Settings = Depends(get_settings),
+    rag_config_manager: RAGConfigManager = Depends(get_rag_config_manager)
+) -> DocumentIndexingService:
+    """获取文档索引服务实例"""
+    return DocumentIndexingService(settings, rag_config_manager)
 
 
-def get_rag_service(settings: Settings = Depends(get_settings)) -> RAGService:
-    """获取RAG服务实例"""
-    return RAGService(settings)
-
-
-@router.post("/index", response_model=IndexResponse, deprecated=True)
+@router.post("/index", response_model=IndexResponse)
 async def build_index(
     file: UploadFile = File(...),
     course_id: str = Form(...),
     course_material_id: str = Form(...),
     course_material_name: str = Form(...),
-    collection_name: str = Form(None),
-    rag_service: RAGService = Depends(get_rag_service)
+    collection_name: Optional[str] = Form(None),
+    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)
 ):
     """
     建立文档索引
 
-    ⚠️ DEPRECATED: 请使用 /api/v1/rag/v2/index 新版本API
+    使用新的文档索引服务实现，提供更好的性能和错误处理
 
     - **file**: 上传的MD文件
     - **course_id**: 课程ID
@@ -50,18 +47,17 @@ async def build_index(
     - **collection_name**: 集合名称（可选，默认使用配置中的名称）
     """
     try:
-        _log_deprecated_warning("POST /rag/index")
         # 验证文件类型
         if not file.filename.endswith(('.md', '.txt')):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="只支持.md和.txt文件"
             )
-        
+
         # 读取文件内容
         file_content = await file.read()
         content_str = file_content.decode('utf-8')
-        
+
         # 构建请求对象
         metadata = DocumentMetadata(
             course_id=course_id,
@@ -70,16 +66,16 @@ async def build_index(
             file_path=file.filename,
             file_size=len(file_content)
         )
-        
+
         request = IndexRequest(
             file_content=content_str,
             metadata=metadata,
             collection_name=collection_name
         )
-        
+
         # 执行索引建立
-        response = await rag_service.build_index(request)
-        
+        response = await doc_service.build_index(request)
+
         if response.success:
             logger.info(f"索引建立成功: {file.filename}")
             return response
@@ -89,7 +85,7 @@ async def build_index(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=response.message
             )
-    
+
     except HTTPException:
         raise
     except Exception as e:
@@ -100,54 +96,20 @@ async def build_index(
         )
 
 
-@router.post("/query", response_model=QueryResponse, deprecated=True)
-async def query_rag(
-    request: QueryRequest,
-    rag_service: RAGService = Depends(get_rag_service)
-):
-    """
-    RAG问答查询
-
-    ⚠️ DEPRECATED: 请使用 /api/v1/conversation/v2/chat 新版本API
-
-    - **question**: 用户问题
-    - **mode**: 聊天模式（query: 检索模式, chat: 直接聊天模式）
-    - **course_id**: 课程ID（可选，用于过滤检索范围）
-    - **chat_memory**: 聊天记忆（可选）
-    - **collection_name**: 集合名称（可选）
-    - **top_k**: 检索Top-K数量（可选）
-    """
-    try:
-        _log_deprecated_warning("POST /rag/query")
-        # 执行查询
-        response = await rag_service.query(request)
-        
-        logger.info(f"查询完成: {request.question[:50]}...")
-        return response
-    
-    except Exception as e:
-        logger.error(f"查询API错误: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"查询失败: {str(e)}"
-        )
-
-
-@router.get("/collections", response_model=CollectionListResponse)
-async def get_collections(
-    rag_service: RAGService = Depends(get_rag_service)
+@router.get("/collections", response_model=List[CollectionInfo])
+def get_collections(
+    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)
 ):
     """
     获取所有集合列表
+
+    返回详细的集合信息，包括向量数量等统计信息
     """
     try:
-        collections = await rag_service.qdrant_repo.get_collections()
-        
-        return CollectionListResponse(
-            collections=collections,
-            total_count=len(collections)
-        )
-    
+        collections = doc_service.get_collections()
+        logger.info(f"获取集合列表成功: {len(collections)} 个集合")
+        return collections
+
     except Exception as e:
         logger.error(f"获取集合列表API错误: {e}")
         raise HTTPException(
@@ -156,62 +118,28 @@ async def get_collections(
         )
 
 
-@router.delete("/collections/{collection_name}", response_model=DeleteCollectionResponse)
-async def delete_collection(
+@router.get("/collections/{collection_name}", response_model=CollectionInfo)
+def get_collection_info(
     collection_name: str,
-    rag_service: RAGService = Depends(get_rag_service)
-):
-    """
-    删除指定集合
-    
-    - **collection_name**: 要删除的集合名称
-    """
-    try:
-        success = await rag_service.qdrant_repo.delete_collection(collection_name)
-        
-        if success:
-            return DeleteCollectionResponse(
-                success=True,
-                message=f"集合 {collection_name} 删除成功",
-                collection_name=collection_name
-            )
-        else:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"删除集合 {collection_name} 失败"
-            )
-    
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"删除集合API错误: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"删除集合失败: {str(e)}"
-        )
-
-
-@router.get("/collections/{collection_name}/info")
-async def get_collection_info(
-    collection_name: str,
-    rag_service: RAGService = Depends(get_rag_service)
+    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)
 ):
     """
     获取指定集合的详细信息
-    
+
     - **collection_name**: 集合名称
     """
     try:
-        collection_info = await rag_service.qdrant_repo.get_collection_info(collection_name)
-        
+        collection_info = doc_service.get_collection_info(collection_name)
+
         if collection_info:
+            logger.info(f"获取集合信息成功: {collection_name}")
             return collection_info
         else:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"集合 {collection_name} 不存在"
             )
-    
+
     except HTTPException:
         raise
     except Exception as e:
@@ -222,31 +150,166 @@ async def get_collection_info(
         )
 
 
+@router.delete("/collections/{collection_name}", response_model=DeleteCollectionResponse)
+def delete_collection(
+    collection_name: str,
+    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)
+):
+    """
+    删除指定集合
+
+    - **collection_name**: 要删除的集合名称
+    """
+    try:
+        success = doc_service.delete_collection(collection_name)
+
+        if success:
+            logger.info(f"集合删除成功: {collection_name}")
+            return DeleteCollectionResponse(
+                success=True,
+                message=f"集合 {collection_name} 删除成功",
+                collection_name=collection_name
+            )
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"删除集合 {collection_name} 失败"
+            )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"删除集合API错误: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"删除集合失败: {str(e)}"
+        )
+
+
+@router.delete("/documents/course/{course_id}")
+def delete_documents_by_course(
+    course_id: str,
+    collection_name: Optional[str] = None,
+    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)
+):
+    """
+    删除指定课程的所有文档
+
+    - **course_id**: 课程ID
+    - **collection_name**: 集合名称（可选）
+    """
+    try:
+        deleted_count = doc_service.delete_documents_by_course(
+            course_id, collection_name
+        )
+
+        logger.info(f"课程文档删除成功: 课程ID={course_id}, 删除数量={deleted_count}")
+        return {
+            "success": True,
+            "message": f"成功删除课程 {course_id} 的 {deleted_count} 个文档",
+            "course_id": course_id,
+            "deleted_count": deleted_count,
+            "collection_name": collection_name
+        }
+
+    except Exception as e:
+        logger.error(f"删除课程文档API错误: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"删除课程文档失败: {str(e)}"
+        )
+
+
+@router.delete("/documents/material/{course_id}/{course_material_id}")
+def delete_documents_by_material(
+    course_id: str,
+    course_material_id: str,
+    collection_name: Optional[str] = None,
+    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)
+):
+    """
+    删除指定课程材料的所有文档
+
+    - **course_id**: 课程ID
+    - **course_material_id**: 课程材料ID
+    - **collection_name**: 集合名称（可选）
+    """
+    try:
+        deleted_count = doc_service.delete_documents_by_material(
+            course_id, course_material_id, collection_name
+        )
+
+        logger.info(f"课程材料文档删除成功: 材料ID={course_material_id}, 删除数量={deleted_count}")
+        return {
+            "success": True,
+            "message": f"成功删除课程材料 {course_material_id} 的 {deleted_count} 个文档",
+            "course_id": course_id,
+            "course_material_id": course_material_id,
+            "deleted_count": deleted_count,
+            "collection_name": collection_name
+        }
+
+    except Exception as e:
+        logger.error(f"删除课程材料文档API错误: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"删除课程材料文档失败: {str(e)}"
+        )
+
+
+@router.get("/collections/{collection_name}/count")
+def count_documents(
+    collection_name: str,
+    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)
+):
+    """
+    统计集合中的文档数量
+
+    - **collection_name**: 集合名称
+    """
+    try:
+        count = doc_service.count_documents(collection_name)
+
+        logger.info(f"文档数量统计成功: 集合={collection_name}, 数量={count}")
+        return {
+            "collection_name": collection_name,
+            "document_count": count
+        }
+
+    except Exception as e:
+        logger.error(f"统计文档数量API错误: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"统计文档数量失败: {str(e)}"
+        )
+
+
 @router.get("/health")
 async def health_check(
-    rag_service: RAGService = Depends(get_rag_service)
+    doc_service: DocumentIndexingService = Depends(get_document_indexing_service)
 ):
     """
     RAG服务健康检查
+
+    提供详细的服务状态信息
     """
     try:
-        # 检查Qdrant连接
-        collections = await rag_service.qdrant_repo.get_collections()
-        
+        service_status = doc_service.get_service_status()
+
         return {
             "status": "healthy",
-            "qdrant_connected": True,
-            "collections_count": len(collections),
+            "version": "v1",
+            "service_info": service_status,
             "message": "RAG服务运行正常"
         }
-    
+
     except Exception as e:
         logger.error(f"健康检查失败: {e}")
         return JSONResponse(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             content={
                 "status": "unhealthy",
-                "qdrant_connected": False,
+                "version": "v1",
                 "error": str(e),
                 "message": "RAG服务异常"
             }
