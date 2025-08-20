@@ -114,6 +114,38 @@
         "documentation": {}
     },
     {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "UploadFile",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -335,6 +367,318 @@
         "description": "fastapi",
         "isExtraImport": true,
         "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "get_settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "ChatService",
+        "importPath": "app.services.chat_service",
+        "description": "app.services.chat_service",
+        "isExtraImport": true,
+        "detail": "app.services.chat_service",
+        "documentation": {}
+    },
+    {
+        "label": "ChatRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatEngineType",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "QueryRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "QueryResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "CollectionListResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "DeleteCollectionResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "DocumentMetadata",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "CollectionInfo",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatEngineType",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "SourceInfo",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "IndexResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "QueryRequest",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "QueryResponse",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatMessage",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatMemory",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "SourceInfo",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatMode",
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "isExtraImport": true,
+        "detail": "app.schemas.rag",
         "documentation": {}
     },
     {
@@ -564,6 +908,22 @@
     },
     {
         "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -14348,219 +14708,11 @@
         "documentation": {}
     },
     {
-        "label": "logger",
-        "importPath": "loguru",
-        "description": "loguru",
-        "isExtraImport": true,
-        "detail": "loguru",
-        "documentation": {}
-    },
-    {
-        "label": "logger",
-        "importPath": "loguru",
-        "description": "loguru",
-        "isExtraImport": true,
-        "detail": "loguru",
-        "documentation": {}
-    },
-    {
-        "label": "logger",
-        "importPath": "loguru",
-        "description": "loguru",
-        "isExtraImport": true,
-        "detail": "loguru",
-        "documentation": {}
-    },
-    {
-        "label": "logger",
-        "importPath": "loguru",
-        "description": "loguru",
-        "isExtraImport": true,
-        "detail": "loguru",
-        "documentation": {}
-    },
-    {
-        "label": "get_settings",
-        "importPath": "app.core.config",
-        "description": "app.core.config",
-        "isExtraImport": true,
-        "detail": "app.core.config",
-        "documentation": {}
-    },
-    {
-        "label": "Settings",
-        "importPath": "app.core.config",
-        "description": "app.core.config",
-        "isExtraImport": true,
-        "detail": "app.core.config",
-        "documentation": {}
-    },
-    {
-        "label": "Settings",
-        "importPath": "app.core.config",
-        "description": "app.core.config",
-        "isExtraImport": true,
-        "detail": "app.core.config",
-        "documentation": {}
-    },
-    {
-        "label": "get_settings",
-        "importPath": "app.core.config",
-        "description": "app.core.config",
-        "isExtraImport": true,
-        "detail": "app.core.config",
-        "documentation": {}
-    },
-    {
-        "label": "Settings",
-        "importPath": "app.core.config",
-        "description": "app.core.config",
-        "isExtraImport": true,
-        "detail": "app.core.config",
-        "documentation": {}
-    },
-    {
-        "label": "get_settings",
-        "importPath": "app.core.config",
-        "description": "app.core.config",
-        "isExtraImport": true,
-        "detail": "app.core.config",
-        "documentation": {}
-    },
-    {
         "label": "RAGService",
         "importPath": "app.services.rag_service",
         "description": "app.services.rag_service",
         "isExtraImport": true,
         "detail": "app.services.rag_service",
-        "documentation": {}
-    },
-    {
-        "label": "IndexRequest",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "IndexResponse",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "QueryRequest",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "QueryResponse",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "CollectionListResponse",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "DeleteCollectionResponse",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "DocumentMetadata",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "CollectionInfo",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "IndexRequest",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "IndexResponse",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "QueryRequest",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "QueryResponse",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "ChatMessage",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "ChatMemory",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "SourceInfo",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
-        "documentation": {}
-    },
-    {
-        "label": "ChatMode",
-        "importPath": "app.schemas.rag",
-        "description": "app.schemas.rag",
-        "isExtraImport": true,
-        "detail": "app.schemas.rag",
         "documentation": {}
     },
     {
@@ -15034,6 +15186,14 @@
         "documentation": {}
     },
     {
+        "label": "QdrantClient",
+        "importPath": "qdrant_client",
+        "description": "qdrant_client",
+        "isExtraImport": true,
+        "detail": "qdrant_client",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "qdrant_client.http",
         "description": "qdrant_client.http",
@@ -15371,11 +15531,27 @@
         "documentation": {}
     },
     {
-        "label": "AsyncOpenAI",
-        "importPath": "openai",
-        "description": "openai",
+        "label": "Settings",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
         "isExtraImport": true,
-        "detail": "openai",
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "VectorStoreIndex",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
+        "documentation": {}
+    },
+    {
+        "label": "PromptTemplate",
+        "importPath": "llama_index.core",
+        "description": "llama_index.core",
+        "isExtraImport": true,
+        "detail": "llama_index.core",
         "documentation": {}
     },
     {
@@ -15515,211 +15691,11 @@
         "documentation": {}
     },
     {
-        "label": "SentenceSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
+        "label": "ChatSummaryMemoryBuffer",
+        "importPath": "llama_index.core.memory",
+        "description": "llama_index.core.memory",
         "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "SentenceSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "CodeSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "HTMLNodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "JSONNodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "MarkdownNodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "SentenceSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "SimpleFileNodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "TokenTextSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "MarkdownElementNodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "NodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "NodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "SentenceSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "TextSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "NodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "SentenceSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "SentenceSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "MarkdownElementNodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "SentenceSplitter",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "SimpleFileNodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "HierarchicalNodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "get_child_nodes",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "get_deeper_nodes",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "get_leaf_nodes",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "get_root_nodes",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
-        "documentation": {}
-    },
-    {
-        "label": "NodeParser",
-        "importPath": "llama_index.core.node_parser",
-        "description": "llama_index.core.node_parser",
-        "isExtraImport": true,
-        "detail": "llama_index.core.node_parser",
+        "detail": "llama_index.core.memory",
         "documentation": {}
     },
     {
@@ -15955,11 +15931,59 @@
         "documentation": {}
     },
     {
+        "label": "SimpleChatEngine",
+        "importPath": "llama_index.core.chat_engine",
+        "description": "llama_index.core.chat_engine",
+        "isExtraImport": true,
+        "detail": "llama_index.core.chat_engine",
+        "documentation": {}
+    },
+    {
         "label": "CondensePlusContextChatEngine",
         "importPath": "llama_index.core.chat_engine",
         "description": "llama_index.core.chat_engine",
         "isExtraImport": true,
         "detail": "llama_index.core.chat_engine",
+        "documentation": {}
+    },
+    {
+        "label": "MetadataFilter",
+        "importPath": "llama_index.core.vector_stores",
+        "description": "llama_index.core.vector_stores",
+        "isExtraImport": true,
+        "detail": "llama_index.core.vector_stores",
+        "documentation": {}
+    },
+    {
+        "label": "MetadataFilters",
+        "importPath": "llama_index.core.vector_stores",
+        "description": "llama_index.core.vector_stores",
+        "isExtraImport": true,
+        "detail": "llama_index.core.vector_stores",
+        "documentation": {}
+    },
+    {
+        "label": "FilterOperator",
+        "importPath": "llama_index.core.vector_stores",
+        "description": "llama_index.core.vector_stores",
+        "isExtraImport": true,
+        "detail": "llama_index.core.vector_stores",
+        "documentation": {}
+    },
+    {
+        "label": "RedisChatStore",
+        "importPath": "llama_index.storage.chat_store.redis",
+        "description": "llama_index.storage.chat_store.redis",
+        "isExtraImport": true,
+        "detail": "llama_index.storage.chat_store.redis",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAI",
+        "importPath": "llama_index.llms.openai",
+        "description": "llama_index.llms.openai",
+        "isExtraImport": true,
+        "detail": "llama_index.llms.openai",
         "documentation": {}
     },
     {
@@ -15987,11 +16011,243 @@
         "documentation": {}
     },
     {
+        "label": "OpenAIEmbedding",
+        "importPath": "llama_index.embeddings.openai",
+        "description": "llama_index.embeddings.openai",
+        "isExtraImport": true,
+        "detail": "llama_index.embeddings.openai",
+        "documentation": {}
+    },
+    {
         "label": "QdrantVectorStore",
         "importPath": "llama_index.vector_stores.qdrant",
         "description": "llama_index.vector_stores.qdrant",
         "isExtraImport": true,
         "detail": "llama_index.vector_stores.qdrant",
+        "documentation": {}
+    },
+    {
+        "label": "QdrantVectorStore",
+        "importPath": "llama_index.vector_stores.qdrant",
+        "description": "llama_index.vector_stores.qdrant",
+        "isExtraImport": true,
+        "detail": "llama_index.vector_stores.qdrant",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncOpenAI",
+        "importPath": "openai",
+        "description": "openai",
+        "isExtraImport": true,
+        "detail": "openai",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "CodeSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "HTMLNodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "JSONNodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "MarkdownNodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "SimpleFileNodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "TokenTextSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "MarkdownElementNodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "NodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "NodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "TextSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "NodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "MarkdownElementNodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceSplitter",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "SimpleFileNodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "HierarchicalNodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "get_child_nodes",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "get_deeper_nodes",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "get_leaf_nodes",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "get_root_nodes",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
+        "documentation": {}
+    },
+    {
+        "label": "NodeParser",
+        "importPath": "llama_index.core.node_parser",
+        "description": "llama_index.core.node_parser",
+        "isExtraImport": true,
+        "detail": "llama_index.core.node_parser",
         "documentation": {}
     },
     {
@@ -50040,6 +50296,24 @@
         "documentation": {}
     },
     {
+        "label": "get_chat_service",
+        "kind": 2,
+        "importPath": "app.api.v1.chat",
+        "description": "app.api.v1.chat",
+        "peekOfCode": "def get_chat_service(settings: Settings = Depends(get_settings)) -> ChatService:\n    \"\"\"获取聊天服务实例\"\"\"\n    return ChatService(settings)\n@router.post(\"/\", response_model=ChatResponse)\nasync def intelligent_chat(\n    request: ChatRequest,\n    chat_service: ChatService = Depends(get_chat_service)\n):\n    \"\"\"\n    智能聊天接口",
+        "detail": "app.api.v1.chat",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "app.api.v1.chat",
+        "description": "app.api.v1.chat",
+        "peekOfCode": "router = APIRouter(prefix=\"/chat\", tags=[\"智能聊天\"])\ndef get_chat_service(settings: Settings = Depends(get_settings)) -> ChatService:\n    \"\"\"获取聊天服务实例\"\"\"\n    return ChatService(settings)\n@router.post(\"/\", response_model=ChatResponse)\nasync def intelligent_chat(\n    request: ChatRequest,\n    chat_service: ChatService = Depends(get_chat_service)\n):\n    \"\"\"",
+        "detail": "app.api.v1.chat",
+        "documentation": {}
+    },
+    {
         "label": "logger",
         "kind": 5,
         "importPath": "app.api.v1.course_materials",
@@ -50557,7 +50831,16 @@
         "kind": 6,
         "importPath": "app.schemas.rag",
         "description": "app.schemas.rag",
-        "peekOfCode": "class ChatMode(str, Enum):\n    \"\"\"聊天模式枚举\"\"\"\n    QUERY = \"query\"  # 检索模式（condense_question ChatEngine）\n    CHAT = \"chat\"    # 直接聊天模式（simple ChatEngine）\nclass DocumentMetadata(BaseModel):\n    \"\"\"文档元数据模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: str = Field(..., description=\"课程材料ID\")\n    course_material_name: str = Field(..., description=\"课程材料名称\")\n    file_path: Optional[str] = Field(None, description=\"文件路径\")",
+        "peekOfCode": "class ChatMode(str, Enum):\n    \"\"\"聊天模式枚举\"\"\"\n    QUERY = \"query\"  # 检索模式（condense_question ChatEngine）\n    CHAT = \"chat\"    # 直接聊天模式（simple ChatEngine）\nclass ChatEngineType(str, Enum):\n    \"\"\"聊天引擎类型枚举\"\"\"\n    CONDENSE_PLUS_CONTEXT = \"condense_plus_context\"  # 检索增强模式\n    SIMPLE = \"simple\"  # 简单对话模式\nclass DocumentMetadata(BaseModel):\n    \"\"\"文档元数据模型\"\"\"",
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatEngineType",
+        "kind": 6,
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "peekOfCode": "class ChatEngineType(str, Enum):\n    \"\"\"聊天引擎类型枚举\"\"\"\n    CONDENSE_PLUS_CONTEXT = \"condense_plus_context\"  # 检索增强模式\n    SIMPLE = \"simple\"  # 简单对话模式\nclass DocumentMetadata(BaseModel):\n    \"\"\"文档元数据模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: str = Field(..., description=\"课程材料ID\")\n    course_material_name: str = Field(..., description=\"课程材料名称\")\n    file_path: Optional[str] = Field(None, description=\"文件路径\")",
         "detail": "app.schemas.rag",
         "documentation": {}
     },
@@ -50647,7 +50930,7 @@
         "kind": 6,
         "importPath": "app.schemas.rag",
         "description": "app.schemas.rag",
-        "peekOfCode": "class CollectionListResponse(BaseModel):\n    \"\"\"集合列表响应模型\"\"\"\n    collections: List[CollectionInfo] = Field(..., description=\"集合列表\")\n    total_count: int = Field(..., description=\"总数量\")\nclass DeleteCollectionResponse(BaseModel):\n    \"\"\"删除集合响应模型\"\"\"\n    success: bool = Field(..., description=\"是否成功\")\n    message: str = Field(..., description=\"响应消息\")\n    collection_name: str = Field(..., description=\"被删除的集合名称\")",
+        "peekOfCode": "class CollectionListResponse(BaseModel):\n    \"\"\"集合列表响应模型\"\"\"\n    collections: List[CollectionInfo] = Field(..., description=\"集合列表\")\n    total_count: int = Field(..., description=\"总数量\")\nclass DeleteCollectionResponse(BaseModel):\n    \"\"\"删除集合响应模型\"\"\"\n    success: bool = Field(..., description=\"是否成功\")\n    message: str = Field(..., description=\"响应消息\")\n    collection_name: str = Field(..., description=\"被删除的集合名称\")\n# 新增聊天相关模型",
         "detail": "app.schemas.rag",
         "documentation": {}
     },
@@ -50656,8 +50939,35 @@
         "kind": 6,
         "importPath": "app.schemas.rag",
         "description": "app.schemas.rag",
-        "peekOfCode": "class DeleteCollectionResponse(BaseModel):\n    \"\"\"删除集合响应模型\"\"\"\n    success: bool = Field(..., description=\"是否成功\")\n    message: str = Field(..., description=\"响应消息\")\n    collection_name: str = Field(..., description=\"被删除的集合名称\")",
+        "peekOfCode": "class DeleteCollectionResponse(BaseModel):\n    \"\"\"删除集合响应模型\"\"\"\n    success: bool = Field(..., description=\"是否成功\")\n    message: str = Field(..., description=\"响应消息\")\n    collection_name: str = Field(..., description=\"被删除的集合名称\")\n# 新增聊天相关模型\nclass ChatRequest(BaseModel):\n    \"\"\"智能聊天请求模型\"\"\"\n    conversation_id: str = Field(..., description=\"对话会话ID，用作Redis存储键\")\n    course_id: Optional[str] = Field(None, description=\"课程ID（与course_material_id二选一）\")",
         "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatRequest",
+        "kind": 6,
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "peekOfCode": "class ChatRequest(BaseModel):\n    \"\"\"智能聊天请求模型\"\"\"\n    conversation_id: str = Field(..., description=\"对话会话ID，用作Redis存储键\")\n    course_id: Optional[str] = Field(None, description=\"课程ID（与course_material_id二选一）\")\n    course_material_id: Optional[str] = Field(None, description=\"课程材料ID（与course_id二选一）\")\n    chat_engine_type: ChatEngineType = Field(..., description=\"聊天引擎类型\")\n    question: str = Field(..., description=\"用户问题\")\n    collection_name: Optional[str] = Field(None, description=\"集合名称，默认使用配置中的名称\")\nclass ChatResponse(BaseModel):\n    \"\"\"智能聊天响应模型\"\"\"",
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatResponse",
+        "kind": 6,
+        "importPath": "app.schemas.rag",
+        "description": "app.schemas.rag",
+        "peekOfCode": "class ChatResponse(BaseModel):\n    \"\"\"智能聊天响应模型\"\"\"\n    answer: str = Field(..., description=\"AI回答内容\")\n    sources: List[SourceInfo] = Field(default_factory=list, description=\"检索到的来源信息（仅condense_plus_context模式）\")\n    conversation_id: str = Field(..., description=\"对话会话ID\")\n    chat_engine_type: ChatEngineType = Field(..., description=\"使用的聊天引擎类型\")\n    filter_info: Optional[str] = Field(None, description=\"使用的过滤条件信息\")\n    processing_time: float = Field(..., description=\"处理时间（秒）\")",
+        "detail": "app.schemas.rag",
+        "documentation": {}
+    },
+    {
+        "label": "ChatService",
+        "kind": 6,
+        "importPath": "app.services.chat_service",
+        "description": "app.services.chat_service",
+        "peekOfCode": "class ChatService:\n    \"\"\"智能聊天服务类\"\"\"\n    def __init__(self, settings: AppSettings):\n        \"\"\"初始化聊天服务\"\"\"\n        self.settings = settings\n        self._setup_llama_index()\n        self._setup_vector_index()\n        self._load_prompts()\n    def _setup_llama_index(self):\n        \"\"\"设置LlamaIndex全局配置\"\"\"",
+        "detail": "app.services.chat_service",
         "documentation": {}
     },
     {

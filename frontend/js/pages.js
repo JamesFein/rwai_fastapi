@@ -737,39 +737,72 @@ function loadRagChatPage(container) {
                     <div class="card-header">
                         <h6 class="mb-0">
                             <i class="bi bi-gear"></i>
-                            查询设置
+                            智能聊天设置
                         </h6>
                     </div>
                     <div class="card-body">
+                        <!-- 会话管理 -->
                         <div class="mb-3">
-                            <label for="chat-mode" class="form-label">聊天模式</label>
-                            <select class="form-select" id="chat-mode">
-                                <option value="query">检索模式</option>
-                                <option value="chat">直接聊天</option>
+                            <label for="conversation-id" class="form-label">
+                                <i class="bi bi-chat-square"></i> 对话会话ID
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="conversation-id"
+                                   placeholder="例如: user123_session001" required>
+                            <div class="form-text">用于区分不同的对话会话，支持记忆持久化</div>
+                        </div>
+
+                        <!-- 聊天引擎类型 -->
+                        <div class="mb-3">
+                            <label for="chat-engine-type" class="form-label">
+                                <i class="bi bi-cpu"></i> 聊天引擎类型
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" id="chat-engine-type" required>
+                                <option value="condense_plus_context">检索增强模式 (推荐)</option>
+                                <option value="simple">直接对话模式</option>
                             </select>
+                            <div class="form-text" id="engine-description">
+                                基于文档内容的智能问答，适合知识查询
+                            </div>
                         </div>
 
+                        <!-- 过滤设置 -->
                         <div class="mb-3">
-                            <label for="course-filter" class="form-label">课程过滤 (可选)</label>
-                            <input type="text" class="form-control" id="course-filter"
-                                   placeholder="例如: CS101">
+                            <label class="form-label">
+                                <i class="bi bi-funnel"></i> 检索过滤 (二选一)
+                            </label>
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <input type="text" class="form-control" id="course-id"
+                                           placeholder="课程ID (例如: course_01)">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="course-material-id"
+                                           placeholder="课程材料ID (例如: material_001)">
+                                </div>
+                            </div>
+                            <div class="form-text">
+                                <i class="bi bi-info-circle"></i>
+                                只能选择一个过滤条件，如果同时填写则优先使用课程ID
+                            </div>
                         </div>
 
+                        <!-- 高级设置 -->
                         <div class="mb-3">
                             <label for="collection-name" class="form-label">集合名称 (可选)</label>
                             <input type="text" class="form-control" id="collection-name"
                                    placeholder="默认使用配置中的集合">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="top-k" class="form-label">检索数量 (Top-K)</label>
-                            <input type="number" class="form-control" id="top-k"
-                                   value="5" min="1" max="20">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="clearCurrentChat()">
+                                <i class="bi bi-trash"></i> 清空当前对话
+                            </button>
+                            <button class="btn btn-outline-info btn-sm" onclick="generateConversationId()">
+                                <i class="bi bi-arrow-clockwise"></i> 生成新会话ID
+                            </button>
                         </div>
-
-                        <button class="btn btn-outline-secondary btn-sm w-100" onclick="clearChat()">
-                            <i class="bi bi-trash"></i> 清空对话
-                        </button>
                     </div>
                 </div>
 
@@ -813,6 +846,22 @@ async function handleChatSubmit(e) {
 
   if (!question) return;
 
+  // 验证必填字段
+  const conversationId = document
+    .getElementById("conversation-id")
+    .value.trim();
+  const chatEngineType = document.getElementById("chat-engine-type").value;
+
+  if (!conversationId) {
+    showError("请输入对话会话ID");
+    return;
+  }
+
+  if (!chatEngineType) {
+    showError("请选择聊天引擎类型");
+    return;
+  }
+
   // 清空输入框
   chatInput.value = "";
 
@@ -823,31 +872,35 @@ async function handleChatSubmit(e) {
   const loadingId = addChatMessage("assistant", "正在思考中...", true);
 
   try {
-    // 构建查询请求
-    const queryData = {
+    // 构建智能聊天请求
+    const chatData = {
+      conversation_id: conversationId,
+      chat_engine_type: chatEngineType,
       question: question,
-      mode: document.getElementById("chat-mode").value,
-      chat_memory: window.chatMemory,
     };
 
+    // 添加过滤参数 (course_id 和 course_material_id 二选一)
+    const courseId = document.getElementById("course-id").value.trim();
+    const courseMaterialId = document
+      .getElementById("course-material-id")
+      .value.trim();
+
+    if (courseId) {
+      chatData.course_id = courseId;
+    } else if (courseMaterialId) {
+      chatData.course_material_id = courseMaterialId;
+    }
+
     // 添加可选参数
-    const courseFilter = document.getElementById("course-filter").value;
-    if (courseFilter) {
-      queryData.course_id = courseFilter;
-    }
-
-    const collectionName = document.getElementById("collection-name").value;
+    const collectionName = document
+      .getElementById("collection-name")
+      .value.trim();
     if (collectionName) {
-      queryData.collection_name = collectionName;
+      chatData.collection_name = collectionName;
     }
 
-    const topK = document.getElementById("top-k").value;
-    if (topK) {
-      queryData.top_k = parseInt(topK);
-    }
-
-    // 调用RAG查询API
-    const response = await RAGAPI.query(queryData);
+    // 调用智能聊天API
+    const response = await ChatAPI.chat(chatData);
 
     // 移除加载消息
     removeChatMessage(loadingId);
@@ -855,14 +908,21 @@ async function handleChatSubmit(e) {
     // 添加助手回复
     addChatMessage("assistant", response.answer);
 
-    // 更新聊天记忆
-    if (response.chat_memory) {
-      window.chatMemory = response.chat_memory;
+    // 显示处理信息
+    if (response.filter_info) {
+      addChatInfo(`过滤条件: ${response.filter_info}`);
     }
+    addChatInfo(
+      `引擎类型: ${
+        response.chat_engine_type
+      } | 处理时间: ${response.processing_time.toFixed(2)}s`
+    );
 
-    // 显示来源信息
+    // 显示来源信息 (仅condense_plus_context模式)
     if (response.sources && response.sources.length > 0) {
       displaySources(response.sources);
+    } else if (response.chat_engine_type === "condense_plus_context") {
+      addChatInfo("未找到相关文档片段");
     }
   } catch (error) {
     // 移除加载消息
@@ -1072,3 +1132,85 @@ function displayCollections(collections) {
 
   container.innerHTML = tableHTML;
 }
+
+// 智能聊天相关辅助函数
+
+// 添加聊天信息消息
+function addChatInfo(info) {
+  const chatContainer = document.getElementById("chat-messages");
+  const infoDiv = document.createElement("div");
+  infoDiv.className = "chat-info text-muted small text-center my-2";
+  infoDiv.innerHTML = `<i class="bi bi-info-circle"></i> ${info}`;
+  chatContainer.appendChild(infoDiv);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// 清空当前对话
+function clearCurrentChat() {
+  const chatContainer = document.getElementById("chat-messages");
+  chatContainer.innerHTML = `
+    <div class="text-center text-muted">
+      <i class="bi bi-chat-square-dots" style="font-size: 3rem; opacity: 0.3;"></i>
+      <p class="mt-3">开始您的智能问答之旅</p>
+      <p class="small">您可以询问关于已索引文档的任何问题</p>
+    </div>
+  `;
+
+  // 隐藏来源信息
+  const sourcesCard = document.getElementById("sources-card");
+  if (sourcesCard) {
+    sourcesCard.style.display = "none";
+  }
+}
+
+// 生成新的会话ID
+function generateConversationId() {
+  const timestamp = Date.now();
+  const random = Math.random().toString(36).substr(2, 6);
+  const conversationId = `chat_${timestamp}_${random}`;
+
+  document.getElementById("conversation-id").value = conversationId;
+  addChatInfo(`已生成新会话ID: ${conversationId}`);
+}
+
+// 监听聊天引擎类型变化
+document.addEventListener("DOMContentLoaded", function () {
+  // 添加引擎类型变化监听器
+  const engineSelect = document.getElementById("chat-engine-type");
+  if (engineSelect) {
+    engineSelect.addEventListener("change", function () {
+      const description = document.getElementById("engine-description");
+      if (this.value === "condense_plus_context") {
+        description.textContent = "基于文档内容的智能问答，适合知识查询";
+      } else {
+        description.textContent = "与AI直接对话，不检索文档，适合一般聊天";
+      }
+    });
+  }
+
+  // 添加过滤字段互斥逻辑
+  const courseIdInput = document.getElementById("course-id");
+  const courseMaterialIdInput = document.getElementById("course-material-id");
+
+  if (courseIdInput && courseMaterialIdInput) {
+    courseIdInput.addEventListener("input", function () {
+      if (this.value.trim()) {
+        courseMaterialIdInput.disabled = true;
+        courseMaterialIdInput.placeholder = "已选择课程ID过滤";
+      } else {
+        courseMaterialIdInput.disabled = false;
+        courseMaterialIdInput.placeholder = "课程材料ID (例如: material_001)";
+      }
+    });
+
+    courseMaterialIdInput.addEventListener("input", function () {
+      if (this.value.trim()) {
+        courseIdInput.disabled = true;
+        courseIdInput.placeholder = "已选择课程材料ID过滤";
+      } else {
+        courseIdInput.disabled = false;
+        courseIdInput.placeholder = "课程ID (例如: course_01)";
+      }
+    });
+  }
+});

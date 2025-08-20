@@ -151,6 +151,29 @@ const RAGAPI = {
   },
 };
 
+// 智能聊天API
+const ChatAPI = {
+  // 智能聊天
+  async chat(chatData) {
+    return api.post("/api/v1/chat/", chatData);
+  },
+
+  // 获取可用引擎
+  async getEngines() {
+    return api.get("/api/v1/chat/engines");
+  },
+
+  // 清除会话记录
+  async clearConversation(conversationId) {
+    return api.delete(`/api/v1/chat/conversations/${conversationId}`);
+  },
+
+  // 聊天服务健康检查
+  async getHealth() {
+    return api.get("/api/v1/chat/health");
+  },
+};
+
 // 课程材料API
 const CourseMaterialAPI = {
   // 统一处理课程材料

@@ -12,6 +12,12 @@ class ChatMode(str, Enum):
     CHAT = "chat"    # 直接聊天模式（simple ChatEngine）
 
 
+class ChatEngineType(str, Enum):
+    """聊天引擎类型枚举"""
+    CONDENSE_PLUS_CONTEXT = "condense_plus_context"  # 检索增强模式
+    SIMPLE = "simple"  # 简单对话模式
+
+
 class DocumentMetadata(BaseModel):
     """文档元数据模型"""
     course_id: str = Field(..., description="课程ID")
@@ -99,3 +105,24 @@ class DeleteCollectionResponse(BaseModel):
     success: bool = Field(..., description="是否成功")
     message: str = Field(..., description="响应消息")
     collection_name: str = Field(..., description="被删除的集合名称")
+
+
+# 新增聊天相关模型
+class ChatRequest(BaseModel):
+    """智能聊天请求模型"""
+    conversation_id: str = Field(..., description="对话会话ID，用作Redis存储键")
+    course_id: Optional[str] = Field(None, description="课程ID（与course_material_id二选一）")
+    course_material_id: Optional[str] = Field(None, description="课程材料ID（与course_id二选一）")
+    chat_engine_type: ChatEngineType = Field(..., description="聊天引擎类型")
+    question: str = Field(..., description="用户问题")
+    collection_name: Optional[str] = Field(None, description="集合名称，默认使用配置中的名称")
+
+
+class ChatResponse(BaseModel):
+    """智能聊天响应模型"""
+    answer: str = Field(..., description="AI回答内容")
+    sources: List[SourceInfo] = Field(default_factory=list, description="检索到的来源信息（仅condense_plus_context模式）")
+    conversation_id: str = Field(..., description="对话会话ID")
+    chat_engine_type: ChatEngineType = Field(..., description="使用的聊天引擎类型")
+    filter_info: Optional[str] = Field(None, description="使用的过滤条件信息")
+    processing_time: float = Field(..., description="处理时间（秒）")
