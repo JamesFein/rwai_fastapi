@@ -261,19 +261,14 @@ async function handleIndexFormSubmit(e) {
   }
 
   try {
-    showLoading();
-
     // 调用API建立索引
     const response = await RAGAPI.buildIndex(formData);
-
-    hideLoading();
 
     // 显示结果
     displayIndexResult(response);
 
     showSuccess("索引建立成功！");
   } catch (error) {
-    hideLoading();
     showError("建立索引失败: " + error.message);
   }
 }
@@ -1176,19 +1171,15 @@ async function handleCleanupMaterial(e) {
   };
 
   try {
-    showLoading();
-
     const response = await CourseMaterialAPI.cleanupMaterial(
       courseId,
       materialId,
       options
     );
 
-    hideLoading();
     showSuccess("材料清理完成");
     displayCleanupResults(response);
   } catch (error) {
-    hideLoading();
     showError("清理材料失败: " + error.message);
   }
 }
@@ -1207,26 +1198,29 @@ async function handleCleanupCourse(e) {
     return;
   }
 
-  const options = {
-    cleanup_files: document.getElementById("cleanup-course-files").checked,
-    cleanup_rag_data: document.getElementById("cleanup-course-rag-data")
-      .checked,
-    cleanup_task_data: document.getElementById("cleanup-course-task-data")
-      .checked,
-    force_cleanup: document.getElementById("force-cleanup-course").checked,
-  };
-
   try {
-    showLoading();
+    console.log("开始删除课程:", courseId); // 调试信息
 
-    const response = await CourseMaterialAPI.cleanupCourse(courseId, options);
+    const response = await CourseMaterialAPI.cleanupCourse(courseId);
 
-    hideLoading();
-    showSuccess("课程清理完成");
-    displayCleanupResults(response);
+    console.log("删除响应:", response); // 调试信息
+
+    // 检查响应格式
+    if (!response || typeof response !== "object") {
+      throw new Error("服务器返回了无效的响应格式");
+    }
+
+    // 检查操作是否成功
+    if (response.success) {
+      showSuccess(response.message || "课程删除完成");
+      displayCleanupResults(response);
+    } else {
+      showError(response.message || "课程删除部分失败，请检查详情");
+      displayCleanupResults(response);
+    }
   } catch (error) {
-    hideLoading();
-    showError("清理课程失败: " + error.message);
+    console.error("删除课程错误:", error); // 调试信息
+    showError("删除课程失败: " + error.message);
   }
 }
 
@@ -1234,88 +1228,127 @@ async function handleCleanupCourse(e) {
 function displayCleanupResults(result) {
   const resultsDiv = document.getElementById("cleanup-results");
 
+  // 解析操作结果
+  const operations = result.operations || [];
+  const uploadOp = operations.find((op) => op.type === "upload_folder");
+  const outlineOp = operations.find((op) => op.type === "outline_folder");
+  const qdrantOp = operations.find((op) => op.type === "qdrant_vectors");
+
+  // 计算成功的操作数量
+  const successCount = operations.filter((op) => op.success).length;
+  const totalCount = operations.length;
+  const allSuccess = successCount === totalCount;
+
   resultsDiv.innerHTML = `
-        <div class="card">
-            <div class="card-header">
-                <h6 class="mb-0">
-                    <i class="bi bi-check-circle text-success"></i>
-                    清理完成
-                </h6>
-            </div>
-            <div class="card-body">
-                <div class="alert alert-success">
-                    <i class="bi bi-check-circle"></i>
-                    ${result.message || "清理操作已完成"}
-                </div>
-
-                ${
-                  result.details
-                    ? `
-                    <h6>清理详情</h6>
-                    <div class="row">
-                        ${
-                          result.details.files_cleaned
-                            ? `
-                            <div class="col-md-3">
-                                <div class="text-center">
-                                    <h4 class="text-primary">${result.details.files_cleaned}</h4>
-                                    <p class="text-muted mb-0">文件已清理</p>
-                                </div>
-                            </div>
-                        `
-                            : ""
-                        }
-                        ${
-                          result.details.rag_data_cleaned
-                            ? `
-                            <div class="col-md-3">
-                                <div class="text-center">
-                                    <h4 class="text-success">${result.details.rag_data_cleaned}</h4>
-                                    <p class="text-muted mb-0">RAG数据已清理</p>
-                                </div>
-                            </div>
-                        `
-                            : ""
-                        }
-                        ${
-                          result.details.tasks_cleaned
-                            ? `
-                            <div class="col-md-3">
-                                <div class="text-center">
-                                    <h4 class="text-info">${result.details.tasks_cleaned}</h4>
-                                    <p class="text-muted mb-0">任务已清理</p>
-                                </div>
-                            </div>
-                        `
-                            : ""
-                        }
-                        ${
-                          result.details.total_size_freed
-                            ? `
-                            <div class="col-md-3">
-                                <div class="text-center">
-                                    <h4 class="text-warning">${formatFileSize(
-                                      result.details.total_size_freed
-                                    )}</h4>
-                                    <p class="text-muted mb-0">空间已释放</p>
-                                </div>
-                            </div>
-                        `
-                            : ""
-                        }
-                    </div>
-                `
-                    : ""
-                }
-
-                <div class="mt-3">
-                    <small class="text-muted">
-                        清理时间: ${formatDateTime(new Date())}
-                    </small>
-                </div>
-            </div>
+    <div class="card">
+      <div class="card-header">
+        <h6 class="mb-0">
+          <i class="bi bi-${
+            allSuccess
+              ? "check-circle text-success"
+              : "exclamation-triangle text-warning"
+          }"></i>
+          ${allSuccess ? "删除完成" : "删除部分完成"}
+        </h6>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-${allSuccess ? "success" : "warning"}">
+          <i class="bi bi-${
+            allSuccess ? "check-circle" : "exclamation-triangle"
+          }"></i>
+          ${result.message || "删除操作已完成"}
         </div>
-    `;
+
+        <h6>操作详情</h6>
+        <div class="row">
+          ${
+            uploadOp
+              ? `
+            <div class="col-md-4">
+              <div class="text-center">
+                <i class="bi bi-${
+                  uploadOp.success
+                    ? "check-circle text-success"
+                    : "x-circle text-danger"
+                } fs-2"></i>
+                <h6 class="mt-2">上传文件夹</h6>
+                <p class="text-muted mb-0 small">${uploadOp.path}</p>
+                <span class="badge bg-${
+                  uploadOp.success ? "success" : "danger"
+                }">${uploadOp.success ? "已删除" : "删除失败"}</span>
+              </div>
+            </div>
+          `
+              : ""
+          }
+
+          ${
+            outlineOp
+              ? `
+            <div class="col-md-4">
+              <div class="text-center">
+                <i class="bi bi-${
+                  outlineOp.success
+                    ? "check-circle text-success"
+                    : "x-circle text-danger"
+                } fs-2"></i>
+                <h6 class="mt-2">大纲文件夹</h6>
+                <p class="text-muted mb-0 small">${outlineOp.path}</p>
+                <span class="badge bg-${
+                  outlineOp.success ? "success" : "danger"
+                }">${outlineOp.success ? "已删除" : "删除失败"}</span>
+              </div>
+            </div>
+          `
+              : ""
+          }
+
+          ${
+            qdrantOp
+              ? `
+            <div class="col-md-4">
+              <div class="text-center">
+                <i class="bi bi-${
+                  qdrantOp.success
+                    ? "check-circle text-success"
+                    : "x-circle text-danger"
+                } fs-2"></i>
+                <h6 class="mt-2">向量数据</h6>
+                <p class="text-muted mb-0">删除了 <strong>${
+                  qdrantOp.deleted_count || 0
+                }</strong> 个向量点</p>
+                <span class="badge bg-${
+                  qdrantOp.success ? "success" : "danger"
+                }">${qdrantOp.success ? "已删除" : "删除失败"}</span>
+              </div>
+            </div>
+          `
+              : ""
+          }
+        </div>
+
+        <div class="mt-3">
+          <div class="progress">
+            <div class="progress-bar bg-${
+              allSuccess ? "success" : "warning"
+            }" role="progressbar"
+                 style="width: ${(successCount / totalCount) * 100}%"
+                 aria-valuenow="${successCount}" aria-valuemin="0" aria-valuemax="${totalCount}">
+              ${successCount}/${totalCount} 操作成功
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <small class="text-muted">
+            课程ID: ${result.course_id} | 删除时间: ${formatDateTime(
+    new Date()
+  )}
+          </small>
+        </div>
+      </div>
+    </div>
+  `;
 
   resultsDiv.style.display = "block";
 }
@@ -1339,12 +1372,10 @@ async function cleanupRAGDocumentsByMaterial() {
   }
 
   try {
-    showLoading();
     const response = await RAGAPI.deleteDocumentsByMaterial(
       courseId,
       materialId
     );
-    hideLoading();
 
     showSuccess(`RAG文档清理完成，删除了 ${response.deleted_count} 个文档`);
     displayCleanupResults({
@@ -1354,7 +1385,6 @@ async function cleanupRAGDocumentsByMaterial() {
       material_id: materialId,
     });
   } catch (error) {
-    hideLoading();
     showError("RAG文档清理失败: " + error.message);
   }
 }
@@ -1374,9 +1404,7 @@ async function cleanupRAGDocumentsByCourse() {
   }
 
   try {
-    showLoading();
     const response = await RAGAPI.deleteDocumentsByCourse(courseId);
-    hideLoading();
 
     showSuccess(`RAG文档清理完成，删除了 ${response.deleted_count} 个文档`);
     displayCleanupResults({
@@ -1385,7 +1413,6 @@ async function cleanupRAGDocumentsByCourse() {
       course_id: courseId,
     });
   } catch (error) {
-    hideLoading();
     showError("RAG文档清理失败: " + error.message);
   }
 }

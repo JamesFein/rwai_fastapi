@@ -197,17 +197,40 @@ class QdrantRepository:
             # 构建Qdrant过滤器
             query_filter = models.Filter(**filter_condition)
 
+            # 先查询匹配的向量数量
+            try:
+                # 使用scroll方法获取匹配的点，只获取ID
+                scroll_result = self.client.scroll(
+                    collection_name=collection_name,
+                    scroll_filter=query_filter,
+                    limit=10000,  # 设置一个较大的限制
+                    with_payload=False,  # 不需要payload，只要ID
+                    with_vectors=False   # 不需要向量数据
+                )
+                points_to_delete = scroll_result[0]  # scroll返回(points, next_page_offset)
+                deleted_count = len(points_to_delete)
+
+                if deleted_count == 0:
+                    logger.info("没有找到匹配的向量点")
+                    return 0
+
+            except Exception as e:
+                logger.warning(f"无法查询匹配的向量数量: {e}，将直接执行删除")
+                deleted_count = 0
+
             # 执行删除操作
             delete_result = self.client.delete(
                 collection_name=collection_name,
                 points_selector=models.FilterSelector(filter=query_filter)
             )
 
-            # 获取删除的数量（这里简化处理，实际可能需要先查询再删除来获取准确数量）
-            deleted_count = getattr(delete_result, 'operation_id', 0)
+            # 如果之前无法获取数量，使用删除结果的状态来估计
             if deleted_count == 0:
-                # 如果无法直接获取删除数量，返回一个估计值
-                deleted_count = 1  # 假设至少删除了一些数据
+                # 检查删除操作是否成功
+                if hasattr(delete_result, 'status') and delete_result.status == 'completed':
+                    deleted_count = 1  # 假设至少删除了一些数据
+                else:
+                    deleted_count = 0
 
             logger.info(f"成功删除 {deleted_count} 个向量点")
             return deleted_count

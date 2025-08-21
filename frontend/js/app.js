@@ -246,11 +246,27 @@ function showLoading() {
 
 // 隐藏加载状态
 function hideLoading() {
-  const loadingModal = bootstrap.Modal.getInstance(
-    document.getElementById("loadingModal")
-  );
-  if (loadingModal) {
-    loadingModal.hide();
+  try {
+    const loadingModal = bootstrap.Modal.getInstance(
+      document.getElementById("loadingModal")
+    );
+    if (loadingModal) {
+      loadingModal.hide();
+    }
+  } catch (error) {
+    console.error("隐藏加载动画失败:", error);
+    // 强制隐藏模态框
+    const modalElement = document.getElementById("loadingModal");
+    if (modalElement) {
+      modalElement.style.display = "none";
+      modalElement.classList.remove("show");
+      document.body.classList.remove("modal-open");
+      // 移除backdrop
+      const backdrop = document.querySelector(".modal-backdrop");
+      if (backdrop) {
+        backdrop.remove();
+      }
+    }
   }
 }
 

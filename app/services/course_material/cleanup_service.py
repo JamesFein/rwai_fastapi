@@ -338,7 +338,7 @@ class CleanupService:
                 target = f"course_id={course_id}"
 
             # 删除向量数据
-            deleted_count = await rag_repository.delete_vectors_by_filter(filter_condition)
+            deleted_count = rag_repository.delete_vectors_by_filter(filter_condition)
 
             operations.append(CleanupOperation(
                 operation_type="rag_cleanup",
