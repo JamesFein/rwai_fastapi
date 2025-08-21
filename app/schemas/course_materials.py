@@ -219,7 +219,6 @@ class CleanupRequest(BaseModel):
     cleanup_files: bool = Field(default=True, description="是否清理文件系统")
     cleanup_rag_data: bool = Field(default=True, description="是否清理RAG数据")
     cleanup_task_data: bool = Field(default=True, description="是否清理任务数据")
-    force_cleanup: bool = Field(default=False, description="是否强制清理（忽略错误）")
 
 
 class CleanupResponse(BaseModel):

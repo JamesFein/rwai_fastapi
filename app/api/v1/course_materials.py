@@ -138,8 +138,7 @@ async def cleanup_course_material(
     course_material_id: str,
     cleanup_files: bool = True,
     cleanup_rag_data: bool = True,
-    cleanup_task_data: bool = True,
-    force_cleanup: bool = False
+    cleanup_task_data: bool = True
 ):
     """
     清理指定课程材料
@@ -157,8 +156,7 @@ async def cleanup_course_material(
             course_material_id=course_material_id,
             cleanup_files=cleanup_files,
             cleanup_rag_data=cleanup_rag_data,
-            cleanup_task_data=cleanup_task_data,
-            force_cleanup=force_cleanup
+            cleanup_task_data=cleanup_task_data
         )
         
         # 执行清理

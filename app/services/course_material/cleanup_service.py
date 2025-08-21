@@ -47,33 +47,29 @@ class CleanupService:
             if request.cleanup_files:
                 file_operations = await self._cleanup_files(
                     request.course_id,
-                    request.course_material_id,
-                    request.force_cleanup
+                    request.course_material_id
                 )
                 operations.extend(file_operations)
-            
+
             # 2. 清理RAG数据
             if request.cleanup_rag_data:
                 rag_operations = await self._cleanup_rag_data(
                     request.course_id,
-                    request.course_material_id,
-                    request.force_cleanup
+                    request.course_material_id
                 )
                 operations.extend(rag_operations)
-            
+
             # 3. 清理任务数据
             if request.cleanup_task_data:
                 task_operations = await self._cleanup_task_data(
                     request.course_id,
-                    request.course_material_id,
-                    request.force_cleanup
+                    request.course_material_id
                 )
                 operations.extend(task_operations)
-            
+
             # 4. 清理空目录
             directory_operations = await self._cleanup_empty_directories(
-                request.course_id,
-                request.force_cleanup
+                request.course_id
             )
             operations.extend(directory_operations)
             
@@ -137,8 +133,7 @@ class CleanupService:
     async def _cleanup_files(
         self,
         course_id: str,
-        course_material_id: Optional[str],
-        force_cleanup: bool
+        course_material_id: Optional[str]
     ) -> List[CleanupOperation]:
         """清理文件系统"""
         operations = []
@@ -146,13 +141,13 @@ class CleanupService:
         try:
             # 清理上传文件
             upload_operations = await self._cleanup_upload_files(
-                course_id, course_material_id, force_cleanup
+                course_id, course_material_id
             )
             operations.extend(upload_operations)
-            
+
             # 清理大纲文件
             outline_operations = await self._cleanup_outline_files(
-                course_id, course_material_id, force_cleanup
+                course_id, course_material_id
             )
             operations.extend(outline_operations)
             
@@ -171,8 +166,7 @@ class CleanupService:
     async def _cleanup_upload_files(
         self,
         course_id: str,
-        course_material_id: Optional[str],
-        force_cleanup: bool
+        course_material_id: Optional[str]
     ) -> List[CleanupOperation]:
         """清理上传文件"""
         operations = []
@@ -241,8 +235,7 @@ class CleanupService:
     async def _cleanup_outline_files(
         self,
         course_id: str,
-        course_material_id: Optional[str],
-        force_cleanup: bool
+        course_material_id: Optional[str]
     ) -> List[CleanupOperation]:
         """清理大纲文件"""
         operations = []
@@ -311,8 +304,7 @@ class CleanupService:
     async def _cleanup_rag_data(
         self,
         course_id: str,
-        course_material_id: Optional[str],
-        force_cleanup: bool
+        course_material_id: Optional[str]
     ) -> List[CleanupOperation]:
         """清理RAG数据"""
         operations = []
@@ -363,8 +355,7 @@ class CleanupService:
     async def _cleanup_task_data(
         self,
         course_id: str,
-        course_material_id: Optional[str],
-        force_cleanup: bool
+        course_material_id: Optional[str]
     ) -> List[CleanupOperation]:
         """清理任务数据"""
         operations = []
@@ -396,8 +387,7 @@ class CleanupService:
 
     async def _cleanup_empty_directories(
         self,
-        course_id: str,
-        force_cleanup: bool
+        course_id: str
     ) -> List[CleanupOperation]:
         """清理空目录"""
         operations = []

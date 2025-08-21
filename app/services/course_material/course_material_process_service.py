@@ -389,8 +389,7 @@ class CourseMaterialProcessService:
                     course_material_id=response.course_material_id,
                     cleanup_files=True,
                     cleanup_rag_data=True,
-                    cleanup_task_data=False,  # 保留任务数据以便查看错误信息
-                    force_cleanup=True
+                    cleanup_task_data=False  # 保留任务数据以便查看错误信息
                 )
 
                 await cleanup_service.cleanup_course_material(cleanup_request)

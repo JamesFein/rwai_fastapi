@@ -1036,12 +1036,6 @@ function loadCleanupToolsPage(container) {
                                         清理任务数据
                                     </label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="force-cleanup">
-                                    <label class="form-check-label" for="force-cleanup">
-                                        强制清理
-                                    </label>
-                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-danger w-100">
@@ -1104,12 +1098,6 @@ function loadCleanupToolsPage(container) {
                                         清理所有任务数据
                                     </label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="force-cleanup-course">
-                                    <label class="form-check-label" for="force-cleanup-course">
-                                        强制清理
-                                    </label>
-                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-danger w-100">
@@ -1170,7 +1158,6 @@ async function handleCleanupMaterial(e) {
     cleanup_files: document.getElementById("cleanup-files").checked,
     cleanup_rag_data: document.getElementById("cleanup-rag-data").checked,
     cleanup_task_data: document.getElementById("cleanup-task-data").checked,
-    force_cleanup: document.getElementById("force-cleanup").checked,
   };
 
   try {

@@ -2842,7 +2842,7 @@
         "kind": 6,
         "importPath": "app.schemas.course_materials",
         "description": "app.schemas.course_materials",
-        "peekOfCode": "class CleanupRequest(BaseModel):\n    \"\"\"清理请求模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: Optional[str] = Field(None, description=\"课程材料ID，如果不提供则清理整个课程\")\n    cleanup_files: bool = Field(default=True, description=\"是否清理文件系统\")\n    cleanup_rag_data: bool = Field(default=True, description=\"是否清理RAG数据\")\n    cleanup_task_data: bool = Field(default=True, description=\"是否清理任务数据\")\n    force_cleanup: bool = Field(default=False, description=\"是否强制清理（忽略错误）\")\nclass CleanupResponse(BaseModel):\n    \"\"\"清理响应模型\"\"\"",
+        "peekOfCode": "class CleanupRequest(BaseModel):\n    \"\"\"清理请求模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: Optional[str] = Field(None, description=\"课程材料ID，如果不提供则清理整个课程\")\n    cleanup_files: bool = Field(default=True, description=\"是否清理文件系统\")\n    cleanup_rag_data: bool = Field(default=True, description=\"是否清理RAG数据\")\n    cleanup_task_data: bool = Field(default=True, description=\"是否清理任务数据\")\nclass CleanupResponse(BaseModel):\n    \"\"\"清理响应模型\"\"\"\n    success: bool = Field(..., description=\"清理是否成功\")",
         "detail": "app.schemas.course_materials",
         "documentation": {}
     },
