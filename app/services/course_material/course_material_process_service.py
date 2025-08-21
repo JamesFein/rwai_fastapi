@@ -123,7 +123,7 @@ class CourseMaterialProcessService:
                 )
                 
                 rag_result = await self._process_rag_indexing(
-                    upload_result["file_content"], request, task_id
+                    upload_result["file_content"], upload_result["file_path"], request, task_id
                 )
                 if not rag_result["success"]:
                     await self._handle_processing_error(
@@ -270,17 +270,34 @@ class CourseMaterialProcessService:
     async def _process_rag_indexing(
         self,
         file_content: str,
+        file_path: str,
         request: CourseProcessRequest,
         task_id: str
     ) -> Dict[str, Any]:
         """处理RAG索引建立"""
         try:
+            # 将绝对路径转换为相对于项目根目录的路径
+            from pathlib import Path
+            import os
+
+            # 获取项目根目录（当前工作目录）
+            project_root = Path.cwd()
+            absolute_file_path = Path(file_path)
+
+            # 计算相对路径
+            try:
+                relative_file_path = absolute_file_path.relative_to(project_root)
+                relative_path_str = str(relative_file_path).replace('\\', '/')  # 统一使用正斜杠
+            except ValueError:
+                # 如果无法计算相对路径，使用绝对路径
+                relative_path_str = str(absolute_file_path)
+
             # 构建文档元数据
             metadata = DocumentMetadata(
                 course_id=request.course_id,
                 course_material_id=request.course_material_id,
                 course_material_name=request.material_name,
-                file_path=None,  # 这里可以设置文件路径
+                file_path=relative_path_str,
                 file_size=len(file_content.encode('utf-8')),
                 upload_time=datetime.now().isoformat()
             )
