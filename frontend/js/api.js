@@ -274,10 +274,8 @@ const CourseMaterialAPI = {
 
   // 清理整个课程
   async cleanupCourse(courseId, options = {}) {
-    const params = new URLSearchParams(options).toString();
-    const url = `/api/v1/course-materials/course/${courseId}${
-      params ? "?" + params : ""
-    }`;
+    // 移除不必要的参数处理，新API不需要这些参数
+    const url = `/api/v1/course/${courseId}`;
     return api.delete(url);
   },
 

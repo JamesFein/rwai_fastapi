@@ -174,46 +174,7 @@ async def cleanup_course_material(
         )
 
 
-@router.delete(
-    "/{course_id}",
-    response_model=CleanupResponse,
-    summary="清理整个课程",
-    description="删除整个课程的所有材料和数据"
-)
-async def cleanup_course(
-    course_id: str,
-    cleanup_files: bool = True,
-    cleanup_rag_data: bool = True,
-    cleanup_task_data: bool = True,
-    force_cleanup: bool = False
-):
-    """
-    清理整个课程
-    
-    删除指定课程的所有材料和数据。
-    """
-    try:
-        # 构建清理请求（不指定course_material_id表示清理整个课程）
-        cleanup_request = CleanupRequest(
-            course_id=course_id,
-            course_material_id=None,
-            cleanup_files=cleanup_files,
-            cleanup_rag_data=cleanup_rag_data,
-            cleanup_task_data=cleanup_task_data,
-            force_cleanup=force_cleanup
-        )
-        
-        # 执行清理
-        cleanup_response = await cleanup_service.cleanup_course_material(cleanup_request)
-        
-        return cleanup_response
-        
-    except Exception as e:
-        logger.error(f"清理课程异常: {str(e)}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"清理课程失败: {str(e)}"
-        )
+
 
 
 @router.get(
