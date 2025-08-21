@@ -1166,10 +1166,10 @@ function displayNewSources(sources) {
       (source) => `
         <div class="source-card-new mb-3">
             <div class="source-header d-flex justify-content-between align-items-center mb-2">
-                <h6 class="source-title mb-0">${
-                  source.course_material_name
+                <h6 class="source-title mb-0">材料 ${
+                  source.course_material_id
                 }</h6>
-                <span class="source-score badge bg-primary">${(
+                <span class="source-score badge bg-primary text-white">${(
                   source.score * 100
                 ).toFixed(1)}%</span>
             </div>

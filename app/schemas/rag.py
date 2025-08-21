@@ -22,7 +22,6 @@ class DocumentMetadata(BaseModel):
     """文档元数据模型"""
     course_id: str = Field(..., description="课程ID")
     course_material_id: str = Field(..., description="课程材料ID")
-    course_material_name: str = Field(..., description="课程材料名称")
     file_path: Optional[str] = Field(None, description="文件路径")
     file_size: Optional[int] = Field(None, description="文件大小")
     upload_time: Optional[str] = Field(None, description="上传时间")
@@ -62,7 +61,6 @@ class SourceInfo(BaseModel):
     """来源信息模型"""
     course_id: str = Field(..., description="课程ID")
     course_material_id: str = Field(..., description="课程材料ID")
-    course_material_name: str = Field(..., description="课程材料名称")
     chunk_text: str = Field(..., description="相关文本片段")
     score: float = Field(..., description="相似度分数")
 

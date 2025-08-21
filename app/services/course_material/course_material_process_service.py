@@ -296,7 +296,6 @@ class CourseMaterialProcessService:
             metadata = DocumentMetadata(
                 course_id=request.course_id,
                 course_material_id=request.course_material_id,
-                course_material_name=request.material_name,
                 file_path=relative_path_str,
                 file_size=len(file_content.encode('utf-8')),
                 upload_time=datetime.now().isoformat()

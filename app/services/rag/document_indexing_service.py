@@ -66,7 +66,6 @@ class DocumentIndexingService:
                 metadata={
                     "course_id": request.metadata.course_id,
                     "course_material_id": request.metadata.course_material_id,
-                    "course_material_name": request.metadata.course_material_name,
                     "file_path": request.metadata.file_path,
                     "file_size": request.metadata.file_size,
                     "upload_time": request.metadata.upload_time or datetime.now().isoformat()
@@ -92,7 +91,6 @@ class DocumentIndexingService:
                         "text": node.text,
                         "course_id": request.metadata.course_id,
                         "course_material_id": request.metadata.course_material_id,
-                        "course_material_name": request.metadata.course_material_name,
                         "file_path": request.metadata.file_path,
                         "chunk_index": i,
                         "created_at": datetime.now().isoformat()

@@ -430,7 +430,6 @@ class ConversationService:
                     sources.append(SourceInfo(
                         course_id=metadata.get("course_id", ""),
                         course_material_id=metadata.get("course_material_id", ""),
-                        course_material_name=metadata.get("course_material_name", ""),
                         chunk_text=content_preview,
                         score=score
                     ))

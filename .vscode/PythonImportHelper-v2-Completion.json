@@ -2932,7 +2932,7 @@
         "kind": 6,
         "importPath": "app.schemas.rag",
         "description": "app.schemas.rag",
-        "peekOfCode": "class ChatEngineType(str, Enum):\n    \"\"\"聊天引擎类型枚举\"\"\"\n    CONDENSE_PLUS_CONTEXT = \"condense_plus_context\"  # 检索增强模式\n    SIMPLE = \"simple\"  # 简单对话模式\nclass DocumentMetadata(BaseModel):\n    \"\"\"文档元数据模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: str = Field(..., description=\"课程材料ID\")\n    course_material_name: str = Field(..., description=\"课程材料名称\")\n    file_path: Optional[str] = Field(None, description=\"文件路径\")",
+        "peekOfCode": "class ChatEngineType(str, Enum):\n    \"\"\"聊天引擎类型枚举\"\"\"\n    CONDENSE_PLUS_CONTEXT = \"condense_plus_context\"  # 检索增强模式\n    SIMPLE = \"simple\"  # 简单对话模式\nclass DocumentMetadata(BaseModel):\n    \"\"\"文档元数据模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: str = Field(..., description=\"课程材料ID\")\n    file_path: Optional[str] = Field(None, description=\"文件路径\")\n    file_size: Optional[int] = Field(None, description=\"文件大小\")",
         "detail": "app.schemas.rag",
         "documentation": {}
     },
@@ -2941,7 +2941,7 @@
         "kind": 6,
         "importPath": "app.schemas.rag",
         "description": "app.schemas.rag",
-        "peekOfCode": "class DocumentMetadata(BaseModel):\n    \"\"\"文档元数据模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: str = Field(..., description=\"课程材料ID\")\n    course_material_name: str = Field(..., description=\"课程材料名称\")\n    file_path: Optional[str] = Field(None, description=\"文件路径\")\n    file_size: Optional[int] = Field(None, description=\"文件大小\")\n    upload_time: Optional[str] = Field(None, description=\"上传时间\")\nclass IndexRequest(BaseModel):\n    \"\"\"索引建立请求模型\"\"\"",
+        "peekOfCode": "class DocumentMetadata(BaseModel):\n    \"\"\"文档元数据模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: str = Field(..., description=\"课程材料ID\")\n    file_path: Optional[str] = Field(None, description=\"文件路径\")\n    file_size: Optional[int] = Field(None, description=\"文件大小\")\n    upload_time: Optional[str] = Field(None, description=\"上传时间\")\nclass IndexRequest(BaseModel):\n    \"\"\"索引建立请求模型\"\"\"\n    file_content: str = Field(..., description=\"文件内容\")",
         "detail": "app.schemas.rag",
         "documentation": {}
     },
@@ -2986,7 +2986,7 @@
         "kind": 6,
         "importPath": "app.schemas.rag",
         "description": "app.schemas.rag",
-        "peekOfCode": "class SourceInfo(BaseModel):\n    \"\"\"来源信息模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: str = Field(..., description=\"课程材料ID\")\n    course_material_name: str = Field(..., description=\"课程材料名称\")\n    chunk_text: str = Field(..., description=\"相关文本片段\")\n    score: float = Field(..., description=\"相似度分数\")\nclass QueryResponse(BaseModel):\n    \"\"\"问答响应模型\"\"\"\n    answer: str = Field(..., description=\"回答内容\")",
+        "peekOfCode": "class SourceInfo(BaseModel):\n    \"\"\"来源信息模型\"\"\"\n    course_id: str = Field(..., description=\"课程ID\")\n    course_material_id: str = Field(..., description=\"课程材料ID\")\n    chunk_text: str = Field(..., description=\"相关文本片段\")\n    score: float = Field(..., description=\"相似度分数\")\nclass QueryResponse(BaseModel):\n    \"\"\"问答响应模型\"\"\"\n    answer: str = Field(..., description=\"回答内容\")\n    sources: List[SourceInfo] = Field(default_factory=list, description=\"来源信息列表\")",
         "detail": "app.schemas.rag",
         "documentation": {}
     },

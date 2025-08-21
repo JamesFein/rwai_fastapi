@@ -31,7 +31,6 @@ async def build_index(
     file: UploadFile = File(...),
     course_id: str = Form(...),
     course_material_id: str = Form(...),
-    course_material_name: str = Form(...),
     collection_name: Optional[str] = Form(None),
     doc_service: DocumentIndexingService = Depends(get_document_indexing_service)
 ):
@@ -43,7 +42,6 @@ async def build_index(
     - **file**: 上传的MD文件
     - **course_id**: 课程ID
     - **course_material_id**: 课程材料ID
-    - **course_material_name**: 课程材料名称
     - **collection_name**: 集合名称（可选，默认使用配置中的名称）
     """
     try:
@@ -62,7 +60,6 @@ async def build_index(
         metadata = DocumentMetadata(
             course_id=course_id,
             course_material_id=course_material_id,
-            course_material_name=course_material_name,
             file_path=file.filename,
             file_size=len(file_content)
         )

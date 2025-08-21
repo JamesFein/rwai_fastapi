@@ -142,10 +142,7 @@ function loadRagIndexPage(container) {
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="index-course-material-name" class="form-label">课程材料名称</label>
-                                <input type="text" class="form-control" id="index-course-material-name" required>
-                            </div>
+
 
                             <div class="mb-3">
                                 <label for="index-collection-name" class="form-label">集合名称 (可选)</label>
@@ -204,15 +201,6 @@ function initializeIndexFileUpload() {
       fileName.textContent = file.name;
       fileSize.textContent = formatFileSize(file.size);
       fileInfo.style.display = "block";
-
-      // 自动填充材料名称
-      const materialNameInput = document.getElementById(
-        "index-course-material-name"
-      );
-      if (!materialNameInput.value) {
-        const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "");
-        materialNameInput.value = nameWithoutExt;
-      }
     },
     onError: (error) => {
       showError(error);
@@ -249,10 +237,6 @@ async function handleIndexFormSubmit(e) {
   formData.append(
     "course_material_id",
     document.getElementById("index-course-material-id").value
-  );
-  formData.append(
-    "course_material_name",
-    document.getElementById("index-course-material-name").value
   );
 
   const collectionName = document.getElementById("index-collection-name").value;
