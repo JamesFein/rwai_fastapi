@@ -236,12 +236,10 @@ function setTheme(theme) {
   }
 }
 
-// 显示加载状态
+// 显示加载状态 - 已禁用
 function showLoading() {
-  const loadingModal = new bootstrap.Modal(
-    document.getElementById("loadingModal")
-  );
-  loadingModal.show();
+  // 不再显示加载动画
+  console.log("showLoading() 调用已被禁用");
 }
 
 // 隐藏加载状态

@@ -1152,6 +1152,9 @@ function loadCleanupToolsPage(container) {
 async function handleCleanupMaterial(e) {
   e.preventDefault();
 
+  // 确保隐藏任何可能存在的加载动画
+  hideLoading();
+
   const courseId = document.getElementById("cleanup-course-id").value;
   const materialId = document.getElementById("cleanup-material-id").value;
 
@@ -1171,6 +1174,7 @@ async function handleCleanupMaterial(e) {
   };
 
   try {
+    // 不显示加载动画，直接执行清理
     const response = await CourseMaterialAPI.cleanupMaterial(
       courseId,
       materialId,
@@ -1188,6 +1192,9 @@ async function handleCleanupMaterial(e) {
 async function handleCleanupCourse(e) {
   e.preventDefault();
 
+  // 确保隐藏任何可能存在的加载动画
+  hideLoading();
+
   const courseId = document.getElementById("cleanup-course-id-full").value;
 
   if (
@@ -1201,6 +1208,7 @@ async function handleCleanupCourse(e) {
   try {
     console.log("开始删除课程:", courseId); // 调试信息
 
+    // 不显示加载动画，直接执行清理
     const response = await CourseMaterialAPI.cleanupCourse(courseId);
 
     console.log("删除响应:", response); // 调试信息
@@ -1355,6 +1363,9 @@ function displayCleanupResults(result) {
 
 // RAG v2 清理函数
 async function cleanupRAGDocumentsByMaterial() {
+  // 确保隐藏任何可能存在的加载动画
+  hideLoading();
+
   const courseId = document.getElementById("cleanup-course-id").value;
   const materialId = document.getElementById("cleanup-material-id").value;
 
@@ -1372,6 +1383,7 @@ async function cleanupRAGDocumentsByMaterial() {
   }
 
   try {
+    // 不显示加载动画，直接执行清理
     const response = await RAGAPI.deleteDocumentsByMaterial(
       courseId,
       materialId
@@ -1390,6 +1402,9 @@ async function cleanupRAGDocumentsByMaterial() {
 }
 
 async function cleanupRAGDocumentsByCourse() {
+  // 确保隐藏任何可能存在的加载动画
+  hideLoading();
+
   const courseId = document.getElementById("cleanup-course-id-full").value;
 
   if (!courseId) {
@@ -1404,6 +1419,7 @@ async function cleanupRAGDocumentsByCourse() {
   }
 
   try {
+    // 不显示加载动画，直接执行清理
     const response = await RAGAPI.deleteDocumentsByCourse(courseId);
 
     showSuccess(`RAG文档清理完成，删除了 ${response.deleted_count} 个文档`);
