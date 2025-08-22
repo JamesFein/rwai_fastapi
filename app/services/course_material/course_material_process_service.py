@@ -236,9 +236,6 @@ class CourseMaterialProcessService:
             outline_response = await outline_service.process_outline_generation(
                 file_content=file_content,
                 original_filename=f"{request.material_name}.md",
-                custom_prompt=request.custom_prompt,
-                include_refine=request.include_refine,
-                model_name=request.llm_model,
                 course_id=request.course_id,
                 course_material_id=request.course_material_id,
                 material_name=request.material_name,

@@ -42,33 +42,14 @@ class OutlineGenerateRequest(BaseModel):
         max_length=100
     )
 
-    # 可选参数
-    custom_prompt: Optional[str] = Field(
-        None,
-        description="自定义提示词，如果不提供则使用默认提示词",
-        max_length=2000
-    )
 
-    include_refine: bool = Field(
-        default=True,
-        description="是否进行大纲精简处理"
-    )
-
-    llm_model: Optional[str] = Field(
-        None,
-        description="指定使用的模型名称，如果不提供则使用配置中的默认模型",
-        alias="model_name"
-    )
 
     class Config:
         json_schema_extra = {
             "example": {
                 "course_id": "0001",
                 "course_material_id": "000001",
-                "material_name": "python第八章",
-                "custom_prompt": None,
-                "include_refine": True,
-                "model_name": "gpt-4o-mini"
+                "material_name": "python第八章"
             }
         }
         protected_namespaces = ()

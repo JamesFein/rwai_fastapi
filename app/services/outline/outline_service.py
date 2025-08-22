@@ -59,21 +59,15 @@ class OutlineService:
     async def generate_outline_from_text(
         self,
         content: str,
-        task_id: str,
-        custom_prompt: Optional[str] = None,
-        include_refine: bool = True,
-        model_name: Optional[str] = None
+        task_id: str
     ) -> Tuple[str, Dict[str, Any]]:
         """
         从文本内容生成大纲
-        
+
         Args:
             content: 文档内容
             task_id: 任务ID
-            custom_prompt: 自定义提示词
-            include_refine: 是否进行精简处理
-            model_name: 模型名称
-            
+
         Returns:
             Tuple[生成的大纲内容, Token使用统计]
         """
@@ -82,13 +76,10 @@ class OutlineService:
         
         try:
             # 第一阶段：生成原始大纲
-            if custom_prompt:
-                prompt = custom_prompt.replace("{content}", content)
-            else:
-                template = await self.get_outline_prompt_template()
-                prompt = template.replace("{content}", content)
-            
-            model = model_name or self.settings.outline_model
+            template = await self.get_outline_prompt_template()
+            prompt = template.replace("{content}", content)
+
+            model = self.settings.outline_model
             
             logger.info(f"开始生成大纲 - 任务ID: {task_id}, 模型: {model}, 内容长度: {len(content)}")
             
@@ -111,36 +102,32 @@ class OutlineService:
             
             logger.info(f"原始大纲生成完成 - 任务ID: {task_id}, 长度: {len(raw_outline)}")
             
-            # 第二阶段：精简大纲（如果需要）
-            if include_refine:
-                refine_template = await self.get_refine_prompt_template()
-                refine_prompt = refine_template.replace("{raw_outline}", raw_outline)
-                
-                refine_model = model_name or self.settings.refine_model
-                
-                logger.info(f"开始精简大纲 - 任务ID: {task_id}, 模型: {refine_model}")
-                
-                refine_response = await self.client.chat.completions.create(
-                    model=refine_model,
-                    messages=[
-                        {"role": "user", "content": refine_prompt}
-                    ],
-                    temperature=0.3,
-                    max_tokens=3000
-                )
-                
-                final_outline = refine_response.choices[0].message.content
-                
-                # 累计Token使用
-                if hasattr(refine_response, 'usage') and refine_response.usage:
-                    total_tokens["prompt_tokens"] += refine_response.usage.prompt_tokens
-                    total_tokens["completion_tokens"] += refine_response.usage.completion_tokens
-                    total_tokens["total_tokens"] += refine_response.usage.total_tokens
-                
-                logger.info(f"大纲精简完成 - 任务ID: {task_id}, 最终长度: {len(final_outline)}")
-            else:
-                final_outline = raw_outline
-                logger.info(f"跳过大纲精简 - 任务ID: {task_id}")
+            # 第二阶段：精简大纲
+            refine_template = await self.get_refine_prompt_template()
+            refine_prompt = refine_template.replace("{raw_outline}", raw_outline)
+
+            refine_model = self.settings.refine_model
+
+            logger.info(f"开始精简大纲 - 任务ID: {task_id}, 模型: {refine_model}")
+
+            refine_response = await self.client.chat.completions.create(
+                model=refine_model,
+                messages=[
+                    {"role": "user", "content": refine_prompt}
+                ],
+                temperature=0.3,
+                max_tokens=3000
+            )
+
+            final_outline = refine_response.choices[0].message.content
+
+            # 累计Token使用
+            if hasattr(refine_response, 'usage') and refine_response.usage:
+                total_tokens["prompt_tokens"] += refine_response.usage.prompt_tokens
+                total_tokens["completion_tokens"] += refine_response.usage.completion_tokens
+                total_tokens["total_tokens"] += refine_response.usage.total_tokens
+
+            logger.info(f"大纲精简完成 - 任务ID: {task_id}, 最终长度: {len(final_outline)}")
             
             processing_time = time.time() - start_time
             logger.info(f"大纲生成总耗时: {processing_time:.2f}秒 - 任务ID: {task_id}")
@@ -210,9 +197,6 @@ class OutlineService:
         self,
         file_content: str,
         original_filename: str,
-        custom_prompt: Optional[str] = None,
-        include_refine: bool = True,
-        model_name: Optional[str] = None,
         course_id: Optional[str] = None,
         course_material_id: Optional[str] = None,
         material_name: Optional[str] = None,
@@ -224,12 +208,9 @@ class OutlineService:
         Args:
             file_content: 文件内容
             original_filename: 原始文件名
-            custom_prompt: 自定义提示词
-            include_refine: 是否精简
-            model_name: 模型名称
-            course_id: 课程ID (新增)
-            course_material_id: 课程材料ID (新增)
-            material_name: 材料名称 (新增)
+            course_id: 课程ID
+            course_material_id: 课程材料ID
+            material_name: 材料名称
             task_id: 任务ID (可选，如果不提供则自动生成)
 
         Returns:
@@ -245,10 +226,7 @@ class OutlineService:
             # 生成大纲
             outline_content, token_usage = await self.generate_outline_from_text(
                 content=file_content,
-                task_id=task_id,
-                custom_prompt=custom_prompt,
-                include_refine=include_refine,
-                model_name=model_name
+                task_id=task_id
             )
             
             # 保存大纲文件

@@ -139,9 +139,6 @@ formData.append("file", fileInput.files[0]); // 必需：文件（.md/.txt）
 formData.append("course_id", "CS101"); // 必需：课程ID
 formData.append("course_material_id", "001"); // 必需：材料ID（课程内唯一）
 formData.append("material_name", "Python基础"); // 必需：材料名称
-formData.append("include_refine", "true"); // 可选：是否精简大纲（默认true）
-formData.append("model_name", "gpt-4o-mini"); // 可选：指定模型
-formData.append("custom_prompt", "请生成详细大纲"); // 可选：自定义提示词
 ```
 
 **cURL 示例**:
@@ -151,8 +148,7 @@ curl -X POST "http://localhost:8000/api/v1/outline/generate" \
   -F "file=@python基础.md" \
   -F "course_id=CS101" \
   -F "course_material_id=001" \
-  -F "material_name=Python基础" \
-  -F "include_refine=true"
+  -F "material_name=Python基础"
 ```
 
 **JavaScript 示例**:
@@ -164,7 +160,6 @@ const generateOutline = async (file, courseId, materialId, materialName) => {
   formData.append("course_id", courseId);
   formData.append("course_material_id", materialId);
   formData.append("material_name", materialName);
-  formData.append("include_refine", true);
 
   const response = await fetch("/api/v1/outline/generate", {
     method: "POST",

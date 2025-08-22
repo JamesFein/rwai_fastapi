@@ -55,32 +55,7 @@ function loadOutlineGeneratePage(container) {
                                        placeholder="例如: Python基础教程">
                             </div>
 
-                            <!-- 高级选项 -->
-                            <div class="mb-3">
-                                <label for="custom-prompt" class="form-label">自定义提示词 (可选)</label>
-                                <textarea class="form-control" id="custom-prompt" rows="3" 
-                                          placeholder="输入自定义的大纲生成提示词..."></textarea>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="model-name" class="form-label">模型选择</label>
-                                    <select class="form-select" id="model-name">
-                                        <option value="">使用默认模型</option>
-                                        <option value="gpt-4o-mini">GPT-4O Mini</option>
-                                        <option value="gpt-4o">GPT-4O</option>
-                                        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3 d-flex align-items-end">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="include-refine" checked>
-                                        <label class="form-check-label" for="include-refine">
-                                            启用大纲精简处理
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
 
                             <button type="submit" class="btn btn-primary w-100">
                                 <i class="bi bi-gear"></i>
@@ -194,20 +169,6 @@ async function handleOutlineFormSubmit(e) {
     "material_name",
     document.getElementById("material-name").value
   );
-  formData.append(
-    "include_refine",
-    document.getElementById("include-refine").checked
-  );
-
-  const customPrompt = document.getElementById("custom-prompt").value;
-  if (customPrompt) {
-    formData.append("custom_prompt", customPrompt);
-  }
-
-  const modelName = document.getElementById("model-name").value;
-  if (modelName) {
-    formData.append("model_name", modelName);
-  }
 
   try {
     showLoading();

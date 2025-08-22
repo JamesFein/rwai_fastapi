@@ -75,9 +75,6 @@
 | `course_id` | String | ✅ | 课程 ID |
 | `course_material_id` | String | ✅ | 课程材料 ID（课程内唯一） |
 | `material_name` | String | ✅ | 材料名称 |
-| `include_refine` | Boolean | ❌ | 是否精简大纲（默认 true） |
-| `model_name` | String | ❌ | 指定模型名称 |
-| `custom_prompt` | String | ❌ | 自定义提示词 |
 
 **cURL 示例**:
 
@@ -86,8 +83,7 @@ curl -X POST "http://localhost:8000/api/v1/outline/generate" \
   -F "file=@python基础.md" \
   -F "course_id=CS101" \
   -F "course_material_id=001" \
-  -F "material_name=Python基础" \
-  -F "include_refine=true"
+  -F "material_name=Python基础"
 ```
 
 **响应示例**:

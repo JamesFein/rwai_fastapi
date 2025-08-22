@@ -229,20 +229,17 @@ class PathGenerator:
             base_dir: 基础目录 (data/uploads)
             course_id: 课程ID
             course_material_id: 课程材料ID
-            material_name: 材料名称
+            material_name: 材料名称 (保留参数以兼容现有调用，但不再使用)
             file_extension: 文件扩展名 (包含点号，如 .md)
 
         Returns:
-            文件路径: data/uploads/{course_id}/{course_material_id}_{material_name}{extension}
+            文件路径: data/uploads/course_{course_id}/course_material_{course_material_id}{extension}
         """
-        # 清理文件名中的特殊字符
-        clean_material_name = FilenameGenerator._sanitize_filename_part(material_name)
+        # 生成文件名: course_material_{course_material_id}{extension}
+        filename = f"course_material_{course_material_id}{file_extension}"
 
-        # 生成文件名: {course_material_id}_{material_name}{extension}
-        filename = f"{course_material_id}_{clean_material_name}{file_extension}"
-
-        # 生成路径: base_dir/course_id/filename
-        file_path = base_dir / course_id / filename
+        # 生成路径: base_dir/course_{course_id}/filename
+        file_path = base_dir / f"course_{course_id}" / filename
 
         logger.debug(f"生成课程上传路径: {file_path}")
         return file_path
@@ -261,19 +258,16 @@ class PathGenerator:
             base_dir: 基础目录 (data/outputs/outlines)
             course_id: 课程ID
             course_material_id: 课程材料ID
-            material_name: 材料名称
+            material_name: 材料名称 (保留参数以兼容现有调用，但不再使用)
 
         Returns:
-            文件路径: data/outputs/outlines/{course_id}/{course_material_id}_{material_name}.md
+            文件路径: data/outputs/outlines/course_{course_id}/course_material_{course_material_id}.md
         """
-        # 清理文件名中的特殊字符
-        clean_material_name = FilenameGenerator._sanitize_filename_part(material_name)
+        # 生成文件名: course_material_{course_material_id}.md
+        filename = f"course_material_{course_material_id}.md"
 
-        # 生成文件名: {course_material_id}_{material_name}.md
-        filename = f"{course_material_id}_{clean_material_name}.md"
-
-        # 生成路径: base_dir/course_id/filename
-        file_path = base_dir / course_id / filename
+        # 生成路径: base_dir/course_{course_id}/filename
+        file_path = base_dir / f"course_{course_id}" / filename
 
         logger.debug(f"生成课程大纲路径: {file_path}")
         return file_path

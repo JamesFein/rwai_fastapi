@@ -353,16 +353,7 @@ function loadUnifiedProcessPage(container) {
                                     <h6 class="mb-0">大纲生成选项</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="mb-3">
-                                        <label for="unified-custom-prompt" class="form-label">自定义提示词</label>
-                                        <textarea class="form-control" id="unified-custom-prompt" rows="2"></textarea>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="unified-include-refine" checked>
-                                        <label class="form-check-label" for="unified-include-refine">
-                                            启用大纲精简
-                                        </label>
-                                    </div>
+                                    <p class="text-muted mb-0">使用默认设置生成大纲</p>
                                 </div>
                             </div>
                         </div>
@@ -485,18 +476,9 @@ async function handleUnifiedProcessSubmit(e) {
     document.getElementById("unified-material-name").value
   );
   formData.append(
-    "include_refine",
-    document.getElementById("unified-include-refine").checked
-  );
-  formData.append(
     "enable_rag_indexing",
     document.getElementById("unified-enable-rag").checked
   );
-
-  const customPrompt = document.getElementById("unified-custom-prompt").value;
-  if (customPrompt) {
-    formData.append("custom_prompt", customPrompt);
-  }
 
   const ragCollection = document.getElementById("unified-rag-collection").value;
   if (ragCollection) {

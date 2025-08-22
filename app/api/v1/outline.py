@@ -51,9 +51,6 @@ async def generate_outline(
     course_id: str = Form(..., description="课程ID"),
     course_material_id: str = Form(..., description="课程材料ID"),
     material_name: str = Form(..., description="材料名称"),
-    custom_prompt: Optional[str] = Form(None, description="自定义提示词"),
-    include_refine: bool = Form(True, description="是否进行大纲精简"),
-    model_name: Optional[str] = Form(None, description="指定模型名称"),
     settings: Settings = Depends(get_current_settings)
 ):
     """生成文档大纲"""
@@ -125,9 +122,6 @@ async def generate_outline(
             result = await outline_service.process_outline_generation(
                 file_content=file_content,
                 original_filename=validated_file.filename,
-                custom_prompt=custom_prompt,
-                include_refine=include_refine,
-                model_name=model_name,
                 course_id=course_id,
                 course_material_id=course_material_id,
                 material_name=material_name,
@@ -336,7 +330,7 @@ async def get_outline_file(
             raise HTTPException(status_code=400, detail="课程材料ID不能为空")
 
         # 构建目录路径
-        course_dir = OUTLINES_DIR / course_id
+        course_dir = OUTLINES_DIR / f"course_{course_id}"
 
         # 检查课程目录是否存在
         if not course_dir.exists():
@@ -345,21 +339,14 @@ async def get_outline_file(
                 detail=f"课程目录不存在: {course_id}"
             )
 
-        # 查找匹配的文件（格式：{course_material_id}_{material_name}.md）
-        pattern = f"{course_material_id}_*.md"
-        matching_files = list(course_dir.glob(pattern))
+        # 构建精确的文件路径（格式：course_material_{course_material_id}.md）
+        outline_file = course_dir / f"course_material_{course_material_id}.md"
 
-        if not matching_files:
+        if not outline_file.exists():
             raise HTTPException(
                 status_code=404,
                 detail=f"未找到课程材料文件: course_id={course_id}, course_material_id={course_material_id}"
             )
-
-        if len(matching_files) > 1:
-            logger.warning(f"找到多个匹配文件: {[f.name for f in matching_files]}")
-
-        # 使用第一个匹配的文件
-        outline_file = matching_files[0]
 
         # 读取文件内容
         try:
