@@ -52,7 +52,10 @@ async def intelligent_chat(
     - 如果提供 course_id，检索时只匹配该课程的文本块
     - 如果提供 course_material_id，检索时只匹配该材料的文本块
     - 如果同时提供两者，优先使用 course_id
-    - 如果都不提供，搜索全部文档
+    - **condense_plus_context 模式行为：**
+      - 无过滤条件：返回 "检索必须携带过滤条件，不支持无过滤条件检索"
+      - 有过滤条件但无匹配结果：返回 "检索的课程和材料不在数据库中"
+    - simple 模式不需要过滤条件
 
     **引擎模式：**
     - `condense_plus_context`: 使用向量检索 + 上下文整合，适合知识问答
@@ -72,10 +75,7 @@ async def intelligent_chat(
                 detail="question 不能为空"
             )
 
-        # 验证过滤参数（至少提供一个或都不提供）
-        if request.chat_engine_type == ChatEngineType.CONDENSE_PLUS_CONTEXT:
-            if not request.course_id and not request.course_material_id:
-                logger.warning(f"condense_plus_context模式建议提供course_id或course_material_id进行过滤")
+        # 注意：过滤条件验证已移至对话服务层处理
 
         # 执行聊天
         response = await conv_service.chat(request)

@@ -346,11 +346,26 @@ class ConversationService:
         try:
             logger.info(f"处理聊天请求 - 对话ID: {request.conversation_id}, 引擎类型: {request.chat_engine_type}")
 
-            # 创建内存和聊天存储
-            memory = self.memory_manager.create_memory(request.conversation_id)
-
             # 创建过滤器
             filters = self._create_filters(request.course_id, request.course_material_id)
+
+            # 对于condense_plus_context模式，强制要求过滤条件
+            if request.chat_engine_type == ChatEngineType.CONDENSE_PLUS_CONTEXT:
+                if filters is None:
+                    # 没有过滤条件，直接返回错误信息
+                    processing_time = time.time() - start_time
+                    logger.warning("condense_plus_context模式必须提供过滤条件")
+                    return ChatResponse(
+                        answer="检索必须携带过滤条件，不支持无过滤条件检索",
+                        sources=[],
+                        conversation_id=request.conversation_id,
+                        chat_engine_type=request.chat_engine_type,
+                        filter_info="检索必须携带过滤条件，不支持无过滤条件检索",
+                        processing_time=processing_time
+                    )
+
+            # 创建内存和聊天存储
+            memory = self.memory_manager.create_memory(request.conversation_id)
 
             # 生成过滤信息描述
             filter_info = self._get_filter_info(request.course_id, request.course_material_id)
@@ -363,7 +378,7 @@ class ConversationService:
             # 执行聊天
             if request.chat_engine_type == ChatEngineType.CONDENSE_PLUS_CONTEXT:
                 response = await self._chat_with_condense_plus_context(
-                    request.question, chat_engine
+                    request.question, chat_engine, filters
                 )
             else:
                 response = await self._chat_with_simple_engine(
@@ -373,6 +388,11 @@ class ConversationService:
             processing_time = time.time() - start_time
 
             logger.info(f"聊天处理完成 - 对话ID: {request.conversation_id}, 耗时: {processing_time:.2f}s")
+
+            # 如果检索结果为空且有过滤条件，更新filter_info
+            if (response["answer"] == "检索的课程和材料不在数据库中" and
+                request.chat_engine_type == ChatEngineType.CONDENSE_PLUS_CONTEXT):
+                filter_info = "检索的课程和材料不在数据库中"
 
             return ChatResponse(
                 answer=response["answer"],
@@ -406,7 +426,7 @@ class ConversationService:
         else:
             return "无过滤条件，搜索全部文档"
 
-    async def _chat_with_condense_plus_context(self, question: str, chat_engine) -> dict:
+    async def _chat_with_condense_plus_context(self, question: str, chat_engine, filters=None) -> dict:
         """使用condense_plus_context模式进行聊天"""
         try:
             # 执行聊天
@@ -433,6 +453,14 @@ class ConversationService:
                         chunk_text=content_preview,
                         score=score
                     ))
+            else:
+                # 如果有过滤条件但没有检索到任何文档，返回特定错误信息
+                if filters is not None:
+                    logger.warning("有过滤条件但未检索到匹配的文档")
+                    return {
+                        "answer": "检索的课程和材料不在数据库中",
+                        "sources": []
+                    }
 
             return {
                 "answer": str(response),
