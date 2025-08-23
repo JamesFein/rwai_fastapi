@@ -108,7 +108,6 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 | 智能聊天 | 智能对话     | `/api/v1/conversation/chat`                                   | POST   |
 | 智能聊天 | 清除会话     | `/api/v1/conversation/conversations/{conversation_id}`        | DELETE |
 | 智能聊天 | 获取会话状态 | `/api/v1/conversation/conversations/{conversation_id}/status` | GET    |
-| 智能聊天 | 获取引擎列表 | `/api/v1/conversation/engines`                                | GET    |
 | 课程材料 | 统一处理材料 | `/api/v1/course-materials/process`                            | POST   |
 | 课程材料 | 查询处理状态 | `/api/v1/course-materials/tasks/{task_id}/status`             | GET    |
 | 课程材料 | 清理指定材料 | `/api/v1/course-materials/{course_id}/{course_material_id}`   | DELETE |
@@ -211,12 +210,11 @@ curl -X POST "http://localhost:8000/api/v1/course-materials/process" \
 
 ### 智能对话模块
 
-| 端点                                      | 方法   | 功能         |
-| ----------------------------------------- | ------ | ------------ |
-| `/api/v1/conversation/chat`               | POST   | 智能对话     |
-| `/api/v1/conversation/engines`            | GET    | 获取引擎列表 |
-| `/api/v1/conversation/conversations/{id}` | DELETE | 清除会话     |
-| `/api/v1/conversation/health`             | GET    | 健康检查     |
+| 端点                                      | 方法   | 功能     |
+| ----------------------------------------- | ------ | -------- |
+| `/api/v1/conversation/chat`               | POST   | 智能对话 |
+| `/api/v1/conversation/conversations/{id}` | DELETE | 清除会话 |
+| `/api/v1/conversation/health`             | GET    | 健康检查 |
 
 ---
 

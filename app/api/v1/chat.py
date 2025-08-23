@@ -121,28 +121,6 @@ async def chat_health_check(
         }
 
 
-@router.get("/engines")
-async def get_available_engines():
-    """
-    获取可用的聊天引擎类型
-    """
-    return {
-        "engines": [
-            {
-                "type": ChatEngineType.CONDENSE_PLUS_CONTEXT,
-                "name": "检索增强模式",
-                "description": "基于文档内容的智能问答，适合知识查询",
-                "features": ["向量检索", "上下文整合", "来源追踪", "动态过滤"]
-            },
-            {
-                "type": ChatEngineType.SIMPLE,
-                "name": "直接对话模式", 
-                "description": "与AI直接对话，不检索文档，适合一般聊天",
-                "features": ["快速响应", "对话记忆", "自然交流"]
-            }
-        ]
-    }
-
 
 @router.delete("/conversations/{conversation_id}")
 async def clear_conversation(

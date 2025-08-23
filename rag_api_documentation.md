@@ -23,37 +23,36 @@ RAG 系统通过以下步骤实现智能问答：
 
 ### 文档索引管理
 
-| 端点 | 方法 | 功能 | 描述 |
-|------|------|------|------|
-| `/api/v1/rag/index` | POST | 建立文档索引 | 上传文档并建立向量索引 |
-| `/api/v1/rag/collections` | GET | 获取集合列表 | 查看所有向量集合 |
-| `/api/v1/rag/collections/{name}` | GET | 获取集合信息 | 查看特定集合详情 |
-| `/api/v1/rag/collections/{name}` | DELETE | 删除集合 | 删除整个向量集合 |
-| `/api/v1/rag/collections/{name}/count` | GET | 统计文档数量 | 获取集合中的文档数量 |
+| 端点                                   | 方法   | 功能         | 描述                   |
+| -------------------------------------- | ------ | ------------ | ---------------------- |
+| `/api/v1/rag/index`                    | POST   | 建立文档索引 | 上传文档并建立向量索引 |
+| `/api/v1/rag/collections`              | GET    | 获取集合列表 | 查看所有向量集合       |
+| `/api/v1/rag/collections/{name}`       | GET    | 获取集合信息 | 查看特定集合详情       |
+| `/api/v1/rag/collections/{name}`       | DELETE | 删除集合     | 删除整个向量集合       |
+| `/api/v1/rag/collections/{name}/count` | GET    | 统计文档数量 | 获取集合中的文档数量   |
 
 ### 文档管理
 
-| 端点 | 方法 | 功能 | 描述 |
-|------|------|------|------|
-| `/api/v1/rag/documents/course/{course_id}` | DELETE | 删除课程文档 | 删除指定课程的所有文档 |
-| `/api/v1/rag/documents/material/{course_id}/{material_id}` | DELETE | 删除材料文档 | 删除指定材料的文档 |
+| 端点                                                       | 方法   | 功能         | 描述                   |
+| ---------------------------------------------------------- | ------ | ------------ | ---------------------- |
+| `/api/v1/rag/documents/course/{course_id}`                 | DELETE | 删除课程文档 | 删除指定课程的所有文档 |
+| `/api/v1/rag/documents/material/{course_id}/{material_id}` | DELETE | 删除材料文档 | 删除指定材料的文档     |
 
 ### 智能对话
 
-| 端点 | 方法 | 功能 | 描述 |
-|------|------|------|------|
-| `/api/v1/conversation/chat` | POST | 智能问答 | 基于文档的智能对话 |
-| `/api/v1/conversation/engines` | GET | 获取引擎列表 | 查看可用的聊天引擎 |
-| `/api/v1/conversation/conversations/{id}` | DELETE | 清除会话 | 删除对话历史 |
-| `/api/v1/conversation/conversations/{id}/status` | GET | 获取会话状态 | 查看会话信息 |
-| `/api/v1/conversation/config` | GET | 获取配置信息 | 查看系统配置 |
+| 端点                                             | 方法   | 功能         | 描述               |
+| ------------------------------------------------ | ------ | ------------ | ------------------ |
+| `/api/v1/conversation/chat`                      | POST   | 智能问答     | 基于文档的智能对话 |
+| `/api/v1/conversation/conversations/{id}`        | DELETE | 清除会话     | 删除对话历史       |
+| `/api/v1/conversation/conversations/{id}/status` | GET    | 获取会话状态 | 查看会话信息       |
+| `/api/v1/conversation/config`                    | GET    | 获取配置信息 | 查看系统配置       |
 
 ### 系统监控
 
-| 端点 | 方法 | 功能 | 描述 |
-|------|------|------|------|
-| `/api/v1/rag/health` | GET | RAG 健康检查 | 检查 RAG 系统状态 |
-| `/api/v1/conversation/health` | GET | 对话健康检查 | 检查对话系统状态 |
+| 端点                          | 方法 | 功能         | 描述              |
+| ----------------------------- | ---- | ------------ | ----------------- |
+| `/api/v1/rag/health`          | GET  | RAG 健康检查 | 检查 RAG 系统状态 |
+| `/api/v1/conversation/health` | GET  | 对话健康检查 | 检查对话系统状态  |
 
 ## 🚀 核心功能详解
 
@@ -71,12 +70,12 @@ curl -X POST "http://localhost:8000/api/v1/rag/index" \
 
 #### 请求参数
 
-| 参数 | 类型 | 必需 | 描述 |
-|------|------|------|------|
-| `file` | File | 是 | 文档文件（.md/.txt） |
-| `course_id` | String | 是 | 课程标识符 |
-| `course_material_id` | String | 是 | 材料标识符 |
-| `collection_name` | String | 否 | 集合名称（默认：course_materials） |
+| 参数                 | 类型   | 必需 | 描述                               |
+| -------------------- | ------ | ---- | ---------------------------------- |
+| `file`               | File   | 是   | 文档文件（.md/.txt）               |
+| `course_id`          | String | 是   | 课程标识符                         |
+| `course_material_id` | String | 是   | 材料标识符                         |
+| `collection_name`    | String | 否   | 集合名称（默认：course_materials） |
 
 #### 响应示例
 
@@ -116,21 +115,21 @@ curl -X POST "http://localhost:8000/api/v1/conversation/chat" \
 
 #### 请求参数
 
-| 参数 | 类型 | 必需 | 描述 |
-|------|------|------|------|
-| `conversation_id` | String | 是 | 会话标识符 |
-| `question` | String | 是 | 用户问题 |
-| `chat_engine_type` | String | 是 | 引擎类型（见下表） |
-| `course_id` | String | 否 | 课程过滤条件 |
-| `course_material_id` | String | 否 | 材料过滤条件 |
-| `collection_name` | String | 否 | 集合名称 |
+| 参数                 | 类型   | 必需 | 描述               |
+| -------------------- | ------ | ---- | ------------------ |
+| `conversation_id`    | String | 是   | 会话标识符         |
+| `question`           | String | 是   | 用户问题           |
+| `chat_engine_type`   | String | 是   | 引擎类型（见下表） |
+| `course_id`          | String | 否   | 课程过滤条件       |
+| `course_material_id` | String | 否   | 材料过滤条件       |
+| `collection_name`    | String | 否   | 集合名称           |
 
 #### 聊天引擎类型
 
-| 类型 | 名称 | 描述 | 适用场景 |
-|------|------|------|----------|
+| 类型                    | 名称         | 描述                   | 适用场景           |
+| ----------------------- | ------------ | ---------------------- | ------------------ |
 | `condense_plus_context` | 检索增强模式 | 基于文档内容的智能问答 | 知识查询、专业问答 |
-| `simple` | 直接对话模式 | 不检索文档的自由对话 | 一般聊天、创意讨论 |
+| `simple`                | 直接对话模式 | 不检索文档的自由对话   | 一般聊天、创意讨论 |
 
 #### 响应示例
 
@@ -229,24 +228,24 @@ curl -X DELETE http://localhost:8000/api/v1/rag/collections/course_materials
 
 ### RAG 系统配置
 
-| 参数 | 默认值 | 描述 |
-|------|--------|------|
-| `REDIS_URL` | `redis://localhost:6379` | Redis 连接地址 |
-| `REDIS_TTL` | `3600` | Redis 数据过期时间（秒） |
-| `QDRANT_HOST` | `localhost` | Qdrant 主机地址 |
-| `QDRANT_PORT` | `6333` | Qdrant 端口 |
-| `LLM_MODEL` | `gpt-4o-mini` | 语言模型名称 |
-| `EMBED_MODEL` | `text-embedding-3-small` | 嵌入模型名称 |
-| `CHUNK_SIZE` | `512` | 文本分块大小 |
-| `CHUNK_OVERLAP` | `50` | 文本分块重叠 |
+| 参数            | 默认值                   | 描述                     |
+| --------------- | ------------------------ | ------------------------ |
+| `REDIS_URL`     | `redis://localhost:6379` | Redis 连接地址           |
+| `REDIS_TTL`     | `3600`                   | Redis 数据过期时间（秒） |
+| `QDRANT_HOST`   | `localhost`              | Qdrant 主机地址          |
+| `QDRANT_PORT`   | `6333`                   | Qdrant 端口              |
+| `LLM_MODEL`     | `gpt-4o-mini`            | 语言模型名称             |
+| `EMBED_MODEL`   | `text-embedding-3-small` | 嵌入模型名称             |
+| `CHUNK_SIZE`    | `512`                    | 文本分块大小             |
+| `CHUNK_OVERLAP` | `50`                     | 文本分块重叠             |
 
 ### 对话系统配置
 
-| 参数 | 默认值 | 描述 |
-|------|--------|------|
-| `CONVERSATION_TOKEN_LIMIT` | `4000` | 对话记忆 Token 限制 |
-| `CONVERSATION_SIMILARITY_TOP_K` | `6` | 检索相似文档数量 |
-| `LLM_TEMPERATURE` | `0.1` | 模型温度参数 |
+| 参数                            | 默认值 | 描述                |
+| ------------------------------- | ------ | ------------------- |
+| `CONVERSATION_TOKEN_LIMIT`      | `4000` | 对话记忆 Token 限制 |
+| `CONVERSATION_SIMILARITY_TOP_K` | `6`    | 检索相似文档数量    |
+| `LLM_TEMPERATURE`               | `0.1`  | 模型温度参数        |
 
 ## 🧪 测试示例
 
@@ -254,21 +253,26 @@ curl -X DELETE http://localhost:8000/api/v1/rag/collections/course_materials
 
 ```javascript
 class RAGClient {
-  constructor(baseUrl = 'http://localhost:8000') {
+  constructor(baseUrl = "http://localhost:8000") {
     this.baseUrl = baseUrl;
   }
 
   // 建立文档索引
-  async indexDocument(file, courseId, materialId, collectionName = 'course_materials') {
+  async indexDocument(
+    file,
+    courseId,
+    materialId,
+    collectionName = "course_materials"
+  ) {
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('course_id', courseId);
-    formData.append('course_material_id', materialId);
-    formData.append('collection_name', collectionName);
+    formData.append("file", file);
+    formData.append("course_id", courseId);
+    formData.append("course_material_id", materialId);
+    formData.append("collection_name", collectionName);
 
     const response = await fetch(`${this.baseUrl}/api/v1/rag/index`, {
-      method: 'POST',
-      body: formData
+      method: "POST",
+      body: formData,
     });
 
     return await response.json();
@@ -279,16 +283,16 @@ class RAGClient {
     const requestBody = {
       conversation_id: conversationId,
       question: question,
-      chat_engine_type: options.engineType || 'condense_plus_context',
-      ...options
+      chat_engine_type: options.engineType || "condense_plus_context",
+      ...options,
     };
 
     const response = await fetch(`${this.baseUrl}/api/v1/conversation/chat`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
     });
 
     return await response.json();
@@ -307,18 +311,16 @@ const client = new RAGClient();
 // 1. 建立索引
 const indexResult = await client.indexDocument(
   fileInput.files[0],
-  'CS101',
-  'lesson01'
+  "CS101",
+  "lesson01"
 );
-console.log('索引建立结果:', indexResult);
+console.log("索引建立结果:", indexResult);
 
 // 2. 开始对话
-const chatResult = await client.chat(
-  'user_session_123',
-  '什么是Python变量？',
-  { course_id: 'CS101' }
-);
-console.log('AI回答:', chatResult.answer);
+const chatResult = await client.chat("user_session_123", "什么是Python变量？", {
+  course_id: "CS101",
+});
+console.log("AI回答:", chatResult.answer);
 ```
 
 ## 🔍 故障排除
@@ -326,16 +328,20 @@ console.log('AI回答:', chatResult.answer);
 ### 常见问题
 
 1. **Qdrant 连接失败**
+
    ```
    Error: 无法连接到向量数据库
    ```
+
    - 检查 Qdrant 服务是否运行
    - 验证 `QDRANT_HOST` 和 `QDRANT_PORT` 配置
 
 2. **Redis 连接失败**
+
    ```
    Error: Redis connection failed
    ```
+
    - 检查 Redis 服务状态
    - 验证 `REDIS_URL` 配置
 
@@ -366,11 +372,11 @@ curl http://localhost:8000/api/v1/rag/health
 
 ## 📊 性能指标
 
-| 操作 | 平均响应时间 | 吞吐量 | 备注 |
-|------|-------------|--------|------|
-| 文档索引 | 5-15秒 | 20 docs/min | 取决于文档大小 |
-| 智能问答 | 2-8秒 | 100 queries/min | 取决于检索范围 |
-| 集合查询 | <1秒 | 1000 requests/min | 缓存优化 |
+| 操作     | 平均响应时间 | 吞吐量            | 备注           |
+| -------- | ------------ | ----------------- | -------------- |
+| 文档索引 | 5-15 秒      | 20 docs/min       | 取决于文档大小 |
+| 智能问答 | 2-8 秒       | 100 queries/min   | 取决于检索范围 |
+| 集合查询 | <1 秒        | 1000 requests/min | 缓存优化       |
 
 ## 🔒 安全考虑
 
